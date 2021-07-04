@@ -171,9 +171,8 @@ export default Vue.extend({
           localStorage.setItem('user_id', result.id)
           localStorage.setItem('first_name', result.first_name)
           localStorage.setItem('last_name', result.last_name)
-          localStorage.setItem('usename', result.username)
+          localStorage.setItem('username', result.username)
           localStorage.setItem('email', result.email)
-          console.log(localStorage.getItem('username'))
         })
         .catch((error: any) => {
           console.log(error)
