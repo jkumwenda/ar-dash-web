@@ -38,53 +38,122 @@
               name="first_name"
               placeholder="First Name..."
               type="text"
-              v-model="userData.first_name"
             />
           </div>
           <div class="w-full md:w-1/2 md:pl-1">
-            <form-input
-              label="Last Name"
+            <label
+              class="block uppercase text-gray-500 text-xs font-bold mb-2"
+              for="grid-last-name"
+            >
+              Last Name
+            </label>
+            <input
+              class="
+                block
+                w-full
+                text-gray-500
+                border border-gray-300
+                rounded-xl
+                py-3
+                px-4
+                mb-3
+                focus:outline-none
+              "
               id="last_name"
               name="last_name"
-              placeholder="First Name..."
-              type="text"
               v-model="userData.last_name"
+              type="text"
+              placeholder="Last name..."
             />
           </div>
         </div>
 
         <div class="flex flex-wrap my-6">
           <div class="w-full">
-            <form-input
-              label="Username"
+            <label
+              class="block uppercase text-gray-500 text-xs font-bold mb-2"
+              for="grid-username"
+            >
+              Username
+            </label>
+            <input
+              class="
+                block
+                w-full
+                text-gray-500
+                border border-gray-300
+                rounded-xl
+                py-3
+                px-4
+                mb-3
+                focus:outline-none
+              "
               id="username"
               name="username"
-              placeholder="Username..."
-              type="text"
               v-model="userData.username"
+              type="text"
+              placeholder="Username ..."
             />
+            <p class="text-gray-600 text-xs italic">
+              Make it as long and as crazy as you'd like
+            </p>
           </div>
         </div>
 
         <div class="flex flex-wrap my-6">
           <div class="w-full md:w-1/2 md:pr-1">
-            <form-input
-              label="Email"
-              id="emain"
+            <label
+              class="block uppercase text-gray-500 text-xs font-bold mb-2"
+              for="grid-email"
+            >
+              Email
+            </label>
+            <input
+              class="
+                block
+                w-full
+                text-gray-500
+                border border-gray-300
+                rounded-xl
+                py-3
+                px-4
+                mb-3
+                focus:outline-none
+              "
+              id="email"
               name="email"
-              placeholder="Email..."
-              type="emai"
               v-model="userData.email"
+              type="email"
+              placeholder="Email ..."
             />
+            <p class="text-red-500 text-xs italic">
+              Please fill out this field.
+            </p>
           </div>
           <div class="w-full md:w-1/2 md:pl-1">
-            <form-input
-              label="Phone Number"
+            <label
+              class="block uppercase text-gray-500 text-xs font-bold mb-2"
+              for="grid-phone-number"
+            >
+              Phone number
+            </label>
+            <input
+              class="
+                block
+                w-full
+                text-gray-500
+                border border-gray-300
+                rounded-xl
+                py-3
+                px-4
+                mb-3
+                focus:outline-none
+              "
               id="phone_number"
               name="phone_number"
-              placeholder="Phone Number..."
-              type="text"
               v-model="userData.phone_number"
+              type="text"
+              placeholder="Phone number ..."
             />
           </div>
         </div>
@@ -169,7 +238,6 @@ export default Vue.extend({
   },
   methods: {
     async addUser() {
-      console.log(this.userData)
       await this.$axios
         .$post('profile/', this.userData, {
           headers: {

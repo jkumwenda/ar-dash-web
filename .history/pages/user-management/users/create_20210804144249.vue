@@ -78,13 +78,29 @@
             />
           </div>
           <div class="w-full md:w-1/2 md:pl-1">
-            <form-input
-              label="Phone Number"
+            <label
+              class="block uppercase text-gray-500 text-xs font-bold mb-2"
+              for="grid-phone-number"
+            >
+              Phone number
+            </label>
+            <input
+              class="
+                block
+                w-full
+                text-gray-500
+                border border-gray-300
+                rounded-xl
+                py-3
+                px-4
+                mb-3
+                focus:outline-none
+              "
               id="phone_number"
               name="phone_number"
-              placeholder="Phone Number..."
-              type="text"
               v-model="userData.phone_number"
+              type="text"
+              placeholder="Phone number ..."
             />
           </div>
         </div>
@@ -159,8 +175,8 @@ export default Vue.extend({
   data() {
     return {
       userData: {
-        first_name: '',
-        last_name: '',
+        first_name: 'matthew',
+        last_name: 'test',
         username: '',
         email: '',
         phone_number: '',

@@ -159,8 +159,8 @@ export default Vue.extend({
   data() {
     return {
       userData: {
-        first_name: '',
-        last_name: '',
+        first_name: 'matthew',
+        last_name: 'test',
         username: '',
         email: '',
         phone_number: '',
