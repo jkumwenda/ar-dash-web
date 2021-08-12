@@ -6,7 +6,28 @@
     >
       {{ label }}
     </label>
-    <input
+
+    <FormulateInput
+      type="text"
+      :name="name"
+      :validation-name="label"
+      :input-class="
+        (context, classes) =>
+          [
+            'block',
+            'w-full',
+            'text-gray-500',
+            'border border-gray-300',
+            'rounded-xl',
+            'py-3',
+            'px-4',
+            'mb-3',
+            'focus:outline-none',
+          ].concat(classes)
+      "
+      :validation="validationRules"
+    />
+    <!-- <input
       class="
         block
         w-full
@@ -24,13 +45,13 @@
       :placeholder="placeholder"
       :value="value"
       @input="$emit('input', $event.target.value)"
-    />
-    <p class="text-red-500 text-xs italic">Please fill out this field.</p>
+    /> -->
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+// import FormulateInput from "@braid/vue-formulate"
 export default Vue.extend({
   props: {
     label: {
@@ -38,6 +59,11 @@ export default Vue.extend({
       required: true,
       default: '',
     },
+    validationRules: {
+      type: String,
+      default: '',
+    },
+
     id: {
       type: String,
       required: true,

@@ -26,7 +26,7 @@
         p-5
       "
     >
-      <form
+      <FormulateForm
         class="w-full max-w-3xl bg-white rounded-xl px-5 border border-gray-200"
         @submit.prevent="addUser"
       >
@@ -39,6 +39,7 @@
               placeholder="First Name..."
               type="text"
               v-model="userData.first_name"
+              validationRules="required"
             />
           </div>
           <div class="w-full md:w-1/2 md:pl-1">
@@ -49,6 +50,7 @@
               placeholder="First Name..."
               type="text"
               v-model="userData.last_name"
+              validationRules="required"
             />
           </div>
         </div>
@@ -62,6 +64,7 @@
               placeholder="Username..."
               type="text"
               v-model="userData.username"
+              validationRules="required|min:5"
             />
           </div>
         </div>
@@ -75,6 +78,7 @@
               placeholder="Email..."
               type="emai"
               v-model="userData.email"
+              validationRules="required|email"
             />
           </div>
           <div class="w-full md:w-1/2 md:pl-1">
@@ -85,6 +89,7 @@
               placeholder="Phone Number..."
               type="text"
               v-model="userData.phone_number"
+              validationRules="required"
             />
           </div>
         </div>
@@ -138,7 +143,7 @@
             </button>
           </div>
         </div>
-      </form>
+      </FormulateForm>
     </div>
   </div>
 </template>
