@@ -11,7 +11,7 @@
         p-5
       "
     >
-      <div class="text-xl">Users</div>
+      <div class="text-xl">Locations</div>
     </div>
     <div class="flex flex-row p-5">
       <div
@@ -24,7 +24,7 @@
           justify-left
         "
       >
-        List of all users
+        List of all locations
       </div>
       <div class="pr-1 flex flex-grow items-center justify-end">
         <button
@@ -47,7 +47,7 @@
         >
           <solid-document-add-icon
             class="w-5 h-5 mr-2 font-extrabold text-blue-400"
-          />New User
+          />New Location
         </button>
         <!-- This example requires Tailwind CSS v2.0+ -->
         <div class="relative inline-block text-left z-10">
@@ -196,27 +196,24 @@
       <div
         class="flex flex-row uppercase bg-gray-300 px-5 py-5 text-xs font-bold"
       >
-        <div class="w-3/12">Firstname</div>
-        <div class="w-3/12">Lastname</div>
-        <div class="w-3/12">Email</div>
-        <div class="w-2/12">Username</div>
+        <div class="w-6/12">Location</div>
+        <div class="w-5/12">District</div>
+
         <div class="w-1/12 text-right justify-items-end">Options</div>
       </div>
       <div
         class="flex flex-row bg-gray-100 px-5 py-5 mt-2 hover:bg-gray-200"
-        v-for="user in users"
-        :key="user.id"
+        v-for="location in locations"
+        :key="location.location_id"
       >
-        <div class="w-3/12">{{ user.first_name }}</div>
-        <div class="w-3/12">{{ user.last_name }}</div>
-        <div class="w-3/12">{{ user.email }}</div>
-        <div class="w-2/12">{{ user.username }}</div>
+        <div class="w-6/12">{{ location.location }}</div>
+        <div class="w-5/12">{{ location.district.district }}</div>
         <div class="w-1/12 flex flex-col flex-end">
           <!--Dropdown menu-->
           <div class="relative inline-block text-left">
             <div>
               <div
-                @click="gridOption('grid-data-' + user.id)"
+                @click="gridOption('grid-data-' + location.location_id)"
                 class="inline-flex justify-end w-full"
               >
                 <solid-dots-horizontal-icon
@@ -226,11 +223,11 @@
             </div>
             <div
               class="hidden absolute right-0 rounded-md shadow-lg bg-white z-10"
-              :id="'grid-data-' + user.id"
+              :id="'grid-data-' + location.location_id"
             >
               <div class="py-1">
-                <div
-                  @click="view(user.id)"
+                <nuxt-link
+                  :to="`/configure/locations/${location.location_id}`"
                   class="
                     text-gray-700
                     block
@@ -242,10 +239,10 @@
                   "
                 >
                   View
-                </div>
+                </nuxt-link>
 
-                <div
-                  @click="edit(user.id)"
+                <nuxt-link
+                  :to="`/configure/locations/${location.location_id}/edit`"
                   class="
                     text-gray-700
                     block
@@ -257,10 +254,10 @@
                   "
                 >
                   Edit
-                </div>
+                </nuxt-link>
 
                 <div
-                  @click="deleteUser(user.id)"
+                  @click="deleteLocation(location.location_id)"
                   class="
                     text-gray-700
                     block
@@ -346,11 +343,13 @@
 </template>
 
 <script>
+import { get, destroy } from '~/services/api.service'
+
 export default {
   layout: 'logged',
   methods: {
     create() {
-      this.$router.push('/user-management/users/create')
+      this.$router.push('/configure/locations/create')
     },
     filter() {
       const dropdown = document.querySelector('#filterSearch')
@@ -366,29 +365,13 @@ export default {
       dropdown.classList.toggle('hidden')
       dropdown.classList.toggle('origin-top-right')
     },
-    view(user_id) {
-      console.log(user_id)
-      this.$router.push({
-        path: '/user-management/user',
-        params: { user_id },
-      })
+    edit(location_id) {
+      console.log(location_id)
+      this.$router.push('/configure/locations/' + { location_id })
     },
-    edit(user_id) {
-      console.log(user_id)
-      this.$router.push('/user-management/users')
-    },
-    async deleteUser(user_id) {
-      console.log(user_id)
-      await this.$axios
-        .$delete('user/' + user_id, {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: 'Bearer ' + localStorage.getItem('token'),
-          },
-        })
-        .then((results) => {
-          this.$router.push('/user-management/users')
-        })
+    deleteLocation(location_id) {
+      destroy(this.$axios, 'location/' + location_id + '/')
+        .then((results) => {})
         .catch((error) => {
           console.log(error)
         })
@@ -396,22 +379,16 @@ export default {
   },
   data() {
     return {
-      users: {},
+      locations: {},
       count: '',
       previous: '',
       next: '',
     }
   },
   async fetch() {
-    await this.$axios
-      .$get('user/', {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
-        },
-      })
+    get(this.$axios, 'location/')
       .then((results) => {
-        this.users = results.results
+        this.locations = results.results
         this.count = results.count
         this.next = results.next
         this.previous = results.previous

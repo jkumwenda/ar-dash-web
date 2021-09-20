@@ -12,9 +12,9 @@
       "
     >
       <div class="text-xl">
-        New building type
+        Edit location
         <p class="text-sm flex flex-row">
-          <solid-information-circle-icon class="w-4 h-4" />Building type details
+          <solid-information-circle-icon class="w-4 h-4" />Location details
         </p>
       </div>
     </div>
@@ -28,7 +28,7 @@
     >
       <form
         class="w-full max-w-3xl bg-white rounded-xl px-5 border border-gray-200"
-        @submit.prevent="addBuildingType"
+        @submit.prevent="updateLocation"
       >
         <div class="flex flex-wrap my-6">
           <div class="w-full">
@@ -36,7 +36,7 @@
               class="block uppercase text-gray-500 text-xs font-bold mb-2"
               for="grid-first-name"
             >
-              Building type
+              Location
             </label>
             <input
               class="
@@ -50,12 +50,59 @@
                 mb-3
                 focus:outline-none
               "
-              id="building_type"
+              id="location"
               name="phone_number"
-              v-model="buildingTypeData.building_type"
+              v-model="locationData.location"
               type="text"
-              placeholder="Building type ..."
+              placeholder="Location name ..."
             />
+            <p class="text-red-500 text-xs italic">
+              Please fill out this field.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap my-6">
+          <div class="w-full">
+            <label
+              class="
+                block
+                uppercase
+                tracking-wide
+                text-gray-500 text-xs
+                font-bold
+                mb-2
+              "
+              for="grid-zip"
+            >
+              District
+            </label>
+            <select
+              class="
+                block
+                w-full
+                text-gray-500
+                border border-gray-300
+                rounded-lg
+                py-3.5
+                px-4
+                mb-3
+                focus:outline-none
+              "
+              id="district"
+              name="district_id"
+              v-model="locationData.district_id"
+              type="text"
+              placeholder="District..."
+            >
+              <option
+                :value="district.district_id"
+                v-for="district in districts"
+                :key="district.district_id"
+              >
+                {{ district.district }}
+              </option>
+            </select>
             <p class="text-red-500 text-xs italic">
               Please fill out this field.
             </p>
@@ -116,23 +163,52 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue'
-import { post } from '~/services/api.service'
+import { update, get } from '~/services/api.service'
 export default Vue.extend({
   layout: 'logged',
   data() {
     return {
-      buildingTypeData: {
-        building_type: '',
+      locationData: {
+        location: '',
+        district_id: '',
       },
+      districts: '',
     }
   },
+  created() {
+    this.getLocation()
+    this.getDistrict()
+  },
   methods: {
-    addBuildingType() {
-      post(this.$axios, 'building_type/', this.buildingTypeData)
+    getLocation() {
+      get(this.$axios, 'location/' + this.$route.params.id + '/')
+        .then((result) => {
+          this.locationData.location = result.location
+          this.locationData.district_id = result.district_id
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
+    getDistrict() {
+      get(this.$axios, 'district/')
         .then((results) => {
-          this.$router.push('/configure/design/building-types')
+          this.districts = results.results
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
+    updateLocation() {
+      update(
+        this.$axios,
+        'location/' + this.$route.params.id + '/',
+        this.locationData
+      )
+        .then((results) => {
+          this.$router.push('/configure/locations')
         })
         .catch((error) => {
           console.log(error)

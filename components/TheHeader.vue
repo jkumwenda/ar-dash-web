@@ -55,9 +55,12 @@
             <nuxt-link to="/" class="text-gray-700 block px-4 py-2 text-sm"
               >Support</nuxt-link
             >
-            <a href="#" class="text-gray-700 block px-4 py-2 text-sm"
-              >Sign out</a
+            <div
+              @click="logout()"
+              class="text-gray-700 block px-4 py-2 text-sm cursor-pointer"
             >
+              Sign out
+            </div>
           </div>
         </div>
       </div>
@@ -85,6 +88,9 @@ export default {
       //   dropdown.classList.remove('flex');
       //   dropdown.classList.add('hidden');
       // }
+    },
+    logout() {
+      this.$router.push('/')
     },
   },
 }

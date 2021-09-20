@@ -3,6 +3,7 @@
     class="flex flex-col lg:flex-row max-h-full min-h-screen font-metropolis"
   >
     <div class="w-12/12 lg:w-2/12 flex flex-col bg-white p-5 text-blue-50">
+      <LoadSpinner v-if="showHideSpinner" />
       <Logo />
       <TheSidebar />
     </div>
@@ -27,5 +28,16 @@ import TheFooter from '~/components/TheFooter'
 export default {
   name: 'logged',
   components: { Logo, TheSidebar, TheHeader, TheFooter },
+  data() {
+    return {
+      showHideSpinner: true,
+    }
+  },
+  beforeCreate() {
+    this.showHideSpinner = true
+  },
+  mounted() {
+    this.showHideSpinner = false
+  },
 }
 </script>

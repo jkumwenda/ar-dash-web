@@ -12,7 +12,7 @@
       "
     >
       <div class="text-xl">
-        New building type
+        Edit building type
         <p class="text-sm flex flex-row">
           <solid-information-circle-icon class="w-4 h-4" />Building type details
         </p>
@@ -28,7 +28,7 @@
     >
       <form
         class="w-full max-w-3xl bg-white rounded-xl px-5 border border-gray-200"
-        @submit.prevent="addBuildingType"
+        @submit.prevent="updateBuildingType"
       >
         <div class="flex flex-wrap my-6">
           <div class="w-full">
@@ -116,9 +116,9 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue'
-import { post } from '~/services/api.service'
+import { update, get } from '~/services/api.service'
 export default Vue.extend({
   layout: 'logged',
   data() {
@@ -128,9 +128,25 @@ export default Vue.extend({
       },
     }
   },
+  created() {
+    this.getPhase()
+  },
   methods: {
-    addBuildingType() {
-      post(this.$axios, 'building_type/', this.buildingTypeData)
+    getPhase() {
+      get(this.$axios, 'building_type/' + this.$route.params.id + '/')
+        .then((result) => {
+          this.buildingTypeData.building_type = result.building_type
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
+    updateBuildingType() {
+      update(
+        this.$axios,
+        'building_type/' + this.$route.params.id + '/',
+        this.buildingTypeData
+      )
         .then((results) => {
           this.$router.push('/configure/design/building-types')
         })

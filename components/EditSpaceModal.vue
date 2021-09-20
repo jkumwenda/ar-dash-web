@@ -1,42 +1,65 @@
 <template>
-  <div class="flex flex-col">
-    <div
-      class="
-        flex flex-row
-        bg-white
-        text-gray-600
-        border border-gray-200
-        rounded-xl
-        mx-5
-        p-5
-      "
-    >
-      <div class="text-xl">
-        New location
-        <p class="text-sm flex flex-row">
-          <solid-information-circle-icon class="w-4 h-4" />Location details
-        </p>
-      </div>
-    </div>
-    <div
-      class="
-        flex flex-col flex-grow
-        border-primary-100
-        hover:border-gray-300
-        p-5
-      "
-    >
+  <div
+    class="
+      flex
+      fixed
+      inset-0
+      justify-center
+      items-center
+      bg-gray-800 bg-opacity-75
+    "
+    @click="$emit('close-modal')"
+  >
+    <div class="bg-white rounded-2xl w-6/12 p-6" @click.stop>
+      <h6 class="text-xl">Project Space Details</h6>
       <form
-        class="w-full max-w-3xl bg-white rounded-xl px-5 border border-gray-200"
-        @submit.prevent="addLocation"
+        class="w-full max-w-3xl bg-white rounded-xl"
+        @submit.prevent="editProjectSpace"
       >
         <div class="flex flex-wrap my-6">
           <div class="w-full">
             <label
               class="block uppercase text-gray-500 text-xs font-bold mb-2"
-              for="grid-first-name"
+              for="grid-project"
             >
-              Location
+              Space
+            </label>
+            <select
+              class="
+                block
+                w-full
+                text-gray-500
+                border border-gray-300
+                rounded-xl
+                py-3
+                px-4
+                mb-3
+                focus:outline-none
+              "
+              id="status"
+              name="status_id"
+              v-model="projectSpaceData.space_id"
+              type="text"
+              placeholder="Building type..."
+            >
+              <option
+                :value="space.space_id"
+                v-for="space in spaces"
+                :key="space.space_id"
+              >
+                {{ space.space }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap my-6">
+          <div class="w-full">
+            <label
+              class="block uppercase text-gray-500 text-xs font-bold mb-2"
+              for="grid-project"
+            >
+              Space size (m)
             </label>
             <input
               class="
@@ -50,66 +73,16 @@
                 mb-3
                 focus:outline-none
               "
-              id="location"
-              name="phone_number"
-              v-model="locationData.location"
+              id="space"
+              name="space"
+              v-model="projectSpaceData.size"
               type="text"
-              placeholder="Location name ..."
+              placeholder="Space size ..."
             />
-            <p class="text-red-500 text-xs italic">
-              Please fill out this field.
-            </p>
           </div>
         </div>
 
-        <div class="flex flex-wrap my-6">
-          <div class="w-full">
-            <label
-              class="
-                block
-                uppercase
-                tracking-wide
-                text-gray-500 text-xs
-                font-bold
-                mb-2
-              "
-              for="grid-zip"
-            >
-              District
-            </label>
-            <select
-              class="
-                block
-                w-full
-                text-gray-500
-                border border-gray-300
-                rounded-lg
-                py-3.5
-                px-4
-                mb-3
-                focus:outline-none
-              "
-              id="district"
-              name="district_id"
-              v-model="locationData.district_id"
-              type="text"
-              placeholder="District..."
-            >
-              <option
-                :value="district.district_id"
-                v-for="district in districts"
-                :key="district.district_id"
-              >
-                {{ district.district }}
-              </option>
-            </select>
-            <p class="text-red-500 text-xs italic">
-              Please fill out this field.
-            </p>
-          </div>
-        </div>
-
-        <div class="flex flex-wrap mb-6">
+        <div class="flex flex-wrap">
           <div class="w-full md:w-1/2 py-1 md:pr-1">
             <button
               type="submit"
@@ -136,13 +109,12 @@
             </button>
           </div>
           <div class="w-full md:w-1/2 py-1 md:pl-1">
-            <nuxt-link
-              to="/configure/locations"
+            <div
               class="
                 block
                 w-full
                 font-bold
-                text-blue-800
+                text-blue-800 text-center
                 border-1
                 bg-blue-100
                 hover:bg-gray-100
@@ -152,10 +124,10 @@
                 px-4
                 mb-3
               "
-              id="cancel"
+              @click="$emit('close-modal')"
             >
-              Cancel
-            </nuxt-link>
+              Cancel {{ value }}
+            </div>
           </div>
         </div>
       </form>
@@ -163,37 +135,44 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue'
 import { post, get } from '~/services/api.service'
 export default Vue.extend({
-  layout: 'logged',
   data() {
     return {
-      locationData: {
-        location: '',
-        district_id: '',
+      projectSpaceData: {
+        size: '',
+        space_id: '',
+        project_id: this.$route.params.id,
       },
-      districts: '',
+      spaces: '',
+      project_space_id: this.project_space_id,
     }
   },
+
+  props: {
+    value: {},
+  },
+
   created() {
-    this.getDistrict()
+    this.getSpace()
   },
   methods: {
-    getDistrict() {
-      get(this.$axios, 'district/')
+    getSpace() {
+      get(this.$axios, 'space/')
         .then((results) => {
-          this.districts = results.results
+          console.log('KOMA GAYEZI', project_id)
+          this.spaces = results.results
         })
         .catch((error) => {
           console.log(error)
         })
     },
-    addLocation() {
-      post(this.$axios, 'location/', this.locationData)
-        .then((results) => {
-          this.$router.push('/configure/locations')
+    addProjectSpace() {
+      post(this.$axios, 'project_space/', this.projectSpaceData)
+        .then((result) => {
+          this.$router.go()
         })
         .catch((error) => {
           console.log(error)

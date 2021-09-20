@@ -11,7 +11,7 @@
         p-5
       "
     >
-      <div class="text-xl">Status</div>
+      <div class="text-xl">Projects</div>
     </div>
     <div class="flex flex-row p-5">
       <div
@@ -24,7 +24,7 @@
           justify-left
         "
       >
-        List of all status
+        List of all projects
       </div>
       <div class="pr-1 flex flex-grow items-center justify-end">
         <button
@@ -47,7 +47,7 @@
         >
           <solid-document-add-icon
             class="w-5 h-5 mr-2 font-extrabold text-blue-400"
-          />New Status
+          />New Project
         </button>
         <!-- This example requires Tailwind CSS v2.0+ -->
         <div class="relative inline-block text-left z-10">
@@ -196,22 +196,30 @@
       <div
         class="flex flex-row uppercase bg-gray-300 px-5 py-5 text-xs font-bold"
       >
-        <div class="w-11/12">Status</div>
-
+        <div class="w-3/12">Project</div>
+        <div class="w-3/12">Client</div>
+        <div class="w-3/12">Project Type</div>
+        <div class="w-2/12">Location</div>
         <div class="w-1/12 text-right justify-items-end">Options</div>
       </div>
       <div
         class="flex flex-row bg-gray-100 px-5 py-5 mt-2 hover:bg-gray-200"
-        v-for="status in status"
-        :key="status.status_id"
+        v-for="project in projects"
+        :key="project.project_id"
       >
-        <div class="w-11/12">{{ status.status }}</div>
+        <div class="w-3/12">{{ project.project_name }}</div>
+        <div class="w-3/12">
+          {{ project.client.user.first_name }}
+          {{ project.client.user.last_name }}
+        </div>
+        <div class="w-3/12">{{ project.building_type.building_type }}</div>
+        <div class="w-2/12">{{ project.location.location }}</div>
         <div class="w-1/12 flex flex-col flex-end">
           <!--Dropdown menu-->
           <div class="relative inline-block text-left">
             <div>
               <div
-                @click="gridOption('grid-data-' + status.status_id)"
+                @click="gridOption('grid-data-' + project.project_id)"
                 class="inline-flex justify-end w-full"
               >
                 <solid-dots-horizontal-icon
@@ -221,11 +229,11 @@
             </div>
             <div
               class="hidden absolute right-0 rounded-md shadow-lg bg-white z-10"
-              :id="'grid-data-' + status.status_id"
+              :id="'grid-data-' + project.project_id"
             >
               <div class="py-1">
                 <nuxt-link
-                  :to="`/configure/design/status/${status.status_id}`"
+                  :to="`/projects/design/${project.project_id}/`"
                   class="
                     text-gray-700
                     block
@@ -240,7 +248,7 @@
                 </nuxt-link>
 
                 <nuxt-link
-                  :to="`/configure/design/status/${status.status_id}/edit`"
+                  :to="`/projects/design/${project.project_id}/edit`"
                   class="
                     text-gray-700
                     block
@@ -255,7 +263,7 @@
                 </nuxt-link>
 
                 <div
-                  @click="deleteStatus(status.status_id)"
+                  @click="deleteProject(project.project_id)"
                   class="
                     text-gray-700
                     block
@@ -347,7 +355,7 @@ export default {
   layout: 'logged',
   methods: {
     create() {
-      this.$router.push('/configure/design/status/create')
+      this.$router.push('/projects/design/create')
     },
     filter() {
       const dropdown = document.querySelector('#filterSearch')
@@ -363,13 +371,13 @@ export default {
       dropdown.classList.toggle('hidden')
       dropdown.classList.toggle('origin-top-right')
     },
-    edit(status_id) {
-      console.log(status_id)
-      this.$router.push('/configure/design/status/' + { status_id })
+    edit(project_id) {
+      console.log(project_id)
+      this.$router.push('/projects/design/' + { project_id })
     },
-    deleteStatus(status_id) {
-      destroy(this.$axios, 'status/' + status_id + '/')
-        .then((results) => {})
+    deleteProject(project_id) {
+      destroy(this.$axios, 'project/' + project_id + '/')
+        .then((results) => {}, this.$router.go())
         .catch((error) => {
           console.log(error)
         })
@@ -377,16 +385,16 @@ export default {
   },
   data() {
     return {
-      status: {},
+      projects: {},
       count: '',
       previous: '',
       next: '',
     }
   },
   async fetch() {
-    get(this.$axios, 'status/')
+    get(this.$axios, 'project/')
       .then((results) => {
-        this.status = results.results
+        this.projects = results.results
         this.count = results.count
         this.next = results.next
         this.previous = results.previous

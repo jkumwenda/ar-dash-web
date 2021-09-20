@@ -4,16 +4,19 @@
       class="
         flex flex-row
         bg-white
-        text-gray-500
-        border border-white
+        text-gray-600
+        border border-gray-200
         rounded-xl
-        shadow
         mx-5
         p-5
       "
     >
-      <solid-information-circle-icon class="w-4 h-4" />
-      <div>The form template with all based basic form requirements</div>
+      <div class="text-xl">
+        New User
+        <p class="text-sm flex flex-row">
+          <solid-information-circle-icon class="w-4 h-4" />User details
+        </p>
+      </div>
     </div>
     <div
       class="
@@ -23,7 +26,10 @@
         p-5
       "
     >
-      <form class="w-full max-w-3xl" @submit.prevent="onSubmit">
+      <form
+        class="w-full max-w-3xl bg-white rounded-xl px-5 border border-gray-200"
+        @submit.prevent="addUser"
+      >
         <div class="flex flex-wrap my-6">
           <div class="w-full md:w-1/2 md:pr-1">
             <label
@@ -38,14 +44,17 @@
                 w-full
                 text-gray-500
                 border border-gray-300
-                rounded-lg
+                rounded-xl
                 py-3
                 px-4
                 mb-3
                 focus:outline-none
               "
+              id="first_name"
+              name="first_name"
+              v-model="userData.first_name"
               type="text"
-              placeholder="First Name"
+              placeholder="First name..."
             />
             <p class="text-red-500 text-xs italic">
               Please fill out this field.
@@ -64,15 +73,17 @@
                 w-full
                 text-gray-500
                 border border-gray-300
-                rounded-lg
+                rounded-xl
                 py-3
                 px-4
                 mb-3
                 focus:outline-none
               "
-              id="grid-last-name"
+              id="last_name"
+              name="last_name"
+              v-model="userData.last_name"
               type="text"
-              placeholder="Last Name"
+              placeholder="Last name..."
             />
           </div>
         </div>
@@ -81,9 +92,9 @@
           <div class="w-full">
             <label
               class="block uppercase text-gray-500 text-xs font-bold mb-2"
-              for="grid-password"
+              for="grid-username"
             >
-              Password
+              Username
             </label>
             <input
               class="
@@ -91,15 +102,17 @@
                 w-full
                 text-gray-500
                 border border-gray-300
-                rounded-lg
+                rounded-xl
                 py-3
                 px-4
                 mb-3
                 focus:outline-none
               "
-              id="grid-password"
-              type="password"
-              placeholder="******************"
+              id="username"
+              name="username"
+              v-model="userData.username"
+              type="text"
+              placeholder="Username ..."
             />
             <p class="text-gray-600 text-xs italic">
               Make it as long and as crazy as you'd like
@@ -108,131 +121,60 @@
         </div>
 
         <div class="flex flex-wrap my-6">
-          <div class="w-full md:w-1/3 md:pr-1">
-            <label
-              class="
-                block
-                uppercase
-                tracking-wide
-                text-gray-500 text-xs
-                font-bold
-                mb-2
-              "
-              for="grid-city"
-            >
-              City
-            </label>
-            <input
-              class="
-                block
-                w-full
-                text-gray-500
-                border border-gray-300
-                rounded-lg
-                py-3
-                px-4
-                mb-3
-                focus:outline-none
-              "
-              type="text"
-              placeholder="Albuquerque"
-            />
-          </div>
-          <div class="w-full md:w-1/3 md:px-1">
-            <label
-              class="
-                block
-                uppercase
-                tracking-wide
-                text-gray-500 text-xs
-                font-bold
-                mb-2
-              "
-              for="grid-zip"
-            >
-              State
-            </label>
-            <select
-              class="
-                block
-                w-full
-                text-gray-500
-                border border-gray-300
-                rounded-lg
-                py-3.5
-                px-4
-                mb-3
-                focus:outline-none
-              "
-              id="grid-zip"
-              type="text"
-              placeholder="90210"
-            >
-              <option>New Mexico</option>
-              <option>Missouri</option>
-              <option>Texas</option>
-            </select>
-          </div>
-          <div class="w-full md:w-1/3 md:pl-1">
-            <label
-              class="
-                block
-                uppercase
-                tracking-wide
-                text-gray-500 text-xs
-                font-bold
-                mb-2
-              "
-              for="grid-zip"
-            >
-              Zip
-            </label>
-            <input
-              class="
-                block
-                w-full
-                text-gray-500
-                border border-gray-300
-                rounded-lg
-                py-3
-                px-4
-                mb-3
-                focus:outline-none
-              "
-              id="grid-zip"
-              type="text"
-              placeholder="90210"
-            />
-          </div>
-        </div>
-
-        <div class="flex flex-wrap my-6">
-          <div class="w-full">
+          <div class="w-full md:w-1/2 md:pr-1">
             <label
               class="block uppercase text-gray-500 text-xs font-bold mb-2"
-              for="grid-password"
+              for="grid-email"
             >
-              Description
+              Email
             </label>
-            <textarea
+            <input
               class="
                 block
                 w-full
                 text-gray-500
                 border border-gray-300
-                rounded-lg
+                rounded-xl
                 py-3
                 px-4
                 mb-3
                 focus:outline-none
               "
-              id="grid-textarea"
-              type="textarea"
-              placeholder="Description"
-            ></textarea>
-            <p class="text-gray-600 text-xs italic">
-              Make it as long and as crazy as you'd like
+              id="email"
+              name="email"
+              v-model="userData.email"
+              type="email"
+              placeholder="Email ..."
+            />
+            <p class="text-red-500 text-xs italic">
+              Please fill out this field.
             </p>
+          </div>
+          <div class="w-full md:w-1/2 md:pl-1">
+            <label
+              class="block uppercase text-gray-500 text-xs font-bold mb-2"
+              for="grid-phone-number"
+            >
+              Phone number
+            </label>
+            <input
+              class="
+                block
+                w-full
+                text-gray-500
+                border border-gray-300
+                rounded-xl
+                py-3
+                px-4
+                mb-3
+                focus:outline-none
+              "
+              id="phone_number"
+              name="phone_number"
+              v-model="userData.phone_number"
+              type="text"
+              placeholder="Phone number ..."
+            />
           </div>
         </div>
 
@@ -243,23 +185,28 @@
               class="
                 block
                 w-full
-                bg-blue-900
+                bg-gradient-to-r
+                from-blue-800
+                to-blue-600
+                hover:from-blue-700 hover:to-blue-500
                 font-bold
-                text-white
+                text-blue-100
                 border-1
-                rounded-lg
+                rounded-2xl
                 border-blue-500
                 hover:bg-blue-800
                 focus:outline-none focus:border-gray-500
-                py-3
+                py-4
                 px-4
               "
+              id="submit"
             >
-              Submit
+              Add User
             </button>
           </div>
           <div class="w-full md:w-1/2 py-1 md:pl-1">
-            <button
+            <nuxt-link
+              to="/user-management/profiles"
               class="
                 block
                 w-full
@@ -268,15 +215,16 @@
                 border-1
                 bg-blue-100
                 hover:bg-gray-100
-                rounded-lg
+                rounded-2xl
                 focus:outline-none focus:border-blue-200
-                py-3
+                py-4
                 px-4
                 mb-3
               "
+              id="cancel"
             >
               Cancel
-            </button>
+            </nuxt-link>
           </div>
         </div>
       </form>
@@ -284,15 +232,51 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-export default Vue.extend({
+<script>
+import { post } from '~/services/api.service'
+export default {
   layout: 'logged',
+  head() {
+    return {
+      title: 'ArDash - Add User',
+    }
+  },
+  data() {
+    return {
+      userData: {
+        first_name: '',
+        last_name: '',
+        username: '',
+        email: '',
+        phone_number: '',
+      },
+    }
+  },
   methods: {
-    onSubmit() {
-      console.log('Submit login form')
-      this.$router.push('/templates')
+    async addUser() {
+      post(this.$axios, 'profile/', this.userData)
+        .then((results) => {
+          this.$router.push('/user-management/profiles')
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+
+      // await this.$axios
+      //   .$post('profile/', this.userData, {
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //       Authorization: 'Bearer ' + localStorage.getItem('token'),
+      //     },
+      //   })
+      //   .then((result: any) => {
+      //     this.$router.push('/user-management/users')
+      //   })
+      //   .catch((error: any) => {
+      //     this.$router.push('/user-management/users')
+      //     console.log(error)
+      //   })
     },
   },
-})
+}
 </script>

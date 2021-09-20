@@ -1,20 +1,49 @@
 <template>
   <div class="flex flex-col">
     <div
-      class="flex flex-row bg-white text-gray-600 border border-gray-200 rounded-xl mx-5 p-5"
+      class="
+        flex flex-row
+        bg-white
+        text-gray-600
+        border border-gray-200
+        rounded-xl
+        mx-5
+        p-5
+      "
     >
       <div class="text-xl">Roles</div>
     </div>
     <div class="flex flex-row p-5">
       <div
-        class="flex flex-none pr-1 lg:pr-5 items-center font-semibold justify-left"
+        class="
+          flex flex-none
+          pr-1
+          lg:pr-5
+          items-center
+          font-semibold
+          justify-left
+        "
       >
         List of all roles
       </div>
       <div class="pr-1 flex flex-grow items-center justify-end">
         <button
           @click="create"
-          class="flex flex-row bg-gradient-to-r from-blue-800 to-blue-600 hover:bg-blue-800 text-blue-50 py-4 px-4 rounded-xl border border-gray-200 border-1 border-blue-200 ml-2 leading-tight focus:outline-none focus:shadow-outline"
+          class="
+            flex flex-row
+            bg-gradient-to-r
+            from-blue-800
+            to-blue-600
+            hover:bg-blue-800
+            text-blue-50
+            py-4
+            px-4
+            rounded-xl
+            border border-gray-200 border-1 border-blue-200
+            ml-2
+            leading-tight
+            focus:outline-none focus:shadow-outline
+          "
         >
           <solid-document-add-icon
             class="w-5 h-5 mr-2 font-extrabold text-blue-400"
@@ -26,7 +55,24 @@
             <button
               type="button"
               @click="filter"
-              class="inline-flex justify-center w-full bg-white border border-white rounded-xl shadow-md font-semibold hover:bg-gray-100 hover:border-gray-100 text-gray-500 py-4 px-4 ml-2 leading-tight focus:outline-none focus:shadow-outline z-20"
+              class="
+                inline-flex
+                justify-center
+                w-full
+                bg-white
+                border border-white
+                rounded-xl
+                shadow-md
+                font-semibold
+                hover:bg-gray-100 hover:border-gray-100
+                text-gray-500
+                py-4
+                px-4
+                ml-2
+                leading-tight
+                focus:outline-none focus:shadow-outline
+                z-20
+              "
             >
               <solid-filter-icon
                 class="w-5 h-5 mr-2 font-extrabold text-blue-500"
@@ -36,7 +82,18 @@
           </div>
 
           <div
-            class="hidden absolute right-0 mt-2 w-80 border border-gray-200 rounded-xl border border-gray-50 shadow-lg bg-white"
+            class="
+              hidden
+              absolute
+              right-0
+              mt-2
+              w-80
+              border border-gray-200
+              rounded-xl
+              border border-gray-50
+              shadow-lg
+              bg-white
+            "
             id="filterSearch"
             tabindex="-1"
           >
@@ -44,7 +101,13 @@
               <div class="flex items-center border-b border-gray-200 m-2 pb-2">
                 <div class="flex-none font-extrabold">
                   <div
-                    class="py-2 items-center justify-center text-md focus:outline-none"
+                    class="
+                      py-2
+                      items-center
+                      justify-center
+                      text-md
+                      focus:outline-none
+                    "
                   >
                     <solid-search-icon
                       class="w-7 h-7 text-blue-800 font-extrabold"
@@ -53,14 +116,33 @@
                 </div>
                 <div class="flex-grow mx-2 items-center justify-center">
                   <input
-                    class="block w-full text-gray-500 text-sm font-semibold rounded-lg py-3 focus:outline-none"
+                    class="
+                      block
+                      w-full
+                      text-gray-500 text-sm
+                      font-semibold
+                      rounded-lg
+                      py-3
+                      focus:outline-none
+                    "
                     type="text"
                     placeholder="Search..."
                   />
                 </div>
                 <div class="flex-none items-center justify-center">
                   <button
-                    class="p-1 px-3 border border-gray-300 bg-white hover:bg-gray-200 rounded-md items-center justify-center focus:outline-none text-sm"
+                    class="
+                      p-1
+                      px-3
+                      border border-gray-300
+                      bg-white
+                      hover:bg-gray-200
+                      rounded-md
+                      items-center
+                      justify-center
+                      focus:outline-none
+                      text-sm
+                    "
                     @click="filterClose"
                   >
                     esc
@@ -69,12 +151,30 @@
               </div>
               <div class="font-bold text-gray-600 m-2">Results</div>
               <div
-                class="bg-blue-200 hover:bg-blue-300 text-gray-600 rounded-xl border border-gray-200 mt-2 mx-2 p-4"
+                class="
+                  bg-blue-200
+                  hover:bg-blue-300
+                  text-gray-600
+                  rounded-xl
+                  border border-gray-200
+                  mt-2
+                  mx-2
+                  p-4
+                "
               >
                 Another searched item
               </div>
               <div
-                class="bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-xl border border-gray-200 mt-2 mx-2 p-4"
+                class="
+                  bg-gray-100
+                  hover:bg-gray-200
+                  text-gray-600
+                  rounded-xl
+                  border border-gray-200
+                  mt-2
+                  mx-2
+                  p-4
+                "
               >
                 Searched item
               </div>
@@ -84,22 +184,34 @@
       </div>
     </div>
     <div
-      class="flex flex-col flex-grow mx-5 p-4 bg-white rounded-xl border border-gray-200"
+      class="
+        flex flex-col flex-grow
+        mx-5
+        p-4
+        bg-white
+        rounded-xl
+        border border-gray-200
+      "
     >
       <div
         class="flex flex-row uppercase bg-gray-300 px-5 py-5 text-xs font-bold"
       >
         <div class="w-11/12">Role</div>
+
         <div class="w-1/12 text-right justify-items-end">Options</div>
       </div>
-      <div class="flex flex-row bg-gray-50 px-5 py-5 hover:bg-gray-200">
-        <div class="w-11/12">Administrator</div>
+      <div
+        class="flex flex-row bg-gray-100 px-5 py-5 mt-2 hover:bg-gray-200"
+        v-for="role in roles"
+        :key="role.role_id"
+      >
+        <div class="w-11/12">{{ role.role }}</div>
         <div class="w-1/12 flex flex-col flex-end">
           <!--Dropdown menu-->
           <div class="relative inline-block text-left">
             <div>
               <div
-                @click="gridOption('grid-data-1')"
+                @click="gridOption('grid-data-' + role.role_id)"
                 class="inline-flex justify-end w-full"
               >
                 <solid-dots-horizontal-icon
@@ -109,64 +221,53 @@
             </div>
             <div
               class="hidden absolute right-0 rounded-md shadow-lg bg-white z-10"
-              id="grid-data-1"
+              :id="'grid-data-' + role.role_id"
             >
               <div class="py-1">
                 <nuxt-link
-                  to="/"
-                  class="text-gray-700 block px-4 py-1 text-sm text-center hover:bg-gray-100"
-                  >View</nuxt-link
+                  :to="`/user-management/roles/${role.role_id}`"
+                  class="
+                    text-gray-700
+                    block
+                    px-4
+                    py-1
+                    text-sm text-center
+                    hover:bg-gray-100
+                    cursor-pointer
+                  "
                 >
+                  View
+                </nuxt-link>
+
                 <nuxt-link
-                  to="/"
-                  class="text-gray-700 block px-4 py-1 text-sm text-center hover:bg-gray-100"
-                  >Edit</nuxt-link
+                  :to="`/user-management/roles/${role.role_id}/edit`"
+                  class="
+                    text-gray-700
+                    block
+                    px-4
+                    py-1
+                    text-sm text-center
+                    hover:bg-gray-100
+                    cursor-pointer
+                  "
                 >
-                <nuxt-link
-                  to="/"
-                  class="text-gray-700 block px-4 py-1 text-sm text-center"
-                  >Delete</nuxt-link
+                  Edit
+                </nuxt-link>
+
+                <div
+                  @click="deleteRole(role.role_id)"
+                  class="
+                    text-gray-700
+                    block
+                    px-4
+                    py-1
+                    text-sm text-center
+                    hover:bg-gray-100
+                    cursor-pointer
+                  "
                 >
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="flex flex-row bg-gray-100 px-5 py-5 hover:bg-gray-200">
-        <div class="w-11/12">Designer</div>
-        <div class="w-1/12 flex flex-col flex-end">
-          <!--Dropdown menu-->
-          <div class="relative inline-block text-left">
-            <div>
-              <div
-                @click="gridOption('grid-data-2')"
-                class="inline-flex justify-end w-full"
-              >
-                <solid-dots-horizontal-icon
-                  class="w-6 h-6 font-extrabold z-0"
-                />
-              </div>
-            </div>
-            <div
-              class="hidden absolute right-0 rounded-md shadow-lg bg-white z-10"
-              id="grid-data-2"
-            >
-              <div class="py-1">
-                <nuxt-link
-                  to="/"
-                  class="text-gray-700 block px-4 py-1 text-sm text-center hover:bg-gray-100"
-                  >View</nuxt-link
-                >
-                <nuxt-link
-                  to="/"
-                  class="text-gray-700 block px-4 py-1 text-sm text-center hover:bg-gray-100"
-                  >Edit</nuxt-link
-                >
-                <nuxt-link
-                  to="/"
-                  class="text-gray-700 block px-4 py-1 text-sm text-center"
-                  >Delete</nuxt-link
-                >
+                  Delete
+                </div>
               </div>
             </div>
           </div>
@@ -176,7 +277,21 @@
     <div class="flex flex-row p-5">
       <nuxt-link
         to="/"
-        class="h-11 w-11 text-blue-100 rounded-xl border border-gray-50 shadow bg-blue-800 hover:bg-blue-700 flex items-center justify-center text-xs font-semibold"
+        class="
+          h-11
+          w-11
+          text-blue-100
+          rounded-xl
+          border border-gray-50
+          shadow
+          bg-blue-800
+          hover:bg-blue-700
+          flex
+          items-center
+          justify-center
+          text-xs
+          font-semibold
+        "
       >
         <outline-arrow-circle-left-icon
           class="w-5 h-5 mx-2 font-extrabold text-blue-100"
@@ -184,13 +299,38 @@
       </nuxt-link>
       <div
         to="/"
-        class="h-11 w-11 mx-3 text-gray-500 font-semibold rounded-xl border border-gray-200 border-2 border-blue-800 flex items-center justify-center"
+        class="
+          h-11
+          w-11
+          mx-3
+          text-gray-500
+          font-semibold
+          rounded-xl
+          border border-gray-200 border-2 border-blue-800
+          flex
+          items-center
+          justify-center
+        "
       >
-        6
+        {{ count }}
       </div>
       <nuxt-link
         to="/"
-        class="h-11 w-11 text-blue-200 rounded-xl border border-gray-50 shadow bg-blue-800 hover:bg-blue-700 flex items-center justify-center text-xs font-semibold"
+        class="
+          h-11
+          w-11
+          text-blue-200
+          rounded-xl
+          border border-gray-50
+          shadow
+          bg-blue-800
+          hover:bg-blue-700
+          flex
+          items-center
+          justify-center
+          text-xs
+          font-semibold
+        "
       >
         <outline-arrow-circle-right-icon
           class="w-5 h-5 mx-2 font-extrabold text-blue-100"
@@ -201,6 +341,8 @@
 </template>
 
 <script>
+import { get, destroy } from '~/services/api.service'
+
 export default {
   layout: 'logged',
   methods: {
@@ -221,6 +363,37 @@ export default {
       dropdown.classList.toggle('hidden')
       dropdown.classList.toggle('origin-top-right')
     },
+    edit(role_id) {
+      console.log(role_id)
+      this.$router.push('/user-management/roles/' + { role_id })
+    },
+    deleteRole(role_id) {
+      destroy(this.$axios, 'role/' + role_id + '/')
+        .then((results) => {})
+        .catch((error) => {
+          console.log(error)
+        })
+    },
+  },
+  data() {
+    return {
+      roles: {},
+      count: '',
+      previous: '',
+      next: '',
+    }
+  },
+  async fetch() {
+    get(this.$axios, 'role/')
+      .then((results) => {
+        this.roles = results.results
+        this.count = results.count
+        this.next = results.next
+        this.previous = results.previous
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   },
 }
 </script>

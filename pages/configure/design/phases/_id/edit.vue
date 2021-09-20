@@ -12,9 +12,9 @@
       "
     >
       <div class="text-xl">
-        New building type
+        Edit phase
         <p class="text-sm flex flex-row">
-          <solid-information-circle-icon class="w-4 h-4" />Building type details
+          <solid-information-circle-icon class="w-4 h-4" />Phase details
         </p>
       </div>
     </div>
@@ -28,7 +28,7 @@
     >
       <form
         class="w-full max-w-3xl bg-white rounded-xl px-5 border border-gray-200"
-        @submit.prevent="addBuildingType"
+        @submit.prevent="updatePhase"
       >
         <div class="flex flex-wrap my-6">
           <div class="w-full">
@@ -36,7 +36,7 @@
               class="block uppercase text-gray-500 text-xs font-bold mb-2"
               for="grid-first-name"
             >
-              Building type
+              Phase
             </label>
             <input
               class="
@@ -50,11 +50,11 @@
                 mb-3
                 focus:outline-none
               "
-              id="building_type"
+              id="phase"
               name="phone_number"
-              v-model="buildingTypeData.building_type"
+              v-model="phaseData.phase"
               type="text"
-              placeholder="Building type ..."
+              placeholder="Phase name ..."
             />
             <p class="text-red-500 text-xs italic">
               Please fill out this field.
@@ -116,23 +116,39 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue'
-import { post } from '~/services/api.service'
+import { update, get } from '~/services/api.service'
 export default Vue.extend({
   layout: 'logged',
   data() {
     return {
-      buildingTypeData: {
-        building_type: '',
+      phaseData: {
+        phase: '',
       },
     }
   },
+  created() {
+    this.getPhase()
+  },
   methods: {
-    addBuildingType() {
-      post(this.$axios, 'building_type/', this.buildingTypeData)
+    getPhase() {
+      get(this.$axios, 'phase/' + this.$route.params.id + '/')
+        .then((result) => {
+          this.phaseData.phase = result.phase
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
+    updatePhase() {
+      update(
+        this.$axios,
+        'phase/' + this.$route.params.id + '/',
+        this.phaseData
+      )
         .then((results) => {
-          this.$router.push('/configure/design/building-types')
+          this.$router.push('/configure/design/phases')
         })
         .catch((error) => {
           console.log(error)

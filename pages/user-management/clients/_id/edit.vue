@@ -12,7 +12,7 @@
       "
     >
       <div class="text-xl">
-        New Client
+        Update Client Client
         <p class="text-sm flex flex-row">
           <solid-information-circle-icon class="w-4 h-4" />Client details
         </p>
@@ -28,7 +28,7 @@
     >
       <form
         class="w-full max-w-3xl bg-white rounded-xl px-5 border border-gray-200"
-        @submit.prevent="addClient"
+        @submit.prevent="updateClient"
       >
         <div class="flex flex-wrap my-6">
           <div class="w-full md:w-1/2 md:pr-1">
@@ -146,38 +146,6 @@
           </div>
         </div>
 
-        <div class="flex flex-wrap my-6">
-          <div class="w-full">
-            <label
-              class="block uppercase text-gray-500 text-xs font-bold mb-2"
-              for="grid-password"
-            >
-              Address
-            </label>
-            <textarea
-              class="
-                block
-                w-full
-                text-gray-500
-                border border-gray-300
-                rounded-xl
-                py-3
-                px-4
-                mb-3
-                focus:outline-none
-              "
-              id="grid-textarea"
-              name="phone_number"
-              v-model="clientData.postal_address"
-              type="textarea"
-              placeholder="Address ..."
-            ></textarea>
-            <p class="text-gray-600 text-xs italic">
-              Make it as long and as crazy as you'd like
-            </p>
-          </div>
-        </div>
-
         <div class="flex flex-wrap mb-6">
           <div class="w-full md:w-1/2 py-1 md:pr-1">
             <button
@@ -222,7 +190,6 @@
                 mb-3
                 text-center
               "
-              id="cancel"
             >
               Cancel
             </nuxt-link>
@@ -234,7 +201,7 @@
 </template>
 
 <script>
-import { post } from '~/services/api.service'
+import { update, get } from '~/services/api.service'
 export default {
   layout: 'logged',
   head() {
@@ -247,15 +214,35 @@ export default {
       clientData: {
         first_name: '',
         last_name: '',
+        username: '',
         email: '',
         phone_number: '',
-        postal_address: '',
       },
     }
   },
+  created() {
+    this.getClient()
+  },
   methods: {
-    async addClient() {
-      post(this.$axios, 'client/', this.clientData)
+    getClient() {
+      get(this.$axios, 'client/' + this.$route.params.id + '/')
+        .then((result) => {
+          this.clientData.first_name = result.user.first_name
+          this.clientData.last_name = result.user.last_name
+          this.clientData.username = result.user.username
+          this.clientData.email = result.user.email
+          this.clientData.phone_number = result.phone_number
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
+    async updateClient() {
+      update(
+        this.$axios,
+        'client/' + this.$route.params.id + '/',
+        this.clientData
+      )
         .then((results) => {
           this.$router.push('/user-management/clients')
         })

@@ -12,9 +12,9 @@
       "
     >
       <div class="text-xl">
-        New building type
+        Edit role
         <p class="text-sm flex flex-row">
-          <solid-information-circle-icon class="w-4 h-4" />Building type details
+          <solid-information-circle-icon class="w-4 h-4" />Role details
         </p>
       </div>
     </div>
@@ -28,7 +28,7 @@
     >
       <form
         class="w-full max-w-3xl bg-white rounded-xl px-5 border border-gray-200"
-        @submit.prevent="addBuildingType"
+        @submit.prevent="updateRole"
       >
         <div class="flex flex-wrap my-6">
           <div class="w-full">
@@ -36,7 +36,7 @@
               class="block uppercase text-gray-500 text-xs font-bold mb-2"
               for="grid-first-name"
             >
-              Building type
+              Role
             </label>
             <input
               class="
@@ -50,11 +50,11 @@
                 mb-3
                 focus:outline-none
               "
-              id="building_type"
+              id="role"
               name="phone_number"
-              v-model="buildingTypeData.building_type"
+              v-model="roleData.role"
               type="text"
-              placeholder="Building type ..."
+              placeholder="Role name ..."
             />
             <p class="text-red-500 text-xs italic">
               Please fill out this field.
@@ -116,23 +116,35 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue'
-import { post } from '~/services/api.service'
+import { update, get } from '~/services/api.service'
 export default Vue.extend({
   layout: 'logged',
   data() {
     return {
-      buildingTypeData: {
-        building_type: '',
+      roleData: {
+        role: '',
       },
     }
   },
+  created() {
+    this.getRole()
+  },
   methods: {
-    addBuildingType() {
-      post(this.$axios, 'building_type/', this.buildingTypeData)
+    getRole() {
+      get(this.$axios, 'role/' + this.$route.params.id + '/')
+        .then((result) => {
+          this.roleData.role = result.role
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
+    updateRole() {
+      update(this.$axios, 'role/' + this.$route.params.id + '/', this.roleData)
         .then((results) => {
-          this.$router.push('/configure/design/building-types')
+          this.$router.push('/user-management/roles')
         })
         .catch((error) => {
           console.log(error)

@@ -12,7 +12,7 @@
       "
     >
       <div class="text-xl">
-        New User
+        Update User Profile
         <p class="text-sm flex flex-row">
           <solid-information-circle-icon class="w-4 h-4" />User details
         </p>
@@ -28,7 +28,7 @@
     >
       <form
         class="w-full max-w-3xl bg-white rounded-xl px-5 border border-gray-200"
-        @submit.prevent="addUser"
+        @submit.prevent="updateProfile"
       >
         <div class="flex flex-wrap my-6">
           <div class="w-full md:w-1/2 md:pr-1">
@@ -52,7 +52,7 @@
               "
               id="first_name"
               name="first_name"
-              v-model="userData.first_name"
+              v-model="profileData.first_name"
               type="text"
               placeholder="First name..."
             />
@@ -81,7 +81,7 @@
               "
               id="last_name"
               name="last_name"
-              v-model="userData.last_name"
+              v-model="profileData.last_name"
               type="text"
               placeholder="Last name..."
             />
@@ -110,7 +110,7 @@
               "
               id="username"
               name="username"
-              v-model="userData.username"
+              v-model="profileData.username"
               type="text"
               placeholder="Username ..."
             />
@@ -142,7 +142,7 @@
               "
               id="email"
               name="email"
-              v-model="userData.email"
+              v-model="profileData.email"
               type="email"
               placeholder="Email ..."
             />
@@ -171,7 +171,7 @@
               "
               id="phone_number"
               name="phone_number"
-              v-model="userData.phone_number"
+              v-model="profileData.phone_number"
               type="text"
               placeholder="Phone number ..."
             />
@@ -201,12 +201,12 @@
               "
               id="submit"
             >
-              Add User
+              Save
             </button>
           </div>
           <div class="w-full md:w-1/2 py-1 md:pl-1">
-            <button
-              type="submit"
+            <nuxt-link
+              to="/user-management/profiles"
               class="
                 block
                 w-full
@@ -220,11 +220,11 @@
                 py-4
                 px-4
                 mb-3
+                text-center
               "
-              id="cancel"
             >
               Cancel
-            </button>
+            </nuxt-link>
           </div>
         </div>
       </form>
@@ -232,9 +232,9 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-export default Vue.extend({
+<script>
+import { update, get } from '~/services/api.service'
+export default {
   layout: 'logged',
   head() {
     return {
@@ -243,7 +243,7 @@ export default Vue.extend({
   },
   data() {
     return {
-      userData: {
+      profileData: {
         first_name: '',
         last_name: '',
         username: '',
@@ -252,22 +252,36 @@ export default Vue.extend({
       },
     }
   },
+  created() {
+    this.getProfile()
+  },
   methods: {
-    async addUser() {
-      await this.$axios
-        .$post('profile/', this.userData, {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: 'Bearer ' + localStorage.getItem('token'),
-          },
+    getProfile() {
+      get(this.$axios, 'profile/' + this.$route.params.id + '/')
+        .then((result) => {
+          this.profileData.first_name = result.user.first_name
+          this.profileData.last_name = result.user.last_name
+          this.profileData.username = result.user.username
+          this.profileData.email = result.user.email
+          this.profileData.phone_number = result.phone_number
         })
-        .then((result: any) => {
-          this.$router.push('/user-management/users')
-        })
-        .catch((error: any) => {
+        .catch((error) => {
           console.log(error)
         })
     },
+    async updateProfile() {
+      update(
+        this.$axios,
+        'profile/' + this.$route.params.id + '/',
+        this.profileData
+      )
+        .then((results) => {
+          this.$router.push('/user-management/profiles')
+        })
+        .catch((error) => {
+          console.log('This is my error coming from the backend ', error)
+        })
+    },
   },
-})
+}
 </script>
