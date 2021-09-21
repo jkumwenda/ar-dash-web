@@ -2,6 +2,9 @@ export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
+  server: {
+    port: 3003,
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'ar-dash-web',
