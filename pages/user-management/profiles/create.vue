@@ -26,154 +26,70 @@
         p-5
       "
     >
-      <form
+      <FormulateForm
         class="w-full max-w-3xl bg-white rounded-xl px-5 border border-gray-200"
         @submit.prevent="addUser"
       >
         <div class="flex flex-wrap my-6">
           <div class="w-full md:w-1/2 md:pr-1">
-            <label
-              class="block uppercase text-gray-500 text-xs font-bold mb-2"
-              for="grid-first-name"
-            >
-              First Name
-            </label>
-            <input
-              class="
-                block
-                w-full
-                text-gray-500
-                border border-gray-300
-                rounded-xl
-                py-3
-                px-4
-                mb-3
-                focus:outline-none
-              "
+            <form-input
+              label="First Name"
               id="first_name"
               name="first_name"
-              v-model="userData.first_name"
+              placeholder="First Name..."
               type="text"
-              placeholder="First name..."
+              v-model="userData.first_name"
+              validationRules="required"
             />
-            <p class="text-red-500 text-xs italic">
-              Please fill out this field.
-            </p>
           </div>
           <div class="w-full md:w-1/2 md:pl-1">
-            <label
-              class="block uppercase text-gray-500 text-xs font-bold mb-2"
-              for="grid-last-name"
-            >
-              Last Name
-            </label>
-            <input
-              class="
-                block
-                w-full
-                text-gray-500
-                border border-gray-300
-                rounded-xl
-                py-3
-                px-4
-                mb-3
-                focus:outline-none
-              "
+            <form-input
+              label="Last Name"
               id="last_name"
               name="last_name"
-              v-model="userData.last_name"
+              placeholder="First Name..."
               type="text"
-              placeholder="Last name..."
+              v-model="userData.last_name"
+              validationRules="required"
             />
           </div>
         </div>
 
         <div class="flex flex-wrap my-6">
           <div class="w-full">
-            <label
-              class="block uppercase text-gray-500 text-xs font-bold mb-2"
-              for="grid-username"
-            >
-              Username
-            </label>
-            <input
-              class="
-                block
-                w-full
-                text-gray-500
-                border border-gray-300
-                rounded-xl
-                py-3
-                px-4
-                mb-3
-                focus:outline-none
-              "
+            <form-input
+              label="Username"
               id="username"
               name="username"
-              v-model="userData.username"
+              placeholder="Username..."
               type="text"
-              placeholder="Username ..."
+              v-model="userData.username"
+              validationRules="required|min:5"
             />
-            <p class="text-gray-600 text-xs italic">
-              Make it as long and as crazy as you'd like
-            </p>
           </div>
         </div>
 
         <div class="flex flex-wrap my-6">
           <div class="w-full md:w-1/2 md:pr-1">
-            <label
-              class="block uppercase text-gray-500 text-xs font-bold mb-2"
-              for="grid-email"
-            >
-              Email
-            </label>
-            <input
-              class="
-                block
-                w-full
-                text-gray-500
-                border border-gray-300
-                rounded-xl
-                py-3
-                px-4
-                mb-3
-                focus:outline-none
-              "
-              id="email"
+            <form-input
+              label="Email"
+              id="emain"
               name="email"
+              placeholder="Email..."
+              type="emai"
               v-model="userData.email"
-              type="email"
-              placeholder="Email ..."
+              validationRules="required|email"
             />
-            <p class="text-red-500 text-xs italic">
-              Please fill out this field.
-            </p>
           </div>
           <div class="w-full md:w-1/2 md:pl-1">
-            <label
-              class="block uppercase text-gray-500 text-xs font-bold mb-2"
-              for="grid-phone-number"
-            >
-              Phone number
-            </label>
-            <input
-              class="
-                block
-                w-full
-                text-gray-500
-                border border-gray-300
-                rounded-xl
-                py-3
-                px-4
-                mb-3
-                focus:outline-none
-              "
+            <form-input
+              label="Phone Number"
               id="phone_number"
               name="phone_number"
-              v-model="userData.phone_number"
+              placeholder="Phone Number..."
               type="text"
-              placeholder="Phone number ..."
+              v-model="userData.phone_number"
+              validationRules="required"
             />
           </div>
         </div>
@@ -227,15 +143,19 @@
             </nuxt-link>
           </div>
         </div>
-      </form>
+      </FormulateForm>
     </div>
   </div>
 </template>
 
 <script>
 import { post } from '~/services/api.service'
-export default {
+import FormInput from '~/components/form/FormInput.vue'
+export default Vue.extend({
   layout: 'logged',
+  components: {
+    FormInput,
+  },
   head() {
     return {
       title: 'ArDash - Add User',
@@ -254,13 +174,10 @@ export default {
   },
   methods: {
     async addUser() {
-      post(this.$axios, 'profile/', this.userData)
-        .then((results) => {
-          this.$router.push('/user-management/profiles')
-        })
-        .catch((error) => {
-          console.log(error)
-        })
+      post(this.$axios, 'profile/', this.userData).then((results) => {
+        this.$router.push('/user-management/profiles')
+        console.log(this.userData)
+      })
 
       // await this.$axios
       //   .$post('profile/', this.userData, {
@@ -278,5 +195,5 @@ export default {
       //   })
     },
   },
-}
+})
 </script>

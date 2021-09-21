@@ -14,6 +14,9 @@ export default {
     continuous: true,
   },
 
+  server: {
+    port: 3003,
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'ar-dash-web',
@@ -33,10 +36,7 @@ export default {
   css: ['~assets/css/tailwind.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-    '~plugins/axios',     
-    { src: '~/plugins/vue-datepicker', ssr: false }
-  ],
+  plugins: ['~plugins/axios', { src: '~/plugins/vue-datepicker', ssr: false }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -49,6 +49,7 @@ export default {
     '@nuxtjs/tailwindcss',
     '@nuxt-hero-icons/outline/nuxt',
     '@nuxt-hero-icons/solid/nuxt',
+    '@braid/vue-formulate/nuxt',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
