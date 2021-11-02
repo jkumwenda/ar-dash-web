@@ -9,6 +9,7 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@braid/vue-formulate": "^2.5.2",
     "@nuxt-hero-icons/outline": "^1.0.1",
     "@nuxt-hero-icons/solid": "^1.0.1",
     "@nuxtjs/axios": "^5.13.6",

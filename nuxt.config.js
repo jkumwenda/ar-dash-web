@@ -14,6 +14,9 @@ export default {
     continuous: true,
   },
 
+  server: {
+    port: 3003,
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'ar-dash-web',
@@ -46,6 +49,7 @@ export default {
     '@nuxtjs/tailwindcss',
     '@nuxt-hero-icons/outline/nuxt',
     '@nuxt-hero-icons/solid/nuxt',
+    '@braid/vue-formulate/nuxt',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
