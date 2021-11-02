@@ -193,6 +193,10 @@
           "
         >
           Progress bar
+          <div class="flex flex-row w-full">
+            <div class="bg-blue-400 w-1/12 text-center p-2">1</div>
+            <div class="bg-gray-100 11/12">Sketching</div>
+          </div>
         </div>
       </div>
     </div>
