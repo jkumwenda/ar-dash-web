@@ -1,8 +1,10 @@
+import { FC } from "react";
 import Logo from "../components/logo";
 import Header from "../containers/header";
+import Footer from "../containers/footer";
 import SideBar from "../containers/side-bar/side-bar";
 
-const BasePage = () => {
+const BasePage: FC = ({ children }) => {
   return (
     <>
       <div className="flex flex-col lg:flex-row max-h-full min-h-screen font-metropolis">
@@ -15,9 +17,9 @@ const BasePage = () => {
           <div className="header border-b-3 border-blue-50 py-5 px-10">
             <Header />
           </div>
-          <div className="content flex-grow px-5"></div>
+          <div className="content flex-grow px-5">{children}</div>
           <div className="footer border-t-2 border-gray-200 py-5 px-10">
-            {/* <TheFooter /> */}
+            <Footer />
           </div>
         </div>
       </div>

@@ -33,6 +33,7 @@ const DropCard: FC<IProps> = ({ links }) => {
           ) : null}
           {content.map(({ title, url }) => (
             <NavLink
+              activeClassName="border-2 border-blue-200"
               key={title}
               className="
             p2-1
@@ -45,6 +46,8 @@ const DropCard: FC<IProps> = ({ links }) => {
             rounded-xl
             hover:text-gray-50
             capitalize
+            
+          
             "
               to={url}
             >

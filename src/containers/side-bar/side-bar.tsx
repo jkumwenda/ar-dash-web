@@ -10,6 +10,7 @@ import DropDown from "../../components/drop-down";
 import NavLinkButton from "../../components/nav-link-button";
 import DropCard from "./components/drop-card";
 import { useState } from "react";
+import routes from "../../fixtures/routes";
 
 const SideBar = () => {
   const [projectOpen, setProjectOpen] = useState(false);
@@ -19,6 +20,7 @@ const SideBar = () => {
   const ProjectsLink = (
     <NavLinkButton
       title="Projects"
+      to={routes.PROJECT}
       Icon={TableIcon}
       onClick={() => setProjectOpen((isOpen) => !isOpen)}
     />
@@ -28,8 +30,8 @@ const SideBar = () => {
       links={[
         {
           content: [
-            { title: "design", url: "/projects/design" },
-            { title: "construction", url: "/projects/construction" },
+            { title: "design", url: routes.PROJECT_DESIGN },
+            { title: "construction", url: routes.PROJECT_CONSTRUCTION },
           ],
         },
       ]}
@@ -38,6 +40,7 @@ const SideBar = () => {
   const UserManagementLink = (
     <NavLinkButton
       title="user management"
+      to="/user-management"
       Icon={UsersIcon}
       onClick={() => setUserManagementOpen((isOpen) => !isOpen)}
     />
@@ -57,6 +60,7 @@ const SideBar = () => {
   );
   const ConfigureLink = (
     <NavLinkButton
+      to="/configure"
       title="configure"
       Icon={CogIcon}
       onClick={() => setConfigureOpen((isOpen) => !isOpen)}
@@ -88,13 +92,13 @@ const SideBar = () => {
   return (
     <>
       <div className="text-gray-600 lg:pt-10 flex flex-col flex-grow">
-        <NavLinkButton Icon={HomeIcon} title="Dashboard" />
+        <NavLinkButton Icon={HomeIcon} title="Dashboard" to="/dashboard" />
         <DropDown
           isOpen={projectOpen}
           button={ProjectsLink}
           dropDownContent={ProjectsContent}
         />
-        <NavLinkButton Icon={HomeIcon} title="reports" />
+        <NavLinkButton Icon={HomeIcon} title="reports" to="/reports" />
         <DropDown
           isOpen={userManagementOpen}
           button={UserManagementLink}
@@ -105,7 +109,7 @@ const SideBar = () => {
           button={ConfigureLink}
           dropDownContent={ConfigureContent}
         />
-        <NavLinkButton Icon={QuestionMarkCircleIcon} title="reports" />
+        <NavLinkButton Icon={QuestionMarkCircleIcon} title="help" to="help" />
       </div>
     </>
   );
