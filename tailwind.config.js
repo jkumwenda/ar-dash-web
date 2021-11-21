@@ -1,4 +1,5 @@
 module.exports = {
+  purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
   theme: {
     fontFamily: {
       metropolis: ['Metropolis']
@@ -6,7 +7,7 @@ module.exports = {
   },
   variants: {},
   plugins: [],
-  colors:{
+  colors: {
     'shiraz': {
       DEFAULT: '#AC003E',
       '50': '#FF93BA',
