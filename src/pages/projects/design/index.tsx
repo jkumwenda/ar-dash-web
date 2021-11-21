@@ -1,6 +1,7 @@
 import { Button, Panel } from "../../../components";
 import { DocumentAddIcon, FilterIcon } from "@heroicons/react/solid";
 import PageBar from "../../../components/page-bar";
+import { FilterSearch } from "../../../containers";
 
 export default function () {
   return (
@@ -19,14 +20,7 @@ export default function () {
             hover:bg-blue-800
             text-blue-50"
           />
-          <Button
-            Icon={FilterIcon}
-            title="filter"
-            onClick={() => {}}
-            iconClassName="text-blue-500"
-            className="bg-white border shadow-md border-white hover:bg-gray-100 hover:border-gray-100
-            text-gray-500 font-semibold"
-          />
+          <FilterSearch />
         </div>
       </PageBar>
     </div>
