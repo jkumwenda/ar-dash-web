@@ -1,16 +1,39 @@
-import { Route, Switch } from "react-router";
-import routes from "../../../fixtures/routes";
-import create from "./containers/create";
-import Home from "./containers/home";
+import { Button, Panel, Table } from "../../../../components";
+import { DocumentAddIcon } from "@heroicons/react/solid";
+import {
+  ArrowCircleLeftIcon,
+  ArrowCircleRightIcon,
+} from "@heroicons/react/outline";
+import PageBar from "../../../../components/page-bar";
+import { FilterSearch, PageWrapper } from "../../../../containers";
+import { useHistory } from "react-router-dom";
+import routes from "../../../../fixtures/routes";
 
 export default function () {
+  const history = useHistory();
   return (
-    <div className="flex flex-col">
-      <Switch>
-        <Route path={routes.PROJECT_DESIGN_CREATE} component={create} />
-        <Route path={routes.PROJECT_DESIGN} component={Home} />
-      </Switch>
-    </div>
+    <>
+      <PageWrapper title="Projects" showBackIcon={false}>
+        <PageBar title="List of All Projects">
+          <div className="pr-1 flex flex-grow items-center justify-end">
+            <Button
+              Icon={DocumentAddIcon}
+              title="new project"
+              onClick={() => history.push(routes.PROJECT_DESIGN_CREATE)}
+              className="
+            bg-gradient-to-r
+            from-blue-800
+            to-blue-600
+            hover:bg-blue-800
+            text-blue-50 mr-2"
+            />
+            <FilterSearch />
+          </div>
+        </PageBar>
+
+        <Table headings={headings} records={records} />
+      </PageWrapper>
+    </>
   );
 }
 

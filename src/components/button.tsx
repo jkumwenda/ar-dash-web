@@ -6,6 +6,7 @@ type IProps = {
   Icon?: any;
   onClick: () => void;
   iconClassName?: string;
+  type?: "button" | "submit" | "reset";
 };
 
 const Button: FC<IProps> = ({
@@ -14,9 +15,11 @@ const Button: FC<IProps> = ({
   title,
   onClick,
   iconClassName = "text-blue-400",
+  type = "button",
 }) => {
   return (
     <button
+      type={type}
       onClick={onClick}
       className={`
         flex flex-row
@@ -24,7 +27,6 @@ const Button: FC<IProps> = ({
         px-4
         rounded-xl
         border border-gray-200 border-1 
-        ml-2
         leading-tight
         focus:outline-none focus:shadow-outline
         capitalize
