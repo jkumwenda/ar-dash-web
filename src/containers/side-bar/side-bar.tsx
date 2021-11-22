@@ -40,7 +40,7 @@ const SideBar = () => {
   const UserManagementLink = (
     <NavLinkButton
       title="user management"
-      to="/user-management"
+      to={routes.USER_MANAGEMENT}
       Icon={UsersIcon}
       onClick={() => setUserManagementOpen((isOpen) => !isOpen)}
     />
@@ -50,9 +50,9 @@ const SideBar = () => {
       links={[
         {
           content: [
-            { title: "system users", url: "/projects/design" },
-            { title: "roles", url: "/projects/construction" },
-            { title: "client management", url: "/projects/construction" },
+            { title: "system users", url: routes.USER_MANAGEMENT_PROFILES },
+            { title: "roles", url: routes.USER_MANAGEMENT_ROLES },
+            { title: "client management", url: routes.USER_MANAGEMENT_CLIENTS },
           ],
         },
       ]}
@@ -60,7 +60,7 @@ const SideBar = () => {
   );
   const ConfigureLink = (
     <NavLinkButton
-      to="/configure"
+      to={routes.CONFIGURE}
       title="configure"
       Icon={CogIcon}
       onClick={() => setConfigureOpen((isOpen) => !isOpen)}
@@ -72,18 +72,24 @@ const SideBar = () => {
         {
           heading: "Design",
           content: [
-            { title: "building types", url: "/projects/design" },
-            { title: "spaces", url: "/projects/construction" },
-            { title: "phases", url: "/projects/construction" },
-            { title: "status", url: "/projects/construction" },
-            { title: "locations", url: "/projects/construction" },
+            {
+              title: "building types",
+              url: routes.CONFIGURE_DESIGN_BUILDING_TYPES,
+            },
+            { title: "spaces", url: routes.CONFIGURE_DESIGN_SPACES },
+            { title: "phases", url: routes.CONFIGURE_DESIGN_PHASES },
+            { title: "status", url: routes.CONFIGURE_DESIGN_STATUS },
+            { title: "locations", url: routes.CONFIGURE_DESIGN_LOCATIONS },
           ],
         },
         {
           heading: "Construction",
           content: [
-            { title: "phases", url: "/projects/design" },
-            { title: "materials", url: "/projects/construction" },
+            { title: "phases", url: routes.CONFIGURE_CONSTRUCTION_PHASES },
+            {
+              title: "materials",
+              url: routes.CONFIGURE_CONSTRUCTION_MATERIALS,
+            },
           ],
         },
       ]}
