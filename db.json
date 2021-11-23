@@ -1,0 +1,118 @@
+{
+  "user": [
+    {
+      "id": 1,
+      "first_name": "james",
+      "last_name": "banda",
+      "username": "james",
+      "email": "james@gmail.com"
+    }
+  ],
+  "building_type": [
+    { "building_type_id": 1, "building_type": "sky scrapper", "instance_id": 1 }
+  ],
+
+  "client": [
+    {
+      "client_id": 1,
+      "postal_address": "P.O BOX 5",
+      "phone_number": "0999999999",
+      "user_id": 1,
+      "instance_id": 1,
+      "user": {
+        "id": 1,
+        "first_name": "james",
+        "last_name": "banda",
+        "username": "james",
+        "email": "james@gmail.com"
+      }
+    }
+  ],
+
+  "district": [
+    {
+      "district_id": 1,
+      "district": "Lilongwe"
+    }
+  ],
+
+  "location": [
+    {
+      "location_id": 1,
+      "location": "Chilobwe",
+      "district_id": 1,
+      "instance_id": 1,
+      "district": {
+        "district_id": 1,
+        "district": "Lilongwe"
+      }
+    }
+  ],
+  "project": [
+    {
+      "project_id": 1,
+      "project_manager": 1,
+      "client_id": 1,
+      "building_typeId": 1,
+      "location_id": 1,
+      "description": "nice project",
+      "start_date": "02/01/2021",
+      "end_date": "03/07/2021",
+      "status_id": 1,
+      "instance_id": 1,
+      "client": {
+        "client_id": 1,
+        "postal_address": "P.O BOX 5",
+        "phone_number": "0999999999",
+        "user_id": 1,
+        "instance_id": 1,
+        "user": {
+          "id": 1,
+          "first_name": "james",
+          "last_name": "banda",
+          "username": "james",
+          "email": "james@gmail.com"
+        }
+      },
+      "building_type": {
+        "building_type_id": 1,
+        "building_type": "sky scrapper",
+        "instance_id": 1
+      },
+      "location": {
+        "location_id": 1,
+        "location": "Chilobwe",
+        "district_id": 1,
+        "instance_id": 1,
+        "district": {
+          "district_id": 1,
+          "district": "Lilongwe"
+        }
+      },
+
+      "instance": {
+        "organisation_name": "Logik",
+        "postal_address": "P.O BOX 5",
+        "email_address": "logik@gmail.com",
+        "folder_fs_path": "path"
+      },
+      "status": { "status_id": 1, "status": "active", "instance_id": 1 },
+      "manager": {
+        "id": 1,
+        "first_name": "james",
+        "last_name": "banda",
+        "username": "james",
+        "email": "james@gmail.com"
+      }
+    }
+  ],
+  "instance": [
+    {
+      "organisation_name": "Logik",
+      "postal_address": "P.O BOX 5",
+      "email_address": "logik@gmail.com",
+      "folder_fs_path": "path"
+    }
+  ],
+  "status": [{ "status_id": 1, "status": "active", "instance_id": 1 }]
+}
