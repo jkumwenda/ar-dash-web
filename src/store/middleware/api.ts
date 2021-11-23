@@ -2,6 +2,7 @@ import { Middleware, Action, Store } from "redux";
 import { create } from "apisauce";
 import * as actions from "../action/api";
 import { isArray } from "lodash";
+import { environments } from "../../utils/env-adapter";
 
 //@ts-ignore
 const api: Middleware =
@@ -11,12 +12,13 @@ const api: Middleware =
     if (action.type !== actions.apiCallBegun.type) return next(action);
 
     const { url, method, onStart, onSuccess, onError, data } = action.payload;
+    const { BASE_API_URL } = environments;
 
     if (onStart) dispatch({ type: onStart });
 
     next(action);
 
-    const api = create({ baseURL: "http://localhost:4001" });
+    const api = create({ baseURL: BASE_API_URL });
 
     const {
       ok,

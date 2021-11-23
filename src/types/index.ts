@@ -1,6 +1,6 @@
 export interface APICache {
   endpoint: string;
-  lastAccessTime: Date;
+  lastAccessTime: number;
 }
 
 export interface Instance {
