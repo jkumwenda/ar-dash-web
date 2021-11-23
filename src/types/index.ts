@@ -71,3 +71,10 @@ export interface Project {
   status: Status;
   manager: User;
 }
+
+export interface PaginatedResults<T> {
+  count: number;
+  next: string;
+  previous: string;
+  results: Array<T>;
+}

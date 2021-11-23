@@ -8,9 +8,16 @@ import PageBar from "../../../../components/page-bar";
 import { FilterSearch, PageWrapper } from "../../../../containers";
 import { useHistory } from "react-router-dom";
 import routes from "../../../../fixtures/routes";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { loadBuildingTypes } from "../../../../store/slices/building-type";
 
 export default function () {
   const history = useHistory();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(loadBuildingTypes());
+  }, []);
   return (
     <>
       <PageWrapper title="Projects" showBackIcon={false}>
