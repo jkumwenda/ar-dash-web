@@ -5,6 +5,7 @@ import locationReducer from "./slices/location";
 import phaseReducer from "./slices/phase";
 import spaceReducer from "./slices/space";
 import statusReducer from "./slices/status";
+import roleReducer from "./slices/role";
 
 export const entityReducer = combineReducers({
   buildingType: buildingTypeReducer,
@@ -13,4 +14,5 @@ export const entityReducer = combineReducers({
   apiCache: apiCacheReducer,
   status: statusReducer,
   location: locationReducer,
+  role: roleReducer,
 });

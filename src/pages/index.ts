@@ -5,3 +5,4 @@ export { default as ConfigureSpacePage } from "./configure/space";
 export { default as ConfigurePhasePage } from "./configure/phase";
 export { default as ConfigureStatusPage } from "./configure/status";
 export { default as ConfigureLocationPage } from "./configure/location";
+export { default as userManagementRolePage } from "./user-management/role";

@@ -200,5 +200,19 @@
       "instance_id": 1,
       "id": 2
     }
+  ],
+  "role": [
+    {
+      "id": 1,
+      "role_id": 1,
+      "role": "administrator-updated",
+      "instance_id": 1
+    },
+    {
+      "role": "super account",
+      "instance_id": 1,
+      "role_id": 2,
+      "id": 2
+    }
   ]
 }

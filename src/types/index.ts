@@ -5,6 +5,11 @@ export interface APICache {
   lastAccessTime: number;
 }
 
+export interface Role {
+  role_id: number;
+  role: string;
+}
+
 export interface Instance {
   organisation_name: string;
   postal_address: string;

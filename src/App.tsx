@@ -7,6 +7,7 @@ import {
   ConfigurePhasePage,
   ConfigureStatusPage,
   ConfigureLocationPage,
+  userManagementRolePage,
 } from "./pages/";
 import routes from "./fixtures/routes";
 
@@ -33,6 +34,10 @@ function App() {
       <Route
         path={routes.CONFIGURE_DESIGN_LOCATIONS}
         component={ConfigureLocationPage}
+      />
+      <Route
+        path={routes.USER_MANAGEMENT_ROLES}
+        component={userManagementRolePage}
       />
     </BasePage>
   );
