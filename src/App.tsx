@@ -8,6 +8,7 @@ import {
   ConfigureStatusPage,
   ConfigureLocationPage,
   userManagementRolePage,
+  userManagementSystemPage,
 } from "./pages/";
 import routes from "./fixtures/routes";
 
@@ -38,6 +39,10 @@ function App() {
       <Route
         path={routes.USER_MANAGEMENT_ROLES}
         component={userManagementRolePage}
+      />
+      <Route
+        path={routes.USER_MANAGEMENT_USERS}
+        component={userManagementSystemPage}
       />
     </BasePage>
   );

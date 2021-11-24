@@ -1,6 +1,7 @@
 const projects = "/projects";
 const userManagement = "/user-management";
 const userManagementRole = userManagement + "/roles";
+const userManagementUser = userManagement + "/users";
 const configureConstruction = "/configure/construction";
 const configureDesign = "/configure/design";
 const configureSpace = "/configure/spaces";
@@ -47,6 +48,11 @@ const routes = {
   USER_MANAGEMENT_ROLES_CREATE: `${userManagementRole}/create`,
   USER_MANAGEMENT_ROLES_EDIT: `${userManagementRole}/:id/edit`,
   USER_MANAGEMENT_ROLES_DELETE: `${userManagementRole}/:id/delete`,
+
+  USER_MANAGEMENT_USERS: userManagementUser,
+  USER_MANAGEMENT_USERS_CREATE: `${userManagementUser}/create`,
+  USER_MANAGEMENT_USERS_EDIT: `${userManagementUser}/:id/edit`,
+  USER_MANAGEMENT_USERS_DELETE: `${userManagementUser}/:id/delete`,
 
   CONFIGURE_CONSTRUCTION_PHASES: `${configureConstruction}/phases`,
   CONFIGURE_CONSTRUCTION_MATERIALS: `${configureConstruction}/materials`,

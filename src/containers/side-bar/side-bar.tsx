@@ -50,7 +50,7 @@ const SideBar = () => {
       links={[
         {
           content: [
-            { title: "system users", url: routes.USER_MANAGEMENT_PROFILES },
+            { title: "system users", url: routes.USER_MANAGEMENT_USERS },
             { title: "roles", url: routes.USER_MANAGEMENT_ROLES },
             { title: "client management", url: routes.USER_MANAGEMENT_CLIENTS },
           ],

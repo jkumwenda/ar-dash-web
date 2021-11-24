@@ -33,7 +33,16 @@
       "first_name": "james",
       "last_name": "banda",
       "username": "james",
-      "email": "james@gmail.com"
+      "email": "james@gmail.com",
+      "instance_id": 1
+    },
+    {
+      "first_name": "Louis",
+      "last_name": "Nyirongo",
+      "email": "louisnyirongo73@gmail.com",
+      "username": "password",
+      "instance_id": 1,
+      "id": 2
     }
   ],
   "building_type": [
