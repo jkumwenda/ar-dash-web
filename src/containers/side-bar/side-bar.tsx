@@ -60,7 +60,7 @@ const SideBar = () => {
   );
   const ConfigureLink = (
     <NavLinkButton
-      to={routes.CONFIGURE}
+      to={routes.CONFIGURE_DESIGN_BUILDING_TYPES}
       title="configure"
       Icon={CogIcon}
       onClick={() => setConfigureOpen((isOpen) => !isOpen)}
@@ -76,7 +76,7 @@ const SideBar = () => {
               title: "building types",
               url: routes.CONFIGURE_DESIGN_BUILDING_TYPES,
             },
-            { title: "spaces", url: routes.CONFIGURE_DESIGN_SPACES },
+            { title: "spaces", url: routes.CONFIGURE_DESIGN_SPACE },
             { title: "phases", url: routes.CONFIGURE_DESIGN_PHASES },
             { title: "status", url: routes.CONFIGURE_DESIGN_STATUS },
             { title: "locations", url: routes.CONFIGURE_DESIGN_LOCATIONS },

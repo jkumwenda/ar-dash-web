@@ -2,6 +2,7 @@ import { Route } from "react-router";
 import {
   BasePage,
   ConfigureBuildingTypesPage,
+  ConfigureSpacePage,
   ProjectDesignPage,
 } from "./pages/";
 import routes from "./fixtures/routes";
@@ -13,6 +14,10 @@ function App() {
       <Route
         path={routes.CONFIGURE_DESIGN_BUILDING_TYPES}
         component={ConfigureBuildingTypesPage}
+      />
+      <Route
+        path={routes.CONFIGURE_DESIGN_SPACE}
+        component={ConfigureSpacePage}
       />
     </BasePage>
   );

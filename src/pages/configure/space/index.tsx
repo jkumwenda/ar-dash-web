@@ -9,14 +9,11 @@ export default function () {
     <div className="flex flex-col">
       <Switch>
         <Route
-          path={`${routes.CONFIGURE_DESIGN_BUILDING_TYPES_EDIT}`}
+          path={`${routes.CONFIGURE_DESIGN_SPACE_EDIT}`}
           component={edit}
         />
-        <Route
-          path={routes.CONFIGURE_DESIGN_BUILDING_TYPES_CREATE}
-          component={create}
-        />
-        <Route path={routes.CONFIGURE_DESIGN_BUILDING_TYPES} component={home} />
+        <Route path={routes.CONFIGURE_DESIGN_SPACE_CREATE} component={create} />
+        <Route path={routes.CONFIGURE_DESIGN_SPACE} component={home} />
       </Switch>
     </div>
   );

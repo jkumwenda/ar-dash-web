@@ -51,7 +51,7 @@ const Table: FC<IProp> = ({
               <TableDropdownOption
                 options={options.map(({ label, url }) => ({
                   label: label,
-                  url: `${url}/${record[recordId]}`,
+                  url: url.replace(":id", record[recordId]),
                 }))}
               />
             </div>

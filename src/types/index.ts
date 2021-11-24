@@ -18,6 +18,12 @@ export interface Space {
   instance_id: number;
 }
 
+export interface Phase {
+  phase_id: number;
+  phase: number;
+  instance_id: number;
+}
+
 export interface BuildingType {
   building_type_id: number;
   building_type: string;

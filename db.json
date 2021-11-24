@@ -3,7 +3,14 @@
     {
       "id": 1,
       "space_id": 1,
-      "space": "cool space"
+      "space": "cool space updated",
+      "instance_id": 1
+    },
+    {
+      "space_id": 2,
+      "space": "new Space",
+      "instance_id": 1,
+      "id": 2
     }
   ],
   "user": [
