@@ -1,3 +1,5 @@
+import { number } from "yup/lib/locale";
+
 export interface APICache {
   endpoint: string;
   lastAccessTime: number;
@@ -8,6 +10,12 @@ export interface Instance {
   postal_address: string;
   email_address: string;
   folder_fs_path: string;
+}
+
+export interface Space {
+  space_id: number;
+  space: string;
+  instance_id: number;
 }
 
 export interface BuildingType {

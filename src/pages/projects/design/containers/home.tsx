@@ -38,7 +38,12 @@ export default function () {
           </div>
         </PageBar>
 
-        <Table headings={headings} records={records} />
+        <Table
+          headings={headings}
+          records={records}
+          recordId="project"
+          options={[]}
+        />
       </PageWrapper>
     </>
   );

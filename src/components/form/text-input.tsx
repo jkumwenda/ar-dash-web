@@ -27,10 +27,6 @@ const TextInput: FC<IProps> = ({
 
   const error = fieldTouched[name] && fieldErrors[name];
 
-  console.log("touched", fieldTouched[name]);
-  console.log("error", fieldErrors[name]);
-  console.log("error==>", error);
-
   return (
     <div className={`${className ? className : ""} flex flex-col  mb-4`}>
       <label

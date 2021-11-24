@@ -13,7 +13,9 @@ const apiCache: Middleware =
 
     const { BASE_API_URL, API_CACHE_TIME } = environments;
 
-    let { url } = action.payload;
+    let { url, method } = action.payload;
+
+    if (method !== "GET") return next(action);
 
     url = `${BASE_API_URL}${url}`;
 

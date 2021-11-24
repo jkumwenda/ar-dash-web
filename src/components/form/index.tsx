@@ -2,6 +2,7 @@ import { Formik } from "formik";
 import { FC } from "react";
 import { useHistory } from "react-router";
 import { Button } from "..";
+import spinner from "../../assets/Spinner.gif";
 
 type IProps = {
   className?: string;
@@ -41,16 +42,24 @@ const Form: FC<IProps> = ({
             <div className="flex flex-wrap mb-6">
               <div className="w-full md:w-1/2 py-1 md:pr-1">
                 <Button
+                  type="submit"
                   onClick={() => {}}
-                  title="submit"
+                  title={
+                    isSubmitting ? (
+                      <img src={spinner} className="w-11 h-11" />
+                    ) : (
+                      "submit"
+                    )
+                  }
+                  padding={isSubmitting ? "py-1 px-4" : "py-4 px-4"}
                   className="
-                   block
+                  block
                   bg-gradient-to-r
                   w-full
                 from-blue-800
                 to-blue-600
                 hover:from-blue-700 hover:to-blue-500 
-                  font-bold
+                 font-bold
                 text-blue-100
                 border-1
                 rounded-2xl

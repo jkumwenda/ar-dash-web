@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction, Dispatch } from "@reduxjs/toolkit";
 import { BuildingType } from "../../types";
 import { apiCallBegun } from "../action/api";
+import { RootState } from "../store";
 
 type SliceState = {
   loading: boolean;
@@ -56,13 +57,51 @@ export const {
   buildingTypeRequested,
 } = slice.actions;
 
-export const loadBuildingTypes = () => (dispatch: Dispatch, getState: any) => {
+export const loadBuildingTypes = () => (dispatch: Dispatch) => {
   dispatch(
     apiCallBegun({
       onSuccess: [buildingTypeReceived.type],
       url: "/building_type",
+      method: "GET",
       onError: [buildingTypeRequestFailed.type],
       onStart: buildingTypeRequested.type,
     })
+  );
+};
+
+export const addBuildingType = (data: any) => (dispatch: Dispatch) => {
+  dispatch(
+    apiCallBegun({
+      onSuccess: [buildingTypeAdded.type],
+      url: "/building_type",
+      data,
+      method: "POST",
+      onError: [buildingTypeRequestFailed.type],
+      onStart: buildingTypeRequested.type,
+    })
+  );
+};
+
+export const editBuildingType =
+  (data: any, id: number) => (dispatch: Dispatch) => {
+    dispatch(
+      apiCallBegun({
+        onSuccess: [buildingTypeEdited.type],
+        url: "/building_type/" + id,
+        data,
+        method: "PUT",
+        onError: [buildingTypeRequestFailed.type],
+        onStart: buildingTypeRequested.type,
+      })
+    );
+  };
+
+export const getBuildingTypes = (state: RootState) => {
+  return state.entities.buildingType.data;
+};
+
+export const getBuildingType = (id: number) => (state: RootState) => {
+  return state.entities.buildingType.data.find(
+    (building) => building.building_type_id === id
   );
 };

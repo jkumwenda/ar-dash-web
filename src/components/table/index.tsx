@@ -7,8 +7,16 @@ type IProp = {
   className?: string;
   headings: Array<{ label: string; key: string; className?: string }>;
   records: Array<any>;
+  options: Array<{ label: string; url: string }>;
+  recordId: string;
 };
-const Table: FC<IProp> = ({ className, headings, records }) => {
+const Table: FC<IProp> = ({
+  className,
+  headings,
+  records,
+  options,
+  recordId,
+}) => {
   return (
     <>
       <div
@@ -41,10 +49,10 @@ const Table: FC<IProp> = ({ className, headings, records }) => {
             ))}
             <div className="w-1/12 flex flex-col flex-end">
               <TableDropdownOption
-                options={[
-                  { label: "view", url: "/view" },
-                  { label: "delete", url: "/delete" },
-                ]}
+                options={options.map(({ label, url }) => ({
+                  label: label,
+                  url: `${url}/${record[recordId]}`,
+                }))}
               />
             </div>
           </div>

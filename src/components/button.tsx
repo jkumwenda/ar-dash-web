@@ -2,11 +2,12 @@ import { FC } from "react";
 
 type IProps = {
   className?: string;
-  title: string;
+  title: any;
   Icon?: any;
   onClick: () => void;
   iconClassName?: string;
   type?: "button" | "submit" | "reset";
+  padding?: string;
 };
 
 const Button: FC<IProps> = ({
@@ -16,6 +17,7 @@ const Button: FC<IProps> = ({
   onClick,
   iconClassName = "text-blue-400",
   type = "button",
+  padding = "py-4 px-4",
 }) => {
   return (
     <button
@@ -23,13 +25,12 @@ const Button: FC<IProps> = ({
       onClick={onClick}
       className={`
         flex flex-row
-        py-4
-        px-4
         rounded-xl
         border border-gray-200 border-1 
         leading-tight
         focus:outline-none focus:shadow-outline
         capitalize
+        ${padding}
         ${className}
   `}
     >
