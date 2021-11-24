@@ -1,4 +1,18 @@
 {
+  "phase": [
+    {
+      "id": 1,
+      "phase_id": 1,
+      "phase": "cool space updated",
+      "instance_id": 1
+    },
+    {
+      "phase": "phase edited",
+      "instance_id": 1,
+      "phase_id": 2,
+      "id": 2
+    }
+  ],
   "space": [
     {
       "id": 1,

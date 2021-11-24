@@ -60,7 +60,7 @@ const SideBar = () => {
   );
   const ConfigureLink = (
     <NavLinkButton
-      to={routes.CONFIGURE_DESIGN_BUILDING_TYPES}
+      to={routes.CONFIGURE}
       title="configure"
       Icon={CogIcon}
       onClick={() => setConfigureOpen((isOpen) => !isOpen)}
