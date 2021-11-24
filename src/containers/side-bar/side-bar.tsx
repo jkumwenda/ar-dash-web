@@ -78,7 +78,7 @@ const SideBar = () => {
             },
             { title: "spaces", url: routes.CONFIGURE_DESIGN_SPACE },
             { title: "phases", url: routes.CONFIGURE_DESIGN_PHASES },
-            { title: "status", url: routes.CONFIGURE_DESIGN_STATUS },
+            { title: "status", url: routes.CONFIGURE_DESIGN_STATUSES },
             { title: "locations", url: routes.CONFIGURE_DESIGN_LOCATIONS },
           ],
         },

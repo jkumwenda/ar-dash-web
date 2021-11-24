@@ -5,6 +5,8 @@ import {
   ConfigureSpacePage,
   ProjectDesignPage,
   ConfigurePhasePage,
+  ConfigureStatusPage,
+  ConfigureLocationPage,
 } from "./pages/";
 import routes from "./fixtures/routes";
 
@@ -23,6 +25,14 @@ function App() {
       <Route
         path={routes.CONFIGURE_DESIGN_PHASES}
         component={ConfigurePhasePage}
+      />
+      <Route
+        path={routes.CONFIGURE_DESIGN_STATUSES}
+        component={ConfigureStatusPage}
+      />
+      <Route
+        path={routes.CONFIGURE_DESIGN_LOCATIONS}
+        component={ConfigureLocationPage}
       />
     </BasePage>
   );

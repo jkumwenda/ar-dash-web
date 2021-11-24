@@ -4,6 +4,8 @@ const configureConstruction = "/configure/construction";
 const configureDesign = "/configure/design";
 const configureSpace = "/configure/spaces";
 const configurePhase = "/configure/phases";
+const configureStatus = "/configure/status";
+const configureLocation = "/configure/locations";
 
 const routes = {
   PROJECT: projects,
@@ -30,8 +32,16 @@ const routes = {
   CONFIGURE_DESIGN_PHASE_EDIT: `${configurePhase}/:id/edit`,
   CONFIGURE_DESIGN_PHASE_DELETE: `${configurePhase}/:id/delete`,
 
-  CONFIGURE_DESIGN_STATUS: `${configureDesign}/status`,
-  CONFIGURE_DESIGN_LOCATIONS: `${configureDesign}/locations`,
+  CONFIGURE_DESIGN_STATUSES: configureStatus,
+  CONFIGURE_DESIGN_STATUS_CREATE: `${configureStatus}/create`,
+  CONFIGURE_DESIGN_STATUS_EDIT: `${configureStatus}/:id/edit`,
+  CONFIGURE_DESIGN_STATUS_DELETE: `${configureStatus}/:id/delete`,
+
+  CONFIGURE_DESIGN_LOCATIONS: configureLocation,
+  CONFIGURE_DESIGN_LOCATIONS_CREATE: `${configureLocation}/create`,
+  CONFIGURE_DESIGN_LOCATIONS_EDIT: `${configureLocation}/:id/edit`,
+  CONFIGURE_DESIGN_LOCATIONS_DELETE: `${configureLocation}/:id/delete`,
+
   CONFIGURE_CONSTRUCTION_PHASES: `${configureConstruction}/phases`,
   CONFIGURE_CONSTRUCTION_MATERIALS: `${configureConstruction}/materials`,
 };

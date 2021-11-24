@@ -90,9 +90,19 @@
     {
       "id": 1,
       "location_id": 1,
-      "location": "Chilobwe",
+      "location": "Chilobwe updated",
       "district_id": 1,
       "instance_id": 1,
+      "district": {
+        "district_id": 1,
+        "district": "Lilongwe"
+      }
+    },
+    {
+      "location": "zingwangwa",
+      "district_id": "1",
+      "instance_id": 1,
+      "id": 2,
       "district": {
         "district_id": 1,
         "district": "Lilongwe"
@@ -181,8 +191,14 @@
     {
       "id": 1,
       "status_id": 1,
-      "status": "active",
+      "status": "active edited",
       "instance_id": 1
+    },
+    {
+      "status": "new",
+      "status_id": 2,
+      "instance_id": 1,
+      "id": 2
     }
   ]
 }
