@@ -50,7 +50,7 @@ export const {
   locationRequested,
 } = slice.actions;
 
-export const loadLocation = () => (dispatch: Dispatch) => {
+export const loadLocations = () => (dispatch: Dispatch) => {
   dispatch(
     apiCallBegun({
       onSuccess: [locationReceived.type],

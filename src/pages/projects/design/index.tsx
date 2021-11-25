@@ -1,46 +1,20 @@
 import { Route, Switch } from "react-router";
 import routes from "../../../fixtures/routes";
 import create from "./containers/create";
+import edit from "./containers/edit";
 import Home from "./containers/home";
 
 export default function () {
   return (
     <div className="flex flex-col">
       <Switch>
+        <Route path={routes.PROJECT_DESIGN_EDIT} component={edit} />
         <Route path={routes.PROJECT_DESIGN_CREATE} component={create} />
         <Route path={routes.PROJECT_DESIGN} component={Home} />
       </Switch>
     </div>
   );
 }
-
-const headings = [
-  { label: "project", key: "project" },
-  { label: "client", key: "client" },
-  { label: "project type", key: "project_type" },
-  { label: "location ", key: "location" },
-];
-
-const records = [
-  {
-    project: "prj 1",
-    client: "client 1",
-    project_type: "design",
-    location: "bangwe",
-  },
-  {
-    project: "prj 2",
-    client: "client 3",
-    project_type: "design",
-    location: "bangwe",
-  },
-  {
-    project: "prj 3",
-    client: "client 3",
-    project_type: "design",
-    location: "bangwe",
-  },
-];
 
 // <div className="flex flex-row p-5">
 //         <NavLink

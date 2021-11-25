@@ -94,6 +94,7 @@ export interface Project {
 export interface PaginatedResults<T> {
   count: number;
   next: string;
+  current: number;
   previous: string;
   results: Array<T>;
 }

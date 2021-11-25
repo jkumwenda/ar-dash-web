@@ -10,13 +10,16 @@ import { useHistory } from "react-router-dom";
 import routes from "../../../../fixtures/routes";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { loadBuildingTypes } from "../../../../store/slices/building-type";
+import { getProjects, loadProjects } from "../../../../store/slices/project";
+import { useAppSelector } from "../../../../hooks/redux-hooks";
 
 export default function () {
   const history = useHistory();
   const dispatch = useDispatch();
+  const projects = useAppSelector(getProjects());
+
   useEffect(() => {
-    dispatch(loadBuildingTypes());
+    dispatch(loadProjects());
   }, []);
   return (
     <>
@@ -40,9 +43,9 @@ export default function () {
 
         <Table
           headings={headings}
-          records={records}
-          recordId="project"
-          options={[]}
+          records={projects}
+          recordId="project_id"
+          options={tableOptions}
         />
       </PageWrapper>
     </>
@@ -50,31 +53,15 @@ export default function () {
 }
 
 const headings = [
-  { label: "project", key: "project" },
-  { label: "client", key: "client" },
-  { label: "project type", key: "project_type" },
-  { label: "location ", key: "location" },
+  { label: "project", key: "project_name" },
+  { label: "client.", key: "client.user.first_name" },
+  { label: "project type", key: "building_type.building_type" },
+  { label: "location ", key: "location.location" },
 ];
 
-const records = [
-  {
-    project: "prj 1",
-    client: "client 1",
-    project_type: "design",
-    location: "bangwe",
-  },
-  {
-    project: "prj 2",
-    client: "client 3",
-    project_type: "design",
-    location: "bangwe",
-  },
-  {
-    project: "prj 3",
-    client: "client 3",
-    project_type: "design",
-    location: "bangwe",
-  },
+const tableOptions = [
+  { label: "edit", url: routes.PROJECT_DESIGN_EDIT },
+  { label: "delete", url: routes.PROJECT_DESIGN_EDIT },
 ];
 
 // <div className="flex flex-row p-5">

@@ -1,6 +1,16 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import * as Yup from "yup";
 import { FormComponents } from "../../../../components/";
+import { useAppDispatch, useAppSelector } from "../../../../hooks/redux-hooks";
+import {
+  getBuildingTypes,
+  loadBuildingTypes,
+} from "../../../../store/slices/building-type";
+import { getClients, loadClients } from "../../../../store/slices/client";
+import { getLocations, loadLocations } from "../../../../store/slices/location";
+import { getStatuses, loadStatus } from "../../../../store/slices/status";
+import { getUsers, loadUsers } from "../../../../store/slices/user";
 
 const { Form, TextInput, SelectInput, TextAreaInput } = FormComponents;
 type IProps = {
@@ -9,9 +19,31 @@ type IProps = {
 };
 
 const ProjectDesignForm: FC<IProps> = ({ onSubmit, initialValues }) => {
+  const users = useAppSelector(getUsers);
+  const clients = useAppSelector(getClients);
+  const buildingTypes = useAppSelector(getBuildingTypes);
+  const statues = useAppSelector(getStatuses);
+  const locations = useAppSelector(getLocations);
+  const dispatch = useDispatch();
+
   const validationSchema = Yup.object().shape({
-    name: Yup.string().required(),
+    project_name: Yup.string().required().label("project name"),
+    project_manager: Yup.string().required().label("project manager"),
+    client_id: Yup.number().required().label("client"),
+    building_type_id: Yup.number().required().label("building type"),
+    start_date: Yup.date().required().label("start date"),
+    end_date: Yup.date().required().label("end date"),
+    status_id: Yup.number().required().label("status"),
+    location_id: Yup.number().required().label("location"),
   });
+
+  useEffect(() => {
+    if (users.length === 0) dispatch(loadUsers());
+    if (clients.length === 0) dispatch(loadClients());
+    if (statues.length === 0) dispatch(loadStatus());
+    if (buildingTypes.length === 0) dispatch(loadBuildingTypes());
+    if (buildingTypes.length === 0) dispatch(loadLocations());
+  }, []);
 
   return (
     <div
@@ -32,7 +64,7 @@ const ProjectDesignForm: FC<IProps> = ({ onSubmit, initialValues }) => {
             <TextInput
               id="name"
               label="project name"
-              name="name"
+              name="project_name"
               placeholder="Project name ..."
             />
           </div>
@@ -42,13 +74,10 @@ const ProjectDesignForm: FC<IProps> = ({ onSubmit, initialValues }) => {
             <SelectInput
               id="manager"
               label="project manager"
-              name="projectManager"
+              name="project_manager"
               optionKey="id"
-              optionName="name"
-              options={[
-                { id: 1, name: "Michael" },
-                { id: 2, name: "James" },
-              ]}
+              optionName="first_name"
+              options={users}
             />
           </div>
 
@@ -56,13 +85,10 @@ const ProjectDesignForm: FC<IProps> = ({ onSubmit, initialValues }) => {
             <SelectInput
               id="client"
               label="client"
-              name="client"
+              name="client_id"
               optionKey="id"
-              optionName="name"
-              options={[
-                { id: 1, name: "Michael" },
-                { id: 2, name: "James" },
-              ]}
+              optionName="user.first_name"
+              options={clients}
             />
           </div>
         </div>
@@ -72,13 +98,10 @@ const ProjectDesignForm: FC<IProps> = ({ onSubmit, initialValues }) => {
             <SelectInput
               id="location"
               label="location"
-              name="location"
-              optionKey="id"
-              optionName="name"
-              options={[
-                { id: 1, name: "Michael" },
-                { id: 2, name: "James" },
-              ]}
+              name="location_id"
+              optionKey="location_id"
+              optionName="location"
+              options={locations}
             />
           </div>
 
@@ -86,13 +109,10 @@ const ProjectDesignForm: FC<IProps> = ({ onSubmit, initialValues }) => {
             <SelectInput
               id="building"
               label="building type"
-              name="building"
-              optionKey="id"
-              optionName="name"
-              options={[
-                { id: 1, name: "Michael" },
-                { id: 2, name: "James" },
-              ]}
+              name="building_type_id"
+              optionKey="building_type_id"
+              optionName="building_type"
+              options={buildingTypes}
             />
           </div>
         </div>
@@ -109,19 +129,20 @@ const ProjectDesignForm: FC<IProps> = ({ onSubmit, initialValues }) => {
         <div className="flex flex-wrap my-6">
           <div className="w-full md:w-1/2 md:pr-1">
             <TextInput
-              id="name"
-              label="project name"
-              name="name"
-              placeholder="Project name ..."
+              id="start_date"
+              label="start date"
+              name="start_date"
+              placeholder="start date ..."
               type="date"
             />
           </div>
           <div className="w-full md:w-1/2 md:pr-1">
             <TextInput
-              id="name"
-              label="project name"
-              name="name"
-              placeholder="Project name ..."
+              id="end_date"
+              label="end date"
+              name="end_date"
+              placeholder="end date ..."
+              type="date"
             />
           </div>
         </div>
@@ -131,13 +152,10 @@ const ProjectDesignForm: FC<IProps> = ({ onSubmit, initialValues }) => {
             <SelectInput
               id="status"
               label="status"
-              name="status"
-              optionKey="id"
-              optionName="name"
-              options={[
-                { id: 1, name: "active" },
-                { id: 2, name: "pending" },
-              ]}
+              name="status_id"
+              optionKey="status_id"
+              optionName="status"
+              options={statues}
             />
           </div>
         </div>

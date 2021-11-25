@@ -123,6 +123,7 @@
       "location": "zingwangwa",
       "district_id": "1",
       "instance_id": 1,
+      "location_id": 2,
       "id": 2,
       "district": {
         "district_id": 1,
@@ -133,70 +134,78 @@
   "project": [
     {
       "id": 1,
-      "count": 2,
-      "next": "http://localhost:4001/project",
-      "previous": "http://localhost:4001/project",
-      "results": [
-        {
-          "project_id": 1,
-          "project_manager": 1,
-          "client_id": 1,
-          "building_typeId": 1,
-          "location_id": 1,
-          "description": "nice project",
-          "start_date": "02/01/2021",
-          "end_date": "03/07/2021",
-          "status_id": 1,
-          "instance_id": 1,
-          "client": {
-            "client_id": 1,
-            "postal_address": "P.O BOX 5",
-            "phone_number": "0999999999",
-            "user_id": 1,
-            "instance_id": 1,
-            "user": {
-              "id": 1,
-              "first_name": "james",
-              "last_name": "banda",
-              "username": "james",
-              "email": "james@gmail.com"
-            }
-          },
-          "building_type": {
-            "building_type_id": 1,
-            "building_type": "sky scrapper",
-            "instance_id": 1
-          },
-          "location": {
-            "location_id": 1,
-            "location": "Chilobwe",
-            "district_id": 1,
-            "instance_id": 1,
-            "district": {
-              "district_id": 1,
-              "district": "Lilongwe"
-            }
-          },
-          "instance": {
-            "organisation_name": "Logik",
-            "postal_address": "P.O BOX 5",
-            "email_address": "logik@gmail.com",
-            "folder_fs_path": "path"
-          },
-          "status": {
-            "status_id": 1,
-            "status": "active",
-            "instance_id": 1
-          },
-          "manager": {
-            "id": 1,
-            "first_name": "james",
-            "last_name": "banda",
-            "username": "james",
-            "email": "james@gmail.com"
-          }
+      "project_id": 1,
+      "project_name": "cool project updated",
+      "project_manager": 1,
+      "client_id": 1,
+      "building_type_id": 1,
+      "location_id": 1,
+      "description": "nice project",
+      "start_date": "2021-11-11",
+      "end_date": "2021-11-26",
+      "status_id": 1,
+      "instance_id": 1,
+      "client": {
+        "client_id": 1,
+        "postal_address": "P.O BOX 5",
+        "phone_number": "0999999999",
+        "user_id": 1,
+        "instance_id": 1,
+        "user": {
+          "id": 1,
+          "first_name": "james",
+          "last_name": "banda",
+          "username": "james",
+          "email": "james@gmail.com"
         }
-      ]
+      },
+      "building_type": {
+        "building_type_id": 1,
+        "building_type": "sky scrapper",
+        "instance_id": 1
+      },
+      "location": {
+        "location_id": 1,
+        "location": "Chilobwe",
+        "district_id": 1,
+        "instance_id": 1,
+        "district": {
+          "district_id": 1,
+          "district": "Lilongwe"
+        }
+      },
+      "instance": {
+        "organisation_name": "Logik",
+        "postal_address": "P.O BOX 5",
+        "email_address": "logik@gmail.com",
+        "folder_fs_path": "path"
+      },
+      "status": {
+        "status_id": 1,
+        "status": "active",
+        "instance_id": 1
+      },
+      "manager": {
+        "id": 1,
+        "first_name": "james",
+        "last_name": "banda",
+        "username": "james",
+        "email": "james@gmail.com"
+      }
+    },
+    {
+      "project_name": "project updated",
+      "project_manager": "1",
+      "client_id": "2",
+      "building_type_id": "2",
+      "start_date": "2021-11-11",
+      "end_date": "2021-11-26",
+      "status_id": "1",
+      "location_id": "2",
+      "description": "description",
+      "instance_id": 1,
+      "project_id": 2,
+      "id": 2
     }
   ],
   "instance": [
@@ -226,7 +235,7 @@
     {
       "id": 1,
       "role_id": 1,
-      "role": "administrator-updated",
+      "role": "administrator",
       "instance_id": 1
     },
     {
@@ -234,6 +243,11 @@
       "instance_id": 1,
       "role_id": 2,
       "id": 2
+    },
+    {
+      "role": "ordinary",
+      "instance_id": 1,
+      "id": 3
     }
   ]
 }

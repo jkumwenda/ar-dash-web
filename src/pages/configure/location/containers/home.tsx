@@ -10,7 +10,7 @@ import { useHistory } from "react-router-dom";
 import routes from "../../../../fixtures/routes";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { getLocations, loadLocation } from "../../../../store/slices/location";
+import { getLocations, loadLocations } from "../../../../store/slices/location";
 import { useAppSelector } from "../../../../hooks/redux-hooks";
 
 export default function () {
@@ -19,7 +19,7 @@ export default function () {
   const locations = useAppSelector((state) => getLocations(state));
 
   useEffect(() => {
-    dispatch(loadLocation());
+    if (locations.length === 0) dispatch(loadLocations());
   }, []);
 
   return (

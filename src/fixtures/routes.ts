@@ -1,4 +1,5 @@
 const projects = "/projects";
+const projectDesign = projects + "/designs";
 const userManagement = "/user-management";
 const userManagementRole = userManagement + "/roles";
 const userManagementUser = userManagement + "/users";
@@ -12,8 +13,11 @@ const configureLocation = "/configure/locations";
 
 const routes = {
   PROJECT: projects,
-  PROJECT_DESIGN: `${projects}/design`,
-  PROJECT_DESIGN_CREATE: `${projects}/design/create`,
+  PROJECT_DESIGN: projectDesign,
+  PROJECT_DESIGN_CREATE: `${projectDesign}/create`,
+  PROJECT_DESIGN_EDIT: `${projectDesign}/:id/edit`,
+  PROJECT_DESIGN_VIEW: `${projectDesign}/:id/view`,
+
   PROJECT_CONSTRUCTION: `${projects}/construction`,
   USER_MANAGEMENT: userManagement,
   USER_MANAGEMENT_PROFILES: `${userManagement}/profiles`,

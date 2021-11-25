@@ -1,5 +1,6 @@
 import { useFormikContext } from "formik";
 import { FC } from "react";
+import _ from "lodash";
 
 interface IProps {
   error?: string;
@@ -57,7 +58,7 @@ const SelectInput: FC<IProps> = ({
         </option>
         {options.map((option) => (
           <option key={option[optionKey]} value={option[optionKey]}>
-            {option[optionName]}
+            {_.get(option, optionName)}
           </option>
         ))}
       </select>
