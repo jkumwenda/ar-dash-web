@@ -7,6 +7,7 @@ import spaceReducer from "./slices/space";
 import statusReducer from "./slices/status";
 import roleReducer from "./slices/role";
 import userReducer from "./slices/user";
+import clientReducer from "./slices/client";
 
 export const entityReducer = combineReducers({
   buildingType: buildingTypeReducer,
@@ -17,4 +18,5 @@ export const entityReducer = combineReducers({
   location: locationReducer,
   role: roleReducer,
   user: userReducer,
+  client: clientReducer,
 });

@@ -54,7 +54,7 @@ const TextInput: FC<IProps> = ({
         placeholder={placeholder}
       />
       {error && (
-        <small className="text-red-600 font-thin text-sm">{error}</small>
+        <small className="text-red-600 font-thin text-sm pl-3">{error}</small>
       )}
     </div>
   );

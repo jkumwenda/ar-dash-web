@@ -76,7 +76,7 @@
       "id": 1,
       "client_id": 1,
       "postal_address": "P.O BOX 5",
-      "phone_number": "0999999999",
+      "phone_number": "08989898989",
       "user_id": 1,
       "instance_id": 1,
       "user": {
@@ -86,6 +86,18 @@
         "username": "james",
         "email": "james@gmail.com"
       }
+    },
+    {
+      "user": {
+        "email": "louisnyirongo73@gmail.com",
+        "first_name": "Louis",
+        "last_name": "Nyirongo"
+      },
+      "postal_address": "desc",
+      "phone_number": "0888937500",
+      "client_id": 2,
+      "instance_id": 1,
+      "id": 2
     }
   ],
   "district": [

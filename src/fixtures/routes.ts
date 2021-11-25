@@ -2,6 +2,7 @@ const projects = "/projects";
 const userManagement = "/user-management";
 const userManagementRole = userManagement + "/roles";
 const userManagementUser = userManagement + "/users";
+const userManagementClient = userManagement + "/clients";
 const configureConstruction = "/configure/construction";
 const configureDesign = "/configure/design";
 const configureSpace = "/configure/spaces";
@@ -16,7 +17,6 @@ const routes = {
   PROJECT_CONSTRUCTION: `${projects}/construction`,
   USER_MANAGEMENT: userManagement,
   USER_MANAGEMENT_PROFILES: `${userManagement}/profiles`,
-  USER_MANAGEMENT_CLIENTS: `${userManagement}/clients`,
 
   CONFIGURE: "/configure",
   CONFIGURE_DESIGN_BUILDING_TYPES: `${configureDesign}/building-types`,
@@ -53,6 +53,11 @@ const routes = {
   USER_MANAGEMENT_USERS_CREATE: `${userManagementUser}/create`,
   USER_MANAGEMENT_USERS_EDIT: `${userManagementUser}/:id/edit`,
   USER_MANAGEMENT_USERS_DELETE: `${userManagementUser}/:id/delete`,
+
+  USER_MANAGEMENT_CLIENTS: userManagementClient,
+  USER_MANAGEMENT_CLIENTS_CREATE: `${userManagementClient}/create`,
+  USER_MANAGEMENT_CLIENTS_EDIT: `${userManagementClient}/:id/edit`,
+  USER_MANAGEMENT_CLIENTS_DELETE: `${userManagementClient}/:id/delete`,
 
   CONFIGURE_CONSTRUCTION_PHASES: `${configureConstruction}/phases`,
   CONFIGURE_CONSTRUCTION_MATERIALS: `${configureConstruction}/materials`,
