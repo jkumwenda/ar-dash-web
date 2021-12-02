@@ -3,9 +3,11 @@ import Logo from "../components/logo";
 import Header from "../containers/header";
 import Footer from "../containers/footer";
 import SideBar from "../containers/side-bar/side-bar";
+import { useLogin } from "../hooks";
 
 const BasePage: FC = ({ children }) => {
-  const loggedIn = true;
+  const { loggedIn } = useLogin();
+
   if (!loggedIn) {
     return null;
   }

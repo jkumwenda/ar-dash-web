@@ -66,7 +66,7 @@ export const addSpace = (data: any) => (dispatch: Dispatch) => {
   dispatch(
     apiCallBegun({
       onSuccess: [SpaceAdded.type],
-      url: "/space",
+      url: "/space/",
       data,
       method: "POST",
       onError: [SpaceRequestFailed.type],

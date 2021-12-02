@@ -69,7 +69,7 @@ export const addClient = (data: any) => (dispatch: Dispatch) => {
   dispatch(
     apiCallBegun({
       onSuccess: [clientAdded.type],
-      url: "/client",
+      url: "/client/",
       data,
       method: "POST",
       onError: [clientRequestFailed.type],

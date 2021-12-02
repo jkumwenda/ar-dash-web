@@ -73,7 +73,7 @@ export const addBuildingType = (data: any) => (dispatch: Dispatch) => {
   dispatch(
     apiCallBegun({
       onSuccess: [buildingTypeAdded.type],
-      url: "/building_type",
+      url: "/building_type/",
       data,
       method: "POST",
       onError: [buildingTypeRequestFailed.type],

@@ -69,7 +69,7 @@ export const addLocation = (data: any) => (dispatch: Dispatch) => {
   dispatch(
     apiCallBegun({
       onSuccess: [locationAdded.type],
-      url: "/location",
+      url: "/location/",
       data,
       method: "POST",
       onError: [locationRequestFailed.type],

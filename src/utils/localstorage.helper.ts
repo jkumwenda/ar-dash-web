@@ -6,4 +6,8 @@ const setKey = (key: string, value: any) => {
   localStorage.setItem(key, value);
 };
 
-export default { setKey, getKey };
+const removeKey = (key: string) => {
+  localStorage.removeItem(key);
+};
+
+export default { setKey, getKey, removeKey };

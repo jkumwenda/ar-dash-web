@@ -69,7 +69,7 @@ export const addProject = (data: any) => (dispatch: Dispatch) => {
   dispatch(
     apiCallBegun({
       onSuccess: [projectAdded.type],
-      url: "/project",
+      url: "/project/",
       data,
       method: "POST",
       onError: [projectRequestFailed.type],

@@ -86,7 +86,7 @@ const ProjectDesignForm: FC<IProps> = ({ onSubmit, initialValues }) => {
               id="client"
               label="client"
               name="client_id"
-              optionKey="id"
+              optionKey="client_id"
               optionName="user.first_name"
               options={clients}
             />

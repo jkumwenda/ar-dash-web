@@ -69,7 +69,7 @@ export const addStatus = (data: any) => (dispatch: Dispatch) => {
   dispatch(
     apiCallBegun({
       onSuccess: [statusAdded.type],
-      url: "/status",
+      url: "/status/",
       data,
       method: "POST",
       onError: [statusRequestFailed.type],

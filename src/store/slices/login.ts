@@ -31,13 +31,20 @@ const slice = createSlice({
     userRequestFailed: (user, action) => {
       user.loading = false;
     },
+    userLogout: (user, action) => {
+      user.loggedIn = false;
+    },
   },
 });
 
 export default slice.reducer;
 
-export const { loggedInDataReceived, userRequestFailed, userRequested } =
-  slice.actions;
+export const {
+  loggedInDataReceived,
+  userRequestFailed,
+  userRequested,
+  userLogout,
+} = slice.actions;
 
 // export const loadusers = () => (dispatch: Dispatch) => {
 //   dispatch(

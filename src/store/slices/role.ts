@@ -66,7 +66,7 @@ export const addRole = (data: any) => (dispatch: Dispatch) => {
   dispatch(
     apiCallBegun({
       onSuccess: [roleAdded.type],
-      url: "/role",
+      url: "/role/",
       data,
       method: "POST",
       onError: [roleRequestFailed.type],

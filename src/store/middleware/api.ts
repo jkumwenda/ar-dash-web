@@ -4,6 +4,7 @@ import * as actions from "../action/api";
 import { isArray } from "lodash";
 import { environments } from "../../utils/env.adapter";
 import localStorage from "../../utils/localstorage.helper";
+import { userLogout } from "../slices/login";
 
 //@ts-ignore
 const api: Middleware =
@@ -43,6 +44,11 @@ const api: Middleware =
       dispatch({ type: onSuccess, payload: responseData });
     }
     if (problem) {
+      //@ts-ignore
+      if (responseData.code && responseData.code === "token_not_valid") {
+        localStorage.removeKey("token");
+        dispatch({ type: userLogout.type, payload: {} });
+      }
       dispatch(actions.apiCallFailed(problem));
 
       if (isArray(onError)) {
