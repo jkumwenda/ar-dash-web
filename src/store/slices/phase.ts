@@ -50,11 +50,12 @@ export const {
   phaseRequested,
 } = slice.actions;
 
+const endpoint = "/phase/";
 export const loadPhases = () => (dispatch: Dispatch) => {
   dispatch(
     apiCallBegun({
       onSuccess: [phaseReceived.type],
-      url: "/phase",
+      url: endpoint,
       method: "GET",
       onError: [phaseRequestFailed.type],
       onStart: phaseRequested.type,
@@ -66,7 +67,7 @@ export const addPhase = (data: any) => (dispatch: Dispatch) => {
   dispatch(
     apiCallBegun({
       onSuccess: [phaseAdded.type],
-      url: "/phase",
+      url: endpoint,
       data,
       method: "POST",
       onError: [phaseRequestFailed.type],
@@ -79,7 +80,7 @@ export const editPhase = (data: any, id: number) => (dispatch: Dispatch) => {
   dispatch(
     apiCallBegun({
       onSuccess: [phaseEdited.type],
-      url: "/phase/" + id,
+      url: `${endpoint}${id}/`,
       data,
       method: "PUT",
       onError: [phaseRequestFailed.type],

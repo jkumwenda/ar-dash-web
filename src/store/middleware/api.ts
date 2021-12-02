@@ -2,7 +2,8 @@ import { Middleware, Action, Store } from "redux";
 import { create } from "apisauce";
 import * as actions from "../action/api";
 import { isArray } from "lodash";
-import { environments } from "../../utils/env-adapter";
+import { environments } from "../../utils/env.adapter";
+import localStorage from "../../utils/localstorage.helper";
 
 //@ts-ignore
 const api: Middleware =
@@ -18,7 +19,13 @@ const api: Middleware =
 
     next(action);
 
-    const api = create({ baseURL: BASE_API_URL });
+    const api = create({
+      baseURL: BASE_API_URL,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getKey("token"),
+      },
+    });
 
     const {
       ok,

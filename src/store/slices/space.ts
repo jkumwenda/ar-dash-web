@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, Dispatch } from "@reduxjs/toolkit";
-import { Space } from "../../types";
+import { Space, PaginatedResults } from "../../types";
 import { apiCallBegun } from "../action/api";
 import { RootState } from "../store";
 
@@ -20,8 +20,8 @@ const slice = createSlice({
     SpaceAdded: (spaces, action: PayloadAction<Space>) => {
       spaces.data.push(action.payload);
     },
-    SpaceReceived: (spaces, action: PayloadAction<Space[]>) => {
-      spaces.data = action.payload;
+    SpaceReceived: (spaces, action: PayloadAction<PaginatedResults<Space>>) => {
+      spaces.data = action.payload.results;
       spaces.loading = false;
     },
     SpaceRequested: (spaces, action) => {

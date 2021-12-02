@@ -1,6 +1,6 @@
 import moment from "moment";
 import { Middleware, Store } from "redux";
-import { environments } from "../../utils/env-adapter";
+import { environments } from "../../utils/env.adapter";
 import { apiCallBegun } from "../action/api";
 import { APICacheAdded, APICacheUpdated, getUrl } from "../slices/cache";
 

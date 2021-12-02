@@ -9,6 +9,7 @@ interface IProps {
   id: string;
   type?: string;
   className?: string;
+  inputClassName?: string;
 }
 
 const TextInput: FC<IProps> = ({
@@ -18,6 +19,7 @@ const TextInput: FC<IProps> = ({
   id,
   name,
   className,
+  inputClassName = "",
 }) => {
   const { handleChange, values, errors, touched } = useFormikContext();
 
@@ -50,7 +52,7 @@ const TextInput: FC<IProps> = ({
         py-3
         px-4
         mb-3
-        focus:outline-none`}
+        focus:outline-none ${inputClassName}`}
         placeholder={placeholder}
       />
       {error && (

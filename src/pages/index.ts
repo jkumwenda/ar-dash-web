@@ -8,3 +8,4 @@ export { default as ConfigureLocation } from "./configure/location";
 export { default as userManagementRole } from "./user-management/role";
 export { default as userManagementSystem } from "./user-management/user";
 export { default as userManagementClient } from "./user-management/client";
+export { default as LoginPage } from "./login";

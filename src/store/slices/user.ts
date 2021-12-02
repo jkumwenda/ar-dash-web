@@ -54,7 +54,7 @@ export const loadUsers = () => (dispatch: Dispatch) => {
   dispatch(
     apiCallBegun({
       onSuccess: [userReceived.type],
-      url: "/user",
+      url: "/user/",
       method: "GET",
       onError: [userRequestFailed.type],
       onStart: userRequested.type,
@@ -66,7 +66,7 @@ export const addUser = (data: any) => (dispatch: Dispatch) => {
   dispatch(
     apiCallBegun({
       onSuccess: [userAdded.type],
-      url: "/user",
+      url: "/user/",
       data,
       method: "POST",
       onError: [userRequestFailed.type],

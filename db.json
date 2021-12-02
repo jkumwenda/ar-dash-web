@@ -69,6 +69,11 @@
       "building_type": "test",
       "instance_id": 1,
       "id": 4
+    },
+    {
+      "building_type": "test",
+      "instance_id": 1,
+      "id": 5
     }
   ],
   "client": [

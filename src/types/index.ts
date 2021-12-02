@@ -74,6 +74,7 @@ export interface Status {
 
 export interface Project {
   project_id: number;
+  project_name: string;
   project_manager: number;
   client_id: number;
   building_type_id: number;
@@ -91,10 +92,10 @@ export interface Project {
   manager: User;
 }
 
-export interface PaginatedResults<T> {
+export type PaginatedResults<T> = {
   count: number;
   next: string;
   current: number;
   previous: string;
   results: Array<T>;
-}
+};

@@ -61,6 +61,7 @@ const headings = [
 
 const tableOptions = [
   { label: "edit", url: routes.PROJECT_DESIGN_EDIT },
+  { label: "view", url: routes.PROJECT_DESIGN_VIEW },
   { label: "delete", url: routes.PROJECT_DESIGN_EDIT },
 ];
 

@@ -3,11 +3,13 @@ import routes from "../../../fixtures/routes";
 import create from "./containers/create";
 import edit from "./containers/edit";
 import Home from "./containers/home";
+import view from "./containers/view";
 
 export default function () {
   return (
     <div className="flex flex-col">
       <Switch>
+        <Route path={routes.PROJECT_DESIGN_VIEW} component={view} />
         <Route path={routes.PROJECT_DESIGN_EDIT} component={edit} />
         <Route path={routes.PROJECT_DESIGN_CREATE} component={create} />
         <Route path={routes.PROJECT_DESIGN} component={Home} />

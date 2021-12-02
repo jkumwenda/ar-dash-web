@@ -1,10 +1,15 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import Logo from "../components/logo";
 import Header from "../containers/header";
 import Footer from "../containers/footer";
 import SideBar from "../containers/side-bar/side-bar";
 
 const BasePage: FC = ({ children }) => {
+  const loggedIn = true;
+  if (!loggedIn) {
+    return null;
+  }
+
   return (
     <>
       <div className="flex flex-col lg:flex-row max-h-full min-h-screen font-metropolis">
