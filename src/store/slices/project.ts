@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, Dispatch } from "@reduxjs/toolkit";
-import { Project } from "../../types";
+import { PaginatedResults, Project } from "../../types";
 import { apiCallBegun } from "../action/api";
 import { RootState } from "../store";
 
@@ -20,8 +20,11 @@ const slice = createSlice({
     projectAdded: (projects, action: PayloadAction<Project>) => {
       projects.data.push(action.payload);
     },
-    projectReceived: (projects, action: PayloadAction<Project[]>) => {
-      projects.data = action.payload;
+    projectReceived: (
+      projects,
+      action: PayloadAction<PaginatedResults<Project>>
+    ) => {
+      projects.data = action.payload.results;
       projects.loading = false;
     },
     projectRequested: (projects, action) => {
@@ -79,7 +82,7 @@ export const editProject = (data: any, id: number) => (dispatch: Dispatch) => {
   dispatch(
     apiCallBegun({
       onSuccess: [projectEdited.type],
-      url: "/project/" + id,
+      url: "/project/" + id + "/",
       data,
       method: "PUT",
       onError: [projectRequestFailed.type],

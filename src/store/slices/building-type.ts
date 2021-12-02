@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, Dispatch } from "@reduxjs/toolkit";
-import { BuildingType } from "../../types";
+import { BuildingType, PaginatedResults } from "../../types";
 import { apiCallBegun } from "../action/api";
 import { RootState } from "../store";
 
@@ -22,9 +22,9 @@ const slice = createSlice({
     },
     buildingTypeReceived: (
       buildingTypes,
-      action: PayloadAction<BuildingType[]>
+      action: PayloadAction<PaginatedResults<BuildingType>>
     ) => {
-      buildingTypes.data = action.payload;
+      buildingTypes.data = action.payload.results;
       buildingTypes.loading = false;
     },
     buildingTypeRequested: (buildingTypes, action) => {
@@ -87,7 +87,7 @@ export const editBuildingType =
     dispatch(
       apiCallBegun({
         onSuccess: [buildingTypeEdited.type],
-        url: "/building_type/" + id,
+        url: "/building_type/" + id + "/",
         data,
         method: "PUT",
         onError: [buildingTypeRequestFailed.type],

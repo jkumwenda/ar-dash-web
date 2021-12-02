@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, Dispatch } from "@reduxjs/toolkit";
-import { Phase } from "../../types";
+import { PaginatedResults, Phase } from "../../types";
 import { apiCallBegun } from "../action/api";
 import { RootState } from "../store";
 
@@ -20,8 +20,8 @@ const slice = createSlice({
     phaseAdded: (phases, action: PayloadAction<Phase>) => {
       phases.data.push(action.payload);
     },
-    phaseReceived: (phases, action: PayloadAction<Phase[]>) => {
-      phases.data = action.payload;
+    phaseReceived: (phases, action: PayloadAction<PaginatedResults<Phase>>) => {
+      phases.data = action.payload.results;
       phases.loading = false;
     },
     phaseRequested: (phases, action) => {

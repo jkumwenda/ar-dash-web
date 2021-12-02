@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, Dispatch } from "@reduxjs/toolkit";
-import { Location } from "../../types";
+import { Location, PaginatedResults } from "../../types";
 import { apiCallBegun } from "../action/api";
 import { RootState } from "../store";
 
@@ -20,8 +20,11 @@ const slice = createSlice({
     locationAdded: (location, action: PayloadAction<Location>) => {
       location.data.push(action.payload);
     },
-    locationReceived: (location, action: PayloadAction<Location[]>) => {
-      location.data = action.payload;
+    locationReceived: (
+      location,
+      action: PayloadAction<PaginatedResults<Location>>
+    ) => {
+      location.data = action.payload.results;
       location.loading = false;
     },
     locationRequested: (location, action) => {
@@ -79,7 +82,7 @@ export const editLocation = (data: any, id: number) => (dispatch: Dispatch) => {
   dispatch(
     apiCallBegun({
       onSuccess: [locationEdited.type],
-      url: "/location/" + id,
+      url: "/location/" + id + "/",
       data,
       method: "PUT",
       onError: [locationRequestFailed.type],

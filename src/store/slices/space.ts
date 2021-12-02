@@ -79,7 +79,7 @@ export const editSpace = (data: any, id: number) => (dispatch: Dispatch) => {
   dispatch(
     apiCallBegun({
       onSuccess: [SpaceEdited.type],
-      url: "/space/" + id,
+      url: "/space/" + id + "/",
       data,
       method: "PUT",
       onError: [SpaceRequestFailed.type],

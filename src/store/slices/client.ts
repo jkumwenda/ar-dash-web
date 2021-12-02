@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, Dispatch } from "@reduxjs/toolkit";
-import { Client } from "../../types";
+import { Client, PaginatedResults } from "../../types";
 import { apiCallBegun } from "../action/api";
 import { RootState } from "../store";
 
@@ -20,8 +20,11 @@ const slice = createSlice({
     clientAdded: (client, action: PayloadAction<Client>) => {
       client.data.push(action.payload);
     },
-    clientReceived: (client, action: PayloadAction<Client[]>) => {
-      client.data = action.payload;
+    clientReceived: (
+      client,
+      action: PayloadAction<PaginatedResults<Client>>
+    ) => {
+      client.data = action.payload.results;
       client.loading = false;
     },
     clientRequested: (client, action) => {
@@ -79,7 +82,7 @@ export const editClient = (data: any, id: number) => (dispatch: Dispatch) => {
   dispatch(
     apiCallBegun({
       onSuccess: [clientEdited.type],
-      url: "/client/" + id,
+      url: "/client/" + id + "/",
       data,
       method: "PUT",
       onError: [clientRequestFailed.type],

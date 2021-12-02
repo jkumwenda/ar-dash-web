@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, Dispatch } from "@reduxjs/toolkit";
-import { Role } from "../../types";
+import { PaginatedResults, Role } from "../../types";
 import { apiCallBegun } from "../action/api";
 import { RootState } from "../store";
 
@@ -20,8 +20,8 @@ const slice = createSlice({
     roleAdded: (roles, action: PayloadAction<Role>) => {
       roles.data.push(action.payload);
     },
-    roleReceived: (roles, action: PayloadAction<Role[]>) => {
-      roles.data = action.payload;
+    roleReceived: (roles, action: PayloadAction<PaginatedResults<Role>>) => {
+      roles.data = action.payload.results;
       roles.loading = false;
     },
     roleRequested: (roles, action) => {
@@ -79,7 +79,7 @@ export const editRole = (data: any, id: number) => (dispatch: Dispatch) => {
   dispatch(
     apiCallBegun({
       onSuccess: [roleEdited.type],
-      url: "/role/" + id,
+      url: "/role/" + id + "/",
       data,
       method: "PUT",
       onError: [roleRequestFailed.type],
