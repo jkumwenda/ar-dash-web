@@ -6,14 +6,30 @@ import { useParams } from "react-router-dom";
 import { PageWrapper } from "../../../../containers";
 import { useAppSelector } from "../../../../hooks/redux-hooks";
 import { getProject } from "../../../../store/slices/project";
+import { ProjectSpace } from "../../../../types";
 import { readableDate } from "../../../../utils/dates.helper";
 import SpaceView from "../components/space-view";
 import SpaceAddForm from "./space-add";
+import SpaceEditForm from "./space-edit";
 
 export default function () {
   const params = useParams<{ id: string }>();
   const project = useAppSelector(getProject(Number(params.id)));
   const [addSpaceVisible, setAddSpaceVisible] = useState(false);
+  const [editSpaceVisible, setEditSpaceVisible] = useState(false);
+  const [projectSpace, setProjectSpace] = useState<ProjectSpace>(
+    {} as ProjectSpace
+  ); // edited project space
+
+  const startEditingProjectSpace = (id: number) => {
+    const space =
+      project?.spaces.find((space) => space.space_id === id) ||
+      ({} as ProjectSpace);
+
+    console.log(space);
+    setProjectSpace(space);
+    setEditSpaceVisible(true);
+  };
 
   return (
     <PageWrapper title="Projects">
@@ -120,6 +136,14 @@ export default function () {
             isOpen={addSpaceVisible}
             onCancel={() => setAddSpaceVisible(false)}
           />
+          <SpaceEditForm
+            isOpen={editSpaceVisible}
+            onCancel={() => {
+              setEditSpaceVisible(false);
+              setProjectSpace({} as ProjectSpace);
+            }}
+            projectSpace={projectSpace}
+          />
 
           <div className="flex space-y-6 text-gray-500">
             <div
@@ -152,7 +176,11 @@ export default function () {
               </div>
               <div className="flex flex-wrap flex-grow mt-2">
                 {project?.spaces.map((projectSpace) => (
-                  <SpaceView projectSpace={projectSpace} />
+                  <SpaceView
+                    key={projectSpace.space_id}
+                    projectSpace={projectSpace}
+                    onClickEdit={startEditingProjectSpace}
+                  />
                 ))}
               </div>
             </div>

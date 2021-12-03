@@ -4,9 +4,10 @@ import { ProjectSpace } from "../../../../types";
 
 type IProps = {
   projectSpace: ProjectSpace;
+  onClickEdit: (id: number) => void;
 };
 
-const SpaceView: FC<IProps> = ({ projectSpace }) => {
+const SpaceView: FC<IProps> = ({ projectSpace, onClickEdit }) => {
   return (
     <div className="py-3 px-6 bg-gray-100 rounded-xl m-1">
       <p className="font-semibold">{projectSpace.space.space}</p>
@@ -21,7 +22,7 @@ const SpaceView: FC<IProps> = ({ projectSpace }) => {
         p-1
       "
           onClick={() => {
-            console.log("open");
+            onClickEdit(projectSpace.project_space_id);
           }}
         >
           <PencilIcon className="w-4 h-4 text-white" />

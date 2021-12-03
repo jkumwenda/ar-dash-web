@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, Dispatch } from "@reduxjs/toolkit";
-import { PaginatedResults, Project } from "../../types";
+import { PaginatedResults, Project, ProjectSpace } from "../../types";
 import { apiCallBegun } from "../action/api";
 import { RootState } from "../store";
 
@@ -33,6 +33,14 @@ const slice = createSlice({
     projectRequestFailed: (projects, action) => {
       projects.loading = false;
     },
+
+    projectSpaceAdded: (projects, action: PayloadAction<ProjectSpace>) => {
+      const project = projects.data.find(
+        (project) => project.project_id === action.payload.project_id
+      );
+
+      project?.spaces.push(action.payload);
+    },
     projectEdited: (projects, action: PayloadAction<Project>) => {
       const index = projects.data.findIndex(
         (project) => project.project_id === action.payload.project_id
@@ -51,6 +59,7 @@ export const {
   projectReceived,
   projectRequestFailed,
   projectRequested,
+  projectSpaceAdded,
 } = slice.actions;
 
 export const loadProjects = () => (dispatch: Dispatch) => {
@@ -70,6 +79,18 @@ export const addProject = (data: any) => (dispatch: Dispatch) => {
     apiCallBegun({
       onSuccess: [projectAdded.type],
       url: "/project/",
+      data,
+      method: "POST",
+      onError: [projectRequestFailed.type],
+      onStart: projectRequested.type,
+    })
+  );
+};
+export const addProjectSpace = (data: any) => (dispatch: Dispatch) => {
+  dispatch(
+    apiCallBegun({
+      onSuccess: [projectSpaceAdded.type],
+      url: "/project_space/",
       data,
       method: "POST",
       onError: [projectRequestFailed.type],

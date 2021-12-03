@@ -2,9 +2,8 @@ import { FC, useEffect, useState } from "react";
 import { Modal, FormComponents } from "../../../../components";
 import * as Yup from "yup";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/redux-hooks";
-import { getSpaces } from "../../../../store/slices/space";
+import { getSpaces, loadSpaces } from "../../../../store/slices/space";
 import { useDispatch } from "react-redux";
-import { loadStatus } from "../../../../store/slices/status";
 
 const { Form, SelectInput, TextInput } = FormComponents;
 
@@ -29,7 +28,7 @@ const SpaceForm: FC<IProps> = ({
   });
 
   useEffect(() => {
-    if (spaces.length === 0) dispatch(loadStatus());
+    if (spaces.length === 0) dispatch(loadSpaces());
   }, []);
 
   return (
