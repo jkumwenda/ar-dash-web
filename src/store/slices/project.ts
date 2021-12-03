@@ -92,7 +92,7 @@ export const editProject = (data: any, id: number) => (dispatch: Dispatch) => {
 };
 
 export const getProjects = () => (state: RootState) => {
-  return state.entities.project.data;
+  return state.entities.project;
 };
 
 export const getProject = (id: number) => (state: RootState) => {

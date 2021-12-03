@@ -1,4 +1,4 @@
-import { Button, Panel, Table } from "../../../../components";
+import { Button, Loader, Panel, Table } from "../../../../components";
 import { DocumentAddIcon } from "@heroicons/react/solid";
 import {
   ArrowCircleLeftIcon,
@@ -16,11 +16,12 @@ import { useAppSelector } from "../../../../hooks/redux-hooks";
 export default function () {
   const history = useHistory();
   const dispatch = useDispatch();
-  const projects = useAppSelector(getProjects());
+  const { data: projects, loading } = useAppSelector(getProjects());
 
   useEffect(() => {
     dispatch(loadProjects());
   }, []);
+
   return (
     <>
       <PageWrapper title="Projects" showBackIcon={false}>
@@ -44,6 +45,7 @@ export default function () {
         <Table
           headings={headings}
           records={projects}
+          loading={loading}
           recordId="project_id"
           options={tableOptions}
         />

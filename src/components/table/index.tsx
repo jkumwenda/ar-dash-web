@@ -2,6 +2,7 @@ import _ from "lodash";
 import { FC } from "react";
 import { DotsHorizontalIcon } from "@heroicons/react/solid";
 import TableDropdownOption from "./options";
+import { Loader } from "..";
 
 type IProp = {
   className?: string;
@@ -9,6 +10,7 @@ type IProp = {
   records: Array<any>;
   options: Array<{ label: string; url: string }>;
   recordId: string;
+  loading?: boolean;
 };
 const Table: FC<IProp> = ({
   className,
@@ -16,6 +18,7 @@ const Table: FC<IProp> = ({
   records,
   options,
   recordId,
+  loading,
 }) => {
   return (
     <>
@@ -40,23 +43,27 @@ const Table: FC<IProp> = ({
         {/* end heading */}
 
         {/* table body */}
-        {records.map((record) => (
-          <div className="flex flex-row bg-gray-100 px-5 py-5 mt-2 hover:bg-gray-200">
-            {headings.map(({ key, label, className }) => (
-              <div key={label} className={className ? className : "w-3/12"}>
-                {_.get(record, key)}
+        {loading ? (
+          <Loader />
+        ) : (
+          records.map((record) => (
+            <div className="flex flex-row bg-gray-100 px-5 py-5 mt-2 hover:bg-gray-200">
+              {headings.map(({ key, label, className }) => (
+                <div key={label} className={className ? className : "w-3/12"}>
+                  {_.get(record, key)}
+                </div>
+              ))}
+              <div className="w-1/12 flex flex-col flex-end">
+                <TableDropdownOption
+                  options={options.map(({ label, url }) => ({
+                    label: label,
+                    url: url.replace(":id", record[recordId]),
+                  }))}
+                />
               </div>
-            ))}
-            <div className="w-1/12 flex flex-col flex-end">
-              <TableDropdownOption
-                options={options.map(({ label, url }) => ({
-                  label: label,
-                  url: url.replace(":id", record[recordId]),
-                }))}
-              />
             </div>
-          </div>
-        ))}
+          ))
+        )}
 
         {/* end table body */}
       </div>
