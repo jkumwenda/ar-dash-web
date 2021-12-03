@@ -11,6 +11,8 @@ type IProps = {
   flexDirection?: string;
   onSubmit: (values: any, isSubmitting?: any) => void;
   submitButton?: Boolean;
+  onCancelClick?: () => void;
+  formClassName?: string;
 };
 
 const Form: FC<IProps> = ({
@@ -21,6 +23,8 @@ const Form: FC<IProps> = ({
   onSubmit,
   submitButton = true,
   flexDirection = "flex-col",
+  onCancelClick,
+  formClassName,
 }) => {
   const history = useHistory();
 
@@ -34,7 +38,11 @@ const Form: FC<IProps> = ({
       {({ handleSubmit, isSubmitting, setSubmitting }) => {
         return (
           <form
-            className="w-full max-w-3xl bg-white rounded-xl px-5 border border-gray-200"
+            className={
+              formClassName
+                ? formClassName
+                : "w-full max-w-3xl bg-white rounded-xl px-5 border border-gray-200"
+            }
             onSubmit={handleSubmit}
           >
             {children}
@@ -72,7 +80,9 @@ const Form: FC<IProps> = ({
               </div>
               <div className="w-full md:w-1/2 py-1 md:pr-1">
                 <Button
-                  onClick={() => history.goBack()}
+                  onClick={() =>
+                    onCancelClick ? onCancelClick() : history.goBack()
+                  }
                   title="cancel"
                   className="
                    block w-full

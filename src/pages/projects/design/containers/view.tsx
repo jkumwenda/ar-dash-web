@@ -1,17 +1,18 @@
 import { PlusIcon, PencilIcon } from "@heroicons/react/outline";
 import { TrashIcon } from "@heroicons/react/solid";
-import { useDispatch } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { useState } from "react";
+
+import { useParams } from "react-router-dom";
 import { PageWrapper } from "../../../../containers";
 import { useAppSelector } from "../../../../hooks/redux-hooks";
 import { getProject } from "../../../../store/slices/project";
 import { readableDate } from "../../../../utils/dates.helper";
+import SpaceAddForm from "./space-add";
 
 export default function () {
-  const dispatch = useDispatch();
-  const history = useHistory();
   const params = useParams<{ id: string }>();
   const project = useAppSelector(getProject(Number(params.id)));
+  const [addSpaceVisible, setAddSpaceVisible] = useState(false);
 
   return (
     <PageWrapper title="Projects">
@@ -114,6 +115,11 @@ export default function () {
             </div>
           </div>
 
+          <SpaceAddForm
+            isOpen={addSpaceVisible}
+            onCancel={() => setAddSpaceVisible(false)}
+          />
+
           <div className="flex space-y-6 text-gray-500">
             <div
               className="
@@ -137,7 +143,7 @@ export default function () {
                   rounded-full
                 "
                   onClick={() => {
-                    console.log("open");
+                    setAddSpaceVisible(true);
                   }}
                 >
                   <PlusIcon className="w-6 h-6 font-extrabold" />
