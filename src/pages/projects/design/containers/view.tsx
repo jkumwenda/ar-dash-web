@@ -5,6 +5,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { PageWrapper } from "../../../../containers";
 import { useAppSelector } from "../../../../hooks/redux-hooks";
 import { getProject } from "../../../../store/slices/project";
+import { readableDate } from "../../../../utils/dates.helper";
 
 export default function () {
   const dispatch = useDispatch();
@@ -49,7 +50,9 @@ export default function () {
               <div className="flex flex-row flex-grow items-center ">
                 <p className="font-semibold pr-5">Duration</p>
                 <p className="text-sm">
-                  {project?.start_date + " - " + project?.end_date}
+                  {readableDate(project?.start_date) +
+                    " - " +
+                    readableDate(project?.end_date)}
                 </p>
               </div>
             </div>
