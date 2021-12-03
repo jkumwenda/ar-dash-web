@@ -11,7 +11,7 @@ const { Form, SelectInput, TextInput } = FormComponents;
 type IProps = {
   isOpen: boolean;
   onCancel: () => void;
-  onSubmit: () => void;
+  onSubmit: (values: any) => void;
   initialValues: any;
 };
 
@@ -21,7 +21,7 @@ const SpaceForm: FC<IProps> = ({
   onSubmit,
   initialValues,
 }) => {
-  const spaces = useAppSelector(getSpaces);
+  const { data: spaces } = useAppSelector(getSpaces);
   const dispatch = useDispatch();
   const validationSchema = Yup.object().shape({
     space_id: Yup.number().required().label("space"),

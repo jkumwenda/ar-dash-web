@@ -92,7 +92,7 @@ export const editStatus = (data: any, id: number) => (dispatch: Dispatch) => {
 };
 
 export const getStatuses = (state: RootState) => {
-  return state.entities.status.data;
+  return state.entities.status;
 };
 
 export const getStatus = (id: number) => (state: RootState) => {

@@ -90,7 +90,7 @@ export const editPhase = (data: any, id: number) => (dispatch: Dispatch) => {
 };
 
 export const getPhases = (state: RootState) => {
-  return state.entities.phase.data;
+  return state.entities.phase;
 };
 
 export const getPhase = (id: number) => (state: RootState) => {

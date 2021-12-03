@@ -16,7 +16,7 @@ import { useAppSelector } from "../../../../hooks/redux-hooks";
 export default function () {
   const history = useHistory();
   const dispatch = useDispatch();
-  const status = useAppSelector((state) => getStatuses(state));
+  const { data: statuses, loading } = useAppSelector(getStatuses);
 
   useEffect(() => {
     dispatch(loadStatus());
@@ -46,7 +46,8 @@ export default function () {
 
         <Table
           headings={headings}
-          records={status}
+          records={statuses}
+          loading={loading}
           options={tableOptions}
           recordId="status_id"
         />

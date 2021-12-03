@@ -92,7 +92,7 @@ export const editLocation = (data: any, id: number) => (dispatch: Dispatch) => {
 };
 
 export const getLocations = (state: RootState) => {
-  return state.entities.location.data;
+  return state.entities.location;
 };
 
 export const getLocation = (id: number) => (state: RootState) => {

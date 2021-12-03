@@ -19,7 +19,9 @@ import { useAppSelector } from "../../../../hooks/redux-hooks";
 export default function () {
   const history = useHistory();
   const dispatch = useDispatch();
-  const buildingTypes = useAppSelector((state) => getBuildingTypes(state));
+  const { data: buildingTypes, loading } = useAppSelector((state) =>
+    getBuildingTypes(state)
+  );
 
   useEffect(() => {
     dispatch(loadBuildingTypes());
@@ -51,6 +53,7 @@ export default function () {
           headings={headings}
           records={buildingTypes}
           options={tableOptions}
+          loading={loading}
           recordId="building_type_id"
         />
       </PageWrapper>

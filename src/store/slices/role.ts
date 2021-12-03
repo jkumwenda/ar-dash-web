@@ -89,7 +89,7 @@ export const editRole = (data: any, id: number) => (dispatch: Dispatch) => {
 };
 
 export const getRoles = (state: RootState) => {
-  return state.entities.role.data;
+  return state.entities.role;
 };
 
 export const getRole = (id: number) => (state: RootState) => {

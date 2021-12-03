@@ -16,7 +16,7 @@ import { useAppSelector } from "../../../../hooks/redux-hooks";
 export default function () {
   const history = useHistory();
   const dispatch = useDispatch();
-  const roles = useAppSelector((state) => getRoles(state));
+  const { data: roles, loading } = useAppSelector(getRoles);
 
   useEffect(() => {
     dispatch(loadRoles());
@@ -45,6 +45,7 @@ export default function () {
         <Table
           headings={headings}
           records={roles}
+          loading={loading}
           options={tableOptions}
           recordId="role_id"
         />

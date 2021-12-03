@@ -23,6 +23,15 @@ export interface Space {
   instance_id: number;
 }
 
+export interface ProjectSpace {
+  project_space_id: number;
+  space: Space;
+  size: number;
+  project_id: number;
+  space_id: number;
+  instance_id: number;
+}
+
 export interface Phase {
   phase_id: number;
   phase: number;
@@ -90,6 +99,7 @@ export interface Project {
   instance: Instance;
   status: Status;
   manager: User;
+  spaces: ProjectSpace[];
 }
 
 export type PaginatedResults<T> = {

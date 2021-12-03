@@ -92,7 +92,7 @@ export const editClient = (data: any, id: number) => (dispatch: Dispatch) => {
 };
 
 export const getClients = (state: RootState) => {
-  return state.entities.client.data;
+  return state.entities.client;
 };
 
 export const getClient = (id: number) => (state: RootState) => {

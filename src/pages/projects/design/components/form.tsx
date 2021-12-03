@@ -19,11 +19,11 @@ type IProps = {
 };
 
 const ProjectDesignForm: FC<IProps> = ({ onSubmit, initialValues }) => {
-  const users = useAppSelector(getUsers);
-  const clients = useAppSelector(getClients);
-  const buildingTypes = useAppSelector(getBuildingTypes);
-  const statues = useAppSelector(getStatuses);
-  const locations = useAppSelector(getLocations);
+  const { data: users } = useAppSelector(getUsers);
+  const { data: clients } = useAppSelector(getClients);
+  const { data: buildingTypes } = useAppSelector(getBuildingTypes);
+  const { data: statues } = useAppSelector(getStatuses);
+  const { data: locations } = useAppSelector(getLocations);
   const dispatch = useDispatch();
 
   const validationSchema = Yup.object().shape({

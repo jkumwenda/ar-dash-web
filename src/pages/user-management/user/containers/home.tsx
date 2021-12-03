@@ -16,7 +16,7 @@ import { useAppSelector } from "../../../../hooks/redux-hooks";
 export default function () {
   const history = useHistory();
   const dispatch = useDispatch();
-  const users = useAppSelector((state) => getUsers(state));
+  const { data: users, loading } = useAppSelector(getUsers);
 
   useEffect(() => {
     dispatch(loadUsers());
@@ -45,6 +45,7 @@ export default function () {
         <Table
           headings={headings}
           records={users}
+          loading={loading}
           options={tableOptions}
           recordId="id"
         />

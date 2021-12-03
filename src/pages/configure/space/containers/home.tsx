@@ -16,7 +16,7 @@ import { useAppSelector } from "../../../../hooks/redux-hooks";
 export default function () {
   const history = useHistory();
   const dispatch = useDispatch();
-  const Space = useAppSelector((state) => getSpaces(state));
+  const { data: spaces, loading } = useAppSelector(getSpaces);
 
   useEffect(() => {
     dispatch(loadSpaces());
@@ -44,7 +44,8 @@ export default function () {
 
         <Table
           headings={headings}
-          records={Space}
+          records={spaces}
+          loading={loading}
           options={tableOptions}
           recordId="space_id"
         />

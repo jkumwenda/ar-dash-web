@@ -89,7 +89,7 @@ export const editUser = (data: any, id: number) => (dispatch: Dispatch) => {
 };
 
 export const getUsers = (state: RootState) => {
-  return state.entities.user.data;
+  return state.entities.user;
 };
 
 export const getUser = (id: number) => (state: RootState) => {

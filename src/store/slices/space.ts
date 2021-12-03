@@ -89,7 +89,7 @@ export const editSpace = (data: any, id: number) => (dispatch: Dispatch) => {
 };
 
 export const getSpaces = (state: RootState) => {
-  return state.entities.space.data;
+  return state.entities.space;
 };
 
 export const getSpace = (id: number) => (state: RootState) => {

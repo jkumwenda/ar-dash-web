@@ -97,7 +97,7 @@ export const editBuildingType =
   };
 
 export const getBuildingTypes = (state: RootState) => {
-  return state.entities.buildingType.data;
+  return state.entities.buildingType;
 };
 
 export const getBuildingType = (id: number) => (state: RootState) => {

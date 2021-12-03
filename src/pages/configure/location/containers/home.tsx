@@ -16,7 +16,9 @@ import { useAppSelector } from "../../../../hooks/redux-hooks";
 export default function () {
   const history = useHistory();
   const dispatch = useDispatch();
-  const locations = useAppSelector((state) => getLocations(state));
+  const { data: locations, loading } = useAppSelector((state) =>
+    getLocations(state)
+  );
 
   useEffect(() => {
     if (locations.length === 0) dispatch(loadLocations());
@@ -47,6 +49,7 @@ export default function () {
         <Table
           headings={headings}
           records={locations}
+          loading={loading}
           options={tableOptions}
           recordId="location_id"
         />

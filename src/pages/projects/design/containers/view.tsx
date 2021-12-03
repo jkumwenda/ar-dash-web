@@ -7,6 +7,7 @@ import { PageWrapper } from "../../../../containers";
 import { useAppSelector } from "../../../../hooks/redux-hooks";
 import { getProject } from "../../../../store/slices/project";
 import { readableDate } from "../../../../utils/dates.helper";
+import SpaceView from "../components/space-view";
 import SpaceAddForm from "./space-add";
 
 export default function () {
@@ -150,37 +151,9 @@ export default function () {
                 </button>
               </div>
               <div className="flex flex-wrap flex-grow mt-2">
-                <div className="py-3 px-6 bg-gray-100 rounded-xl m-1">
-                  <p className="font-semibold">space 1</p>
-                  <p>5 m</p>
-                  <p>
-                    <button
-                      className="
-                      rounded-full
-                      bg-gradient-to-r
-                      from-blue-400
-                      to-blue-700
-                      p-1
-                    "
-                      onClick={() => {
-                        console.log("open");
-                      }}
-                    >
-                      <PencilIcon className="w-4 h-4 text-white" />
-                    </button>
-                    <button
-                      className="
-                      rounded-full
-                      bg-gradient-to-r
-                      from-red-400
-                      to-red-700
-                      p-1
-                    "
-                    >
-                      <TrashIcon className="w-4 h-4 text-white" />
-                    </button>
-                  </p>
-                </div>
+                {project?.spaces.map((projectSpace) => (
+                  <SpaceView projectSpace={projectSpace} />
+                ))}
               </div>
             </div>
           </div>
