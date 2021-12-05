@@ -10,7 +10,7 @@ type SliceState = {
 
 const initialState: SliceState = {
   loading: false,
-  data: [],
+  data: [] as Project[],
 };
 
 const slice = createSlice({
@@ -33,13 +33,26 @@ const slice = createSlice({
     projectRequestFailed: (projects, action) => {
       projects.loading = false;
     },
-
     projectSpaceAdded: (projects, action: PayloadAction<ProjectSpace>) => {
       const project = projects.data.find(
         (project) => project.project_id === action.payload.project_id
       );
-
       project?.spaces.push(action.payload);
+    },
+    projectSpaceEdit: (projects, action: PayloadAction<ProjectSpace>) => {
+      console.log(action.payload);
+      const project = projects.data.find(
+        (project) => project.project_id === action.payload.project_id
+      );
+
+      if (!project) return;
+
+      const index = project?.spaces.findIndex(
+        (space) => space.project_space_id === action.payload.project_space_id
+      );
+
+      project.spaces[index] = action.payload;
+      projects.loading = false;
     },
     projectEdited: (projects, action: PayloadAction<Project>) => {
       const index = projects.data.findIndex(
@@ -60,6 +73,7 @@ export const {
   projectRequestFailed,
   projectRequested,
   projectSpaceAdded,
+  projectSpaceEdit,
 } = slice.actions;
 
 export const loadProjects = () => (dispatch: Dispatch) => {
@@ -99,6 +113,20 @@ export const addProjectSpace = (data: any) => (dispatch: Dispatch) => {
   );
 };
 
+export const editProjectSpace =
+  (data: any, id: number) => (dispatch: Dispatch) => {
+    dispatch(
+      apiCallBegun({
+        onSuccess: [projectSpaceEdit.type],
+        url: "/project_space/" + id + "/",
+        data,
+        method: "PUT",
+        onError: [projectRequestFailed.type],
+        onStart: projectRequested.type,
+      })
+    );
+  };
+
 export const editProject = (data: any, id: number) => (dispatch: Dispatch) => {
   dispatch(
     apiCallBegun({
@@ -116,8 +144,18 @@ export const getProjects = () => (state: RootState) => {
   return state.entities.project;
 };
 
-export const getProject = (id: number) => (state: RootState) => {
+const _getProject = (id: number, state: RootState) => {
   return state.entities.project.data.find(
     (project) => project.project_id === id
   );
 };
+
+export const getProject = (id: number) => (state: RootState) => {
+  return _getProject(id, state);
+};
+
+export const getProjectSpace =
+  (projectId: number, spaceId: number) => (state: RootState) => {
+    const project = _getProject(projectId, state);
+    return project?.spaces.find((space) => space.project_space_id === spaceId);
+  };

@@ -1,12 +1,10 @@
 import { PlusIcon, PencilIcon } from "@heroicons/react/outline";
-import { TrashIcon } from "@heroicons/react/solid";
 import { useState } from "react";
 
 import { useParams } from "react-router-dom";
 import { PageWrapper } from "../../../../containers";
 import { useAppSelector } from "../../../../hooks/redux-hooks";
 import { getProject } from "../../../../store/slices/project";
-import { ProjectSpace } from "../../../../types";
 import { readableDate } from "../../../../utils/dates.helper";
 import SpaceView from "../components/space-view";
 import SpaceAddForm from "./space-add";
@@ -17,19 +15,7 @@ export default function () {
   const project = useAppSelector(getProject(Number(params.id)));
   const [addSpaceVisible, setAddSpaceVisible] = useState(false);
   const [editSpaceVisible, setEditSpaceVisible] = useState(false);
-  const [projectSpace, setProjectSpace] = useState<ProjectSpace>(
-    {} as ProjectSpace
-  ); // edited project space
-
-  const startEditingProjectSpace = (id: number) => {
-    const space =
-      project?.spaces.find((space) => space.space_id === id) ||
-      ({} as ProjectSpace);
-
-    console.log(space);
-    setProjectSpace(space);
-    setEditSpaceVisible(true);
-  };
+  const [projectSpaceId, setProjectSpaceId] = useState<number | undefined>(); // edited project space
 
   return (
     <PageWrapper title="Projects">
@@ -136,13 +122,15 @@ export default function () {
             isOpen={addSpaceVisible}
             onCancel={() => setAddSpaceVisible(false)}
           />
+
           <SpaceEditForm
             isOpen={editSpaceVisible}
             onCancel={() => {
               setEditSpaceVisible(false);
-              setProjectSpace({} as ProjectSpace);
+              setProjectSpaceId(undefined);
             }}
-            projectSpace={projectSpace}
+            //@ts-ignore
+            projectSpaceId={projectSpaceId}
           />
 
           <div className="flex space-y-6 text-gray-500">
@@ -175,11 +163,14 @@ export default function () {
                 </button>
               </div>
               <div className="flex flex-wrap flex-grow mt-2">
-                {project?.spaces.map((projectSpace) => (
+                {project?.spaces.map((projectSpace, index) => (
                   <SpaceView
-                    key={projectSpace.space_id}
+                    key={projectSpace.space_id + index}
                     projectSpace={projectSpace}
-                    onClickEdit={startEditingProjectSpace}
+                    onClickEdit={() => {
+                      setProjectSpaceId(projectSpace.project_space_id);
+                      setEditSpaceVisible(true);
+                    }}
                   />
                 ))}
               </div>
