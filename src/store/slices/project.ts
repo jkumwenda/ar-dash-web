@@ -42,6 +42,18 @@ const slice = createSlice({
 
       projects.loading = false;
     },
+    paginatedDataReceived: (
+      projects,
+      action: PayloadAction<PaginatedResults<Project>>
+    ) => {
+      const { results, next } = action.payload;
+      const { currentPage } = projects.pagination;
+      projects.data = [...projects.data, ...results];
+      projects.pagination.next = next;
+      projects.pagination.loadedPages[currentPage + 1] = results;
+      projects.pagination.currentPage += 1;
+      projects.loading = false;
+    },
     projectRequested: (projects, action) => {
       projects.loading = true;
     },
@@ -90,6 +102,7 @@ export const {
   projectRequested,
   projectSpaceAdded,
   projectSpaceEdit,
+  paginatedDataReceived,
 } = slice.actions;
 
 export const loadProjects = () => (dispatch: Dispatch) => {
@@ -97,6 +110,18 @@ export const loadProjects = () => (dispatch: Dispatch) => {
     apiCallBegun({
       onSuccess: [projectReceived.type],
       url: "/project",
+      method: "GET",
+      onError: [projectRequestFailed.type],
+      onStart: projectRequested.type,
+    })
+  );
+};
+
+export const getNextPage = (pageNumber: number) => (dispatch: Dispatch) => {
+  dispatch(
+    apiCallBegun({
+      onSuccess: [paginatedDataReceived.type],
+      url: "/project/?page=" + pageNumber,
       method: "GET",
       onError: [projectRequestFailed.type],
       onStart: projectRequested.type,

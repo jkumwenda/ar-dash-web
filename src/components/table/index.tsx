@@ -1,8 +1,9 @@
 import _ from "lodash";
 import { FC } from "react";
-import { DotsHorizontalIcon } from "@heroicons/react/solid";
 import TableDropdownOption from "./options";
 import { Loader } from "..";
+import PaginationBar from "../pagination-bar";
+import { Pagination } from "../../types";
 
 type IProp = {
   className?: string;
@@ -11,6 +12,9 @@ type IProp = {
   options: Array<{ label: string; url: string }>;
   recordId: string;
   loading?: boolean;
+  pagination?: any;
+  onLoadNextPage?: (pageNumber: number) => void;
+  onPreviousClick?: (pageNumber: number) => void;
 };
 const Table: FC<IProp> = ({
   className,
@@ -19,6 +23,9 @@ const Table: FC<IProp> = ({
   options,
   recordId,
   loading,
+  pagination,
+  onLoadNextPage,
+  onPreviousClick,
 }) => {
   return (
     <>
@@ -70,6 +77,13 @@ const Table: FC<IProp> = ({
 
         {/* end table body */}
       </div>
+      {onLoadNextPage && onPreviousClick && (
+        <PaginationBar
+          pagination={pagination}
+          onLoadNextPage={onLoadNextPage}
+          onPreviousClick={onPreviousClick}
+        />
+      )}
     </>
   );
 };

@@ -8,19 +8,29 @@ import PageBar from "../../../../components/page-bar";
 import { FilterSearch, PageWrapper } from "../../../../containers";
 import { useHistory } from "react-router-dom";
 import routes from "../../../../fixtures/routes";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { getProjects, loadProjects } from "../../../../store/slices/project";
+import {
+  getNextPage,
+  getProjects,
+  loadProjects,
+} from "../../../../store/slices/project";
 import { useAppSelector } from "../../../../hooks/redux-hooks";
 
 export default function () {
   const history = useHistory();
   const dispatch = useDispatch();
-  const { data: projects, loading } = useAppSelector(getProjects());
+  const { data: projects, loading, pagination } = useAppSelector(getProjects());
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     dispatch(loadProjects());
   }, []);
+
+  const loadNextPage = (pageNumber: number) => {
+    dispatch(getNextPage(pageNumber));
+    setCurrentPage(pageNumber);
+  };
 
   return (
     <>
@@ -44,10 +54,21 @@ export default function () {
 
         <Table
           headings={headings}
-          records={projects}
+          records={
+            pagination.loadedPages
+              ? pagination.loadedPages[currentPage]
+                ? pagination.loadedPages[currentPage]
+                : []
+              : []
+          }
           loading={loading}
           recordId="project_id"
           options={tableOptions}
+          onLoadNextPage={loadNextPage}
+          pagination={pagination}
+          onPreviousClick={(pageNumber: number) => {
+            setCurrentPage(pageNumber);
+          }}
         />
       </PageWrapper>
     </>
