@@ -14,7 +14,7 @@ type IProp = {
   loading?: boolean;
   pagination?: any;
   onLoadNextPage?: (pageNumber: number) => void;
-  onPreviousClick?: (pageNumber: number) => void;
+  setCurrentPage?: (pageNumber: number) => void;
 };
 const Table: FC<IProp> = ({
   className,
@@ -25,7 +25,7 @@ const Table: FC<IProp> = ({
   loading,
   pagination,
   onLoadNextPage,
-  onPreviousClick,
+  setCurrentPage,
 }) => {
   return (
     <>
@@ -77,11 +77,11 @@ const Table: FC<IProp> = ({
 
         {/* end table body */}
       </div>
-      {onLoadNextPage && onPreviousClick && (
+      {onLoadNextPage && setCurrentPage && (
         <PaginationBar
           pagination={pagination}
           onLoadNextPage={onLoadNextPage}
-          onPreviousClick={onPreviousClick}
+          setCurrentPage={setCurrentPage}
         />
       )}
     </>

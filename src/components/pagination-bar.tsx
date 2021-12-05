@@ -7,15 +7,16 @@ import {
 type IProps = {
   pagination: any;
   onLoadNextPage: (pageNumber: number) => void;
-  onPreviousClick: (pageNumber: number) => void;
+  setCurrentPage: (pageNumber: number) => void;
 };
 
 const PaginationBar: FC<IProps> = ({
   pagination,
   onLoadNextPage,
-  onPreviousClick,
+  setCurrentPage,
 }) => {
   const [currentViewedPage, setCurrentViewedPage] = useState(1);
+  const [pages, setPages] = useState<Array<number>>([1]);
 
   const nextPage = () => {
     const nextPage = currentViewedPage + 1;
@@ -27,12 +28,16 @@ const PaginationBar: FC<IProps> = ({
       onLoadNextPage(nextPage);
     }
 
+    setPages((pages) => [...pages, nextPage]);
     setCurrentViewedPage(nextPage);
   };
 
   const previousPage = () => {
-    onPreviousClick(currentViewedPage - 1);
-    setCurrentViewedPage(currentViewedPage - 1);
+    const previousPage = currentViewedPage - 1;
+
+    if (previousPage === 0) return;
+    setCurrentPage(previousPage);
+    setCurrentViewedPage(previousPage);
   };
 
   return (
@@ -58,11 +63,18 @@ const PaginationBar: FC<IProps> = ({
         >
           <ArrowCircleLeftIcon className="w-5 h-5 mx-2 font-extrabold text-blue-100" />
         </button>
-        <div
-          className="
+        {pages.map((pageNumber) => (
+          <div
+            key={pageNumber}
+            onClick={() => {
+              setCurrentPage(pageNumber);
+              setCurrentViewedPage(pageNumber);
+            }}
+            className={`
           h-11
           w-11
-          mx-3
+          mx-1
+          cursor-pointer
           text-gray-500
           font-semibold
           rounded-xl
@@ -70,10 +82,16 @@ const PaginationBar: FC<IProps> = ({
           flex
           items-center
           justify-center
-        "
-        >
-          {currentViewedPage}
-        </div>
+          ${
+            pageNumber === currentViewedPage && pages.length > 1
+              ? "bg-blue-200"
+              : ""
+          }
+        `}
+          >
+            {pageNumber}
+          </div>
+        ))}
         <button
           onClick={nextPage}
           className="

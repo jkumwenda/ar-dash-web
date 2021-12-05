@@ -66,7 +66,7 @@ export default function () {
           options={tableOptions}
           onLoadNextPage={loadNextPage}
           pagination={pagination}
-          onPreviousClick={(pageNumber: number) => {
+          setCurrentPage={(pageNumber: number) => {
             setCurrentPage(pageNumber);
           }}
         />
