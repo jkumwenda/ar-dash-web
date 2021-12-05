@@ -18,13 +18,16 @@ const PaginationBar: FC<IProps> = ({
   const [currentViewedPage, setCurrentViewedPage] = useState(1);
 
   const nextPage = () => {
-    if (!pagination?.next) return;
+    const nextPage = currentViewedPage + 1;
 
-    console.log("after");
+    if (!pagination?.next && pagination.currentPage === currentViewedPage)
+      return;
 
-    onLoadNextPage(currentViewedPage + 1);
+    if (!pagination[nextPage]) {
+      onLoadNextPage(nextPage);
+    }
 
-    setCurrentViewedPage(currentViewedPage + 1);
+    setCurrentViewedPage(nextPage);
   };
 
   const previousPage = () => {
