@@ -19,6 +19,7 @@ const slice = createSlice({
   reducers: {
     clientAdded: (client, action: PayloadAction<Client>) => {
       client.data.push(action.payload);
+      client.loading = false;
     },
     clientReceived: (
       client,
@@ -39,6 +40,7 @@ const slice = createSlice({
       );
 
       client.data[index] = action.payload;
+      client.loading = false;
     },
   },
 });

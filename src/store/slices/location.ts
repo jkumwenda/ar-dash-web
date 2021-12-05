@@ -19,6 +19,7 @@ const slice = createSlice({
   reducers: {
     locationAdded: (location, action: PayloadAction<Location>) => {
       location.data.push(action.payload);
+      location.loading = false;
     },
     locationReceived: (
       location,
@@ -39,6 +40,7 @@ const slice = createSlice({
       );
 
       location.data[index] = action.payload;
+      location.loading = false;
     },
   },
 });

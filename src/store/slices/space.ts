@@ -19,6 +19,7 @@ const slice = createSlice({
   reducers: {
     SpaceAdded: (spaces, action: PayloadAction<Space>) => {
       spaces.data.push(action.payload);
+      spaces.loading = false;
     },
     SpaceReceived: (spaces, action: PayloadAction<PaginatedResults<Space>>) => {
       spaces.data = action.payload.results;
@@ -36,6 +37,7 @@ const slice = createSlice({
       );
 
       spaces.data[index] = action.payload;
+      spaces.loading = false;
     },
   },
 });

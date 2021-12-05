@@ -109,3 +109,10 @@ export type PaginatedResults<T> = {
   previous: string;
   results: Array<T>;
 };
+
+export interface Pagination<T> {
+  pageSize?: number;
+  currentPage: number;
+  next: string;
+  loadedPages: { [key: number]: Array<T> };
+}

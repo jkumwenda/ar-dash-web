@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, Fragment } from "react";
 import { NavLink } from "react-router-dom";
 
 type IProps = {
@@ -27,14 +27,17 @@ const DropCard: FC<IProps> = ({ links }) => {
       {links.map(({ heading, content }) => (
         <>
           {heading ? (
-            <div className="p2-1  px-3 p-2 mx-1 text-gray-600 text-lg">
+            <div
+              key={heading}
+              className="p2-1  px-3 p-2 mx-1 text-gray-600 text-lg"
+            >
               {heading}
             </div>
           ) : null}
-          {content.map(({ title, url }, index) => (
+          {content.map(({ title, url }) => (
             <NavLink
               activeClassName="border-2 border-blue-200"
-              key={title + index}
+              key={title + heading}
               className="
             p2-1
             p-2

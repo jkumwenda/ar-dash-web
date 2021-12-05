@@ -19,6 +19,7 @@ const slice = createSlice({
   reducers: {
     buildingTypeAdded: (buildingTypes, action: PayloadAction<BuildingType>) => {
       buildingTypes.data.push(action.payload);
+      buildingTypes.loading = false;
     },
     buildingTypeReceived: (
       buildingTypes,
@@ -43,6 +44,7 @@ const slice = createSlice({
       );
 
       buildingTypes.data[index] = action.payload;
+      buildingTypes.loading = false;
     },
   },
 });

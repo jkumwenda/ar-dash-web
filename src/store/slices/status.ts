@@ -19,6 +19,7 @@ const slice = createSlice({
   reducers: {
     statusAdded: (status, action: PayloadAction<Status>) => {
       status.data.push(action.payload);
+      status.loading = false;
     },
     statusReceived: (
       status,
@@ -39,6 +40,7 @@ const slice = createSlice({
       );
 
       status.data[index] = action.payload;
+      status.loading = false;
     },
   },
 });

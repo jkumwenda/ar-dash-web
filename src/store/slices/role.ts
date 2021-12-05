@@ -19,6 +19,7 @@ const slice = createSlice({
   reducers: {
     roleAdded: (roles, action: PayloadAction<Role>) => {
       roles.data.push(action.payload);
+      roles.loading = false;
     },
     roleReceived: (roles, action: PayloadAction<PaginatedResults<Role>>) => {
       roles.data = action.payload.results;
@@ -36,6 +37,7 @@ const slice = createSlice({
       );
 
       roles.data[index] = action.payload;
+      roles.loading = false;
     },
   },
 });

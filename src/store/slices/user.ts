@@ -19,6 +19,7 @@ const slice = createSlice({
   reducers: {
     userAdded: (user, action: PayloadAction<User>) => {
       user.data.push(action.payload);
+      user.loading = false;
     },
     userReceived: (user, action: PayloadAction<PaginatedResults<User>>) => {
       user.data = action.payload.results;
@@ -36,6 +37,7 @@ const slice = createSlice({
       );
 
       user.data[index] = action.payload;
+      user.loading = false;
     },
   },
 });

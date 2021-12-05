@@ -1,16 +1,23 @@
 import { createSlice, PayloadAction, Dispatch } from "@reduxjs/toolkit";
-import { PaginatedResults, Project, ProjectSpace } from "../../types";
+import {
+  PaginatedResults,
+  Pagination,
+  Project,
+  ProjectSpace,
+} from "../../types";
 import { apiCallBegun } from "../action/api";
 import { RootState } from "../store";
 
 type SliceState = {
   loading: boolean;
   data: Project[];
+  pagination: Pagination<Project>;
 };
 
 const initialState: SliceState = {
   loading: false,
   data: [] as Project[],
+  pagination: {} as Pagination<Project>,
 };
 
 const slice = createSlice({
@@ -19,12 +26,20 @@ const slice = createSlice({
   reducers: {
     projectAdded: (projects, action: PayloadAction<Project>) => {
       projects.data.push(action.payload);
+      projects.loading = false;
     },
     projectReceived: (
       projects,
       action: PayloadAction<PaginatedResults<Project>>
     ) => {
-      projects.data = action.payload.results;
+      const { results, next } = action.payload;
+      projects.data = results;
+      projects.pagination = {
+        next,
+        currentPage: 1,
+        loadedPages: { 1: results },
+      };
+
       projects.loading = false;
     },
     projectRequested: (projects, action) => {
@@ -38,6 +53,7 @@ const slice = createSlice({
         (project) => project.project_id === action.payload.project_id
       );
       project?.spaces.push(action.payload);
+      projects.loading = false;
     },
     projectSpaceEdit: (projects, action: PayloadAction<ProjectSpace>) => {
       console.log(action.payload);
