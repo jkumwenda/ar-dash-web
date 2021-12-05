@@ -31,10 +31,10 @@ const DropCard: FC<IProps> = ({ links }) => {
               {heading}
             </div>
           ) : null}
-          {content.map(({ title, url }) => (
+          {content.map(({ title, url }, index) => (
             <NavLink
               activeClassName="border-2 border-blue-200"
-              key={title}
+              key={title + index}
               className="
             p2-1
             p-2

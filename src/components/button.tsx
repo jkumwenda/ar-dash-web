@@ -34,7 +34,9 @@ const Button: FC<IProps> = ({
         ${className}
   `}
     >
-      {Icon && <Icon class={`w-5 h-5 mr-2 font-extrabold  ${iconClassName}`} />}
+      {Icon && (
+        <Icon className={`w-5 h-5 mr-2 font-extrabold  ${iconClassName}`} />
+      )}
       {title}
     </button>
   );

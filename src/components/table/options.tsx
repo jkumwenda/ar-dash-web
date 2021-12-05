@@ -26,8 +26,9 @@ const TableDropdownOption: FC<IProps> = ({ className, options }) => {
         } absolute right-0 rounded-md shadow-lg bg-white z-10`}
       >
         <div className="py-1">
-          {options.map(({ label, url }) => (
+          {options.map(({ label, url }, index) => (
             <Link
+              key={label + index}
               to={url}
               className="
               text-gray-700

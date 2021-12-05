@@ -47,7 +47,10 @@ const Table: FC<IProp> = ({
           <Loader />
         ) : (
           records.map((record) => (
-            <div className="flex flex-row bg-gray-100 px-5 py-5 mt-2 hover:bg-gray-200">
+            <div
+              key={record[recordId]}
+              className="flex flex-row bg-gray-100 px-5 py-5 mt-2 hover:bg-gray-200"
+            >
               {headings.map(({ key, label, className }) => (
                 <div key={label} className={className ? className : "w-3/12"}>
                   {_.get(record, key)}
