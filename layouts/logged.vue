@@ -7,7 +7,7 @@
       <Logo />
       <TheSidebar />
     </div>
-    <div class="w-12/12 lg:w-10/12 flex flex-col bg-gray-100">
+    <div class="w-12/12 lg:w-10/12 flex flex-col bg-blue-50">
       <div class="header border-b-3 border-blue-50 py-5 px-10">
         <TheHeader />
       </div>

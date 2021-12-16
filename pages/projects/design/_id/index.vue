@@ -126,53 +126,49 @@
             "
           >
             <div class="flex flex-row">
-              <h2 class="flex-grow text-xl pb-2">Project Spaces</h2>
+              <h2 class="flex-grow text-xl font-md pb-2">Project Spaces</h2>
               <button
                 class="
                   bg-gradient-to-r
-                  from-blue-600
-                  to-blue-800
-                  p-2
-                  text-2xl text-blue-100
-                  rounded-full
+                  from-blue-800
+                  to-blue-600
+                  text-blue-100
+                  flex flex-row
+                  rounded-xl
+                  py-2
+                  px-2
+                  font-bold
+                  text-sm
                 "
                 @click="showAddProjectSpaceModal = true"
               >
-                <outline-plus-icon class="w-6 h-6 font-extrabold" />
+                <solid-plus-icon class="w-5 h-5 font-extrabold" /> Add space
               </button>
             </div>
             <div class="flex flex-wrap flex-grow mt-2">
               <div
-                class="py-3 px-6 bg-gray-100 rounded-xl m-1"
+                class="bg-gray-100 rounded-xl m-1"
                 v-for="project_space in project_spaces"
                 :key="project_space.project_space_id"
               >
-                <p class="font-semibold">{{ project_space.space.space }}</p>
-                <p>{{ project_space.size }} m</p>
-                <p>
+                <div class="py-3 px-4 m-1">
+                  <p class="font-semibold">{{ project_space.space.space }}</p>
+                  <p>{{ project_space.size }} m</p>
+                </div>
+
+                <p class="bg-blue-600 px-4 pt-1 rounded-b-xl">
                   <button
-                    class="
-                      rounded-full
-                      bg-gradient-to-r
-                      from-blue-400
-                      to-blue-700
-                      p-1
-                    "
+                    class="rounded-lg m-0"
                     @click="editSpaceModal(project_space.project_space_id)"
                   >
-                    <outline-pencil-icon class="w-4 h-4 text-white" />
+                    <solid-pencil-alt-icon class="w-5 h-5 text-blue-200" />
                   </button>
+
                   <button
-                    class="
-                      rounded-full
-                      bg-gradient-to-r
-                      from-red-400
-                      to-red-700
-                      p-1
-                    "
+                    class="rounded-lg m-0"
                     @click="deleteProjectSpace(project_space.project_space_id)"
                   >
-                    <solid-trash-icon class="w-4 h-4 text-white" />
+                    <solid-trash-icon class="w-5 h-5 text-blue-200" />
                   </button>
                 </p>
               </div>
@@ -181,21 +177,205 @@
         </div>
       </div>
 
-      <div class="w-12/12 lg:w-4/12">
+      <div class="w-12/12 lg:w-4/12 text-gray-500">
         <div
           class="
             flex flex-col flex-grow
             m-5
             p-4
+            py-5
             bg-white
             rounded-xl
             border border-gray-200
           "
         >
-          Progress bar
+          <h2
+            class="
+              flex-grow
+              text-md
+              bg-blue-500
+              font-xl
+              p-4
+              border border-xl
+              text-blue-100
+              rounded-2xl
+              mb-4
+              mx-1
+            "
+          >
+            Project Stages
+          </h2>
           <div class="flex flex-row w-full">
-            <div class="bg-blue-400 w-1/12 text-center p-2">1</div>
-            <div class="bg-gray-100 11/12">Sketching</div>
+            <div
+              class="
+                bg-white
+                flex-none
+                text-center text-gray-500
+                rounded-full
+                inline-block
+                align-middle
+                border-2 border-blue-400
+                font-semibold
+                px-4
+                p-2
+                mx-1
+              "
+            >
+              1
+            </div>
+            <div
+              class="
+                bg-gray-100
+                flex-grow
+                rounded-full
+                inline-block
+                align-middle
+                border-2 border-gray-100
+                px-4
+                p-2
+              "
+            >
+              Sketching
+            </div>
+          </div>
+          <div class="flex flex-row w-full">
+            <div
+              class="
+                flex-none
+                text-center text-gray-500
+                inline-block
+                align-middle
+                border-1 border-blue-400
+                font-semibold
+                px-2
+                mx-1
+                py-0
+                my-0
+              "
+            >
+              <outline-arrow-narrow-down-icon class="w-6 h-10 text-blue-400" />
+            </div>
+          </div>
+          <div class="flex flex-row w-full">
+            <div
+              class="
+                bg-white
+                flex-none
+                text-center text-gray-500
+                rounded-full
+                inline-block
+                align-middle
+                border-2 border-gray-400
+                font-semibold
+                px-4
+                p-2
+                mx-1
+              "
+            >
+              2
+            </div>
+            <div
+              class="
+                bg-gray-100
+                flex-grow
+                rounded-full
+                inline-block
+                align-middle
+                border-2 border-gray-100
+                px-4
+                p-2
+              "
+            >
+              Drawing
+            </div>
+          </div>
+          <div class="flex flex-row w-full">
+            <div
+              class="
+                flex-none
+                text-center text-gray-500
+                inline-block
+                align-middle
+                border-1 border-gray-400
+                font-semibold
+                px-2
+                mx-1
+                py-0
+                my-0
+              "
+            >
+              <outline-arrow-narrow-down-icon class="w-6 h-10 text-gray-400" />
+            </div>
+          </div>
+          <div class="flex flex-row w-full">
+            <div
+              class="
+                bg-white
+                flex-none
+                text-center text-gray-500
+                rounded-full
+                inline-block
+                align-middle
+                border-2 border-gray-400
+                font-semibold
+                px-4
+                p-2
+                mx-1
+              "
+            >
+              3
+            </div>
+            <div
+              class="
+                bg-gray-100
+                flex-grow
+                rounded-full
+                inline-block
+                align-middle
+                border-2 border-gray-100
+                px-4
+                p-2
+              "
+            >
+              3D Modeling
+            </div>
+            <div
+              class="
+                bg-gray-100
+                flex-none
+                rounded-full
+                inline-block
+                align-middle
+                border-2 border-gray-100
+                px-3
+                p-2
+                pt-3
+                mx-1
+                pb-1
+              "
+            >
+              <button
+                class="rounded-lg m-0"
+                @click="editSpaceModal(project_space.project_space_id)"
+              >
+                <solid-pencil-alt-icon
+                  ChatAlt2Icon
+                  class="w-4 h-4 text-blue-500 font-bold"
+                />
+              </button>
+              <button
+                class="rounded-lg m-0"
+                @click="editSpaceModal(project_space.project_space_id)"
+              >
+                <solid-chat-alt2-icon class="w-4 h-4 text-blue-500 font-bold" />
+              </button>
+              <button
+                class="rounded-lg m-0"
+                @click="deleteProjectSpace(project_space.project_space_id)"
+              >
+                <solid-trash-icon class="w-4 h-4 text-blue-500" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
