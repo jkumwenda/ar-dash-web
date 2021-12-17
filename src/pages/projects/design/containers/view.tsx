@@ -1,4 +1,5 @@
-import { PlusIcon, PencilIcon } from "@heroicons/react/outline";
+import { PlusIcon, ArrowNarrowDownIcon } from "@heroicons/react/outline";
+import { PencilAltIcon, ChatAlt2Icon, TrashIcon } from "@heroicons/react/solid";
 import { useState } from "react";
 
 import { useParams } from "react-router-dom";
@@ -184,15 +185,187 @@ export default function () {
             flex flex-col flex-grow
             m-5
             p-4
+            py-5
             bg-white
             rounded-xl
             border border-gray-200
           "
           >
-            Progress bar
+            <h2
+              className="
+              flex-grow
+              text-md
+              bg-blue-500
+              font-xl
+              p-4
+              border border-xl
+              text-blue-100
+              rounded-2xl
+              mb-4
+              mx-1
+            "
+            >
+              Project Stages
+            </h2>
             <div className="flex flex-row w-full">
-              <div className="bg-blue-400 w-1/12 text-center p-2">1</div>
-              <div className="bg-gray-100 11/12">Sketching</div>
+              <div
+                className="
+                bg-white
+                flex-none
+                text-center text-gray-500
+                rounded-full
+                inline-block
+                align-middle
+                border-2 border-blue-400
+                font-semibold
+                px-4
+                p-2
+                mx-1
+              "
+              >
+                1
+              </div>
+              <div
+                className="
+                bg-gray-100
+                flex-grow
+                rounded-full
+                inline-block
+                align-middle
+                border-2 border-gray-100
+                px-4
+                p-2
+              "
+              >
+                Sketching
+              </div>
+            </div>
+            <div className="flex flex-row w-full">
+              <div
+                className="
+                flex-none
+                text-center text-gray-500
+                inline-block
+                align-middle
+                border-1 border-blue-400
+                font-semibold
+                px-2
+                mx-1
+                py-0
+                my-0
+              "
+              >
+                <ArrowNarrowDownIcon className="w-6 h-10 text-blue-400" />
+              </div>
+            </div>
+            <div className="flex flex-row w-full">
+              <div
+                className="
+                bg-white
+                flex-none
+                text-center text-gray-500
+                rounded-full
+                inline-block
+                align-middle
+                border-2 border-gray-400
+                font-semibold
+                px-4
+                p-2
+                mx-1
+              "
+              >
+                2
+              </div>
+              <div
+                className="
+                bg-gray-100
+                flex-grow
+                rounded-full
+                inline-block
+                align-middle
+                border-2 border-gray-100
+                px-4
+                p-2
+              "
+              >
+                Drawing
+              </div>
+            </div>
+            <div className="flex flex-row w-full">
+              <div
+                className="
+                flex-none
+                text-center text-gray-500
+                inline-block
+                align-middle
+                border-1 border-gray-400
+                font-semibold
+                px-2
+                mx-1
+                py-0
+                my-0
+              "
+              >
+                <ArrowNarrowDownIcon className="w-6 h-10 text-gray-400" />
+              </div>
+            </div>
+            <div className="flex flex-row w-full">
+              <div
+                className="
+                bg-white
+                flex-none
+                text-center text-gray-500
+                rounded-full
+                inline-block
+                align-middle
+                border-2 border-gray-400
+                font-semibold
+                px-4
+                p-2
+                mx-1
+              "
+              >
+                3
+              </div>
+              <div
+                className="
+                bg-gray-100
+                flex-grow
+                rounded-full
+                inline-block
+                align-middle
+                border-2 border-gray-100
+                px-4
+                p-2
+              "
+              >
+                3D Modeling
+              </div>
+              <div
+                className="
+                bg-gray-100
+                flex-none
+                rounded-full
+                inline-block
+                align-middle
+                border-2 border-gray-100
+                px-3
+                p-2
+                pt-3
+                mx-1
+                pb-1
+              "
+              >
+                <button className="rounded-lg m-0">
+                  <PencilAltIcon className="w-4 h-4 text-blue-500 font-bold" />
+                </button>
+                <button className="rounded-lg m-0">
+                  <ChatAlt2Icon className="w-4 h-4 text-blue-500 font-bold" />
+                </button>
+                <button className="rounded-lg m-0">
+                  <TrashIcon className="w-4 h-4 text-blue-500" />
+                </button>
+              </div>
             </div>
           </div>
         </div>

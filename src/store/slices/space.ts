@@ -31,6 +31,9 @@ const slice = createSlice({
     SpaceRequestFailed: (spaces, action) => {
       spaces.loading = false;
     },
+    spaceDeleted: (spaces, action) => {
+      console.log(action);
+    },
     SpaceEdited: (spaces, action: PayloadAction<Space>) => {
       const index = spaces.data.findIndex(
         (space) => space.space_id === action.payload.space_id
@@ -50,6 +53,7 @@ export const {
   SpaceReceived,
   SpaceRequestFailed,
   SpaceRequested,
+  spaceDeleted,
 } = slice.actions;
 
 export const loadSpaces = () => (dispatch: Dispatch) => {
@@ -71,6 +75,18 @@ export const addSpace = (data: any) => (dispatch: Dispatch) => {
       url: "/space/",
       data,
       method: "POST",
+      onError: [SpaceRequestFailed.type],
+      onStart: SpaceRequested.type,
+    })
+  );
+};
+
+export const deleteSpace = (id: number) => (dispatch: Dispatch) => {
+  dispatch(
+    apiCallBegun({
+      onSuccess: [spaceDeleted.type],
+      url: "/space/" + id + "/",
+      method: "DELETE",
       onError: [SpaceRequestFailed.type],
       onStart: SpaceRequested.type,
     })

@@ -1,9 +1,5 @@
 import { Button, Panel, Table } from "../../../../components";
 import { DocumentAddIcon } from "@heroicons/react/solid";
-import {
-  ArrowCircleLeftIcon,
-  ArrowCircleRightIcon,
-} from "@heroicons/react/outline";
 import PageBar from "../../../../components/page-bar";
 import { FilterSearch, PageWrapper } from "../../../../containers";
 import { useHistory } from "react-router-dom";
@@ -11,10 +7,12 @@ import routes from "../../../../fixtures/routes";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import {
+  deleteBuildingType,
   getBuildingTypes,
   loadBuildingTypes,
 } from "../../../../store/slices/building-type";
 import { useAppSelector } from "../../../../hooks/redux-hooks";
+import { deleteButtonClicked } from "../../../../store/slices/delete-notification";
 
 export default function () {
   const history = useHistory();
@@ -26,6 +24,27 @@ export default function () {
   useEffect(() => {
     dispatch(loadBuildingTypes());
   }, []);
+
+  const handleOnDelete = (id: number) => {
+    dispatch(
+      deleteButtonClicked({
+        onYesClick: () => dispatch(deleteBuildingType(id)),
+      })
+    );
+  };
+
+  const headings = [
+    { label: "Building Type", key: "building_type", className: "w-11/12" },
+  ];
+
+  const tableOptions = [
+    { label: "edit", url: routes.CONFIGURE_DESIGN_BUILDING_TYPES_EDIT },
+    {
+      label: "delete",
+      url: routes.CONFIGURE_DESIGN_BUILDING_TYPES,
+      onClick: handleOnDelete,
+    },
+  ];
 
   return (
     <>
@@ -60,12 +79,3 @@ export default function () {
     </>
   );
 }
-
-const headings = [
-  { label: "Building Type", key: "building_type", className: "w-11/12" },
-];
-
-const tableOptions = [
-  { label: "edit", url: routes.CONFIGURE_DESIGN_BUILDING_TYPES_EDIT },
-  { label: "delete", url: routes.CONFIGURE_DESIGN_BUILDING_TYPES_EDIT },
-];

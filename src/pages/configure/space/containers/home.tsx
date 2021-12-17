@@ -12,6 +12,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getSpaces, loadSpaces } from "../../../../store/slices/space";
 import { useAppSelector } from "../../../../hooks/redux-hooks";
+import { deleteButtonClicked } from "../../../../store/slices/delete-notification";
 
 export default function () {
   const history = useHistory();
@@ -22,6 +23,19 @@ export default function () {
     dispatch(loadSpaces());
   }, []);
 
+  const handleDelete = (id: number) => {
+    // dispatch(deleteButtonClicked(id));
+  };
+
+  const tableOptions = [
+    { label: "edit", url: routes.CONFIGURE_DESIGN_SPACE_EDIT },
+    {
+      label: "delete",
+      url: routes.CONFIGURE_DESIGN_PHASE_DELETE,
+      onClick: handleDelete,
+    },
+  ];
+
   return (
     <>
       <PageWrapper title="spaces" showBackIcon={false}>
@@ -30,7 +44,7 @@ export default function () {
             <Button
               Icon={DocumentAddIcon}
               title="new space"
-              onClick={() => history.push(routes.CONFIGURE_DESIGN_SPACE_CREATE)}
+              onClick={() => history.push(routes.CONFIGURE_DESIGN_SPACE)}
               className="
             bg-gradient-to-r
             from-blue-800
@@ -55,8 +69,3 @@ export default function () {
 }
 
 const headings = [{ label: "Space", key: "space", className: "w-11/12" }];
-
-const tableOptions = [
-  { label: "edit", url: routes.CONFIGURE_DESIGN_SPACE_EDIT },
-  { label: "delete", url: routes.CONFIGURE_DESIGN_SPACE_EDIT },
-];

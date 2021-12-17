@@ -4,7 +4,12 @@ import { Link } from "react-router-dom";
 
 type IProps = {
   className?: string;
-  options: Array<{ label: string; url: string }>;
+  options: Array<{
+    id: any;
+    label: string;
+    url: string;
+    onClick?: (id: any) => void;
+  }>;
 };
 
 const TableDropdownOption: FC<IProps> = ({ className, options }) => {
@@ -26,14 +31,15 @@ const TableDropdownOption: FC<IProps> = ({ className, options }) => {
         } absolute right-0 rounded-md shadow-lg bg-white z-10`}
       >
         <div className="py-1">
-          {options.map(({ label, url }, index) => (
+          {options.map(({ label, url, onClick, id }, index) => (
             <Link
               key={label + index}
               to={url}
+              onClick={onClick ? () => onClick(id) : () => {}}
               className="
               text-gray-700
               block
-              px-4
+              px-4  
               py-1
               text-sm text-center
               hover:bg-gray-100

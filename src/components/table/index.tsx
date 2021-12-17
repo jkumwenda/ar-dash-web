@@ -9,7 +9,11 @@ type IProp = {
   className?: string;
   headings: Array<{ label: string; key: string; className?: string }>;
   records: Array<any>;
-  options: Array<{ label: string; url: string }>;
+  options: Array<{
+    label: string;
+    url: string;
+    onClick?: (id: number) => void;
+  }>;
   recordId: string;
   loading?: boolean;
   pagination?: any;
@@ -65,9 +69,11 @@ const Table: FC<IProp> = ({
               ))}
               <div className="w-1/12 flex flex-col flex-end">
                 <TableDropdownOption
-                  options={options.map(({ label, url }) => ({
+                  options={options.map(({ label, url, onClick }) => ({
                     label: label,
                     url: url.replace(":id", record[recordId]),
+                    onClick,
+                    id: record[recordId],
                   }))}
                 />
               </div>

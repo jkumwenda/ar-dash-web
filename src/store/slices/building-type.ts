@@ -34,6 +34,9 @@ const slice = createSlice({
     buildingTypeRequestFailed: (buildingTypes, action) => {
       buildingTypes.loading = false;
     },
+    buildingTypeDeleted: (buildingTypes, action) => {
+      console.log(action.payload);
+    },
     buildingTypeEdited: (
       buildingTypes,
       action: PayloadAction<BuildingType>
@@ -57,6 +60,7 @@ export const {
   buildingTypeReceived,
   buildingTypeRequestFailed,
   buildingTypeRequested,
+  buildingTypeDeleted,
 } = slice.actions;
 
 export const loadBuildingTypes = () => (dispatch: Dispatch) => {
@@ -97,6 +101,18 @@ export const editBuildingType =
       })
     );
   };
+
+export const deleteBuildingType = (id: number) => (dispatch: Dispatch) => {
+  dispatch(
+    apiCallBegun({
+      onSuccess: [buildingTypeDeleted.type],
+      url: "/building_type/" + id + "/",
+      method: "DELETE",
+      onError: [buildingTypeRequestFailed.type],
+      onStart: buildingTypeRequested.type,
+    })
+  );
+};
 
 export const getBuildingTypes = (state: RootState) => {
   return state.entities.buildingType;

@@ -14,6 +14,7 @@ import {
 } from "./pages/";
 import routes from "./fixtures/routes";
 import { useLogin } from "./hooks/";
+import { DeleteConfirmation } from "./containers";
 
 function App() {
   const logged = useLogin();
@@ -65,6 +66,7 @@ function App() {
         <Route exact path={routes.USER_MANAGEMENT}>
           <Redirect to={routes.USER_MANAGEMENT_USERS} />
         </Route>
+        <DeleteConfirmation />
       </BasePage>
     </>
   );
