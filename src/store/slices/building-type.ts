@@ -34,8 +34,13 @@ const slice = createSlice({
     buildingTypeRequestFailed: (buildingTypes, action) => {
       buildingTypes.loading = false;
     },
-    buildingTypeDeleted: (buildingTypes, action) => {
-      console.log(action.payload);
+    buildingTypeDeleted: (buildingTypes, action: PayloadAction<number>) => {
+      const newFiltered = buildingTypes.data.filter(
+        (building) => building.building_type_id !== action.payload
+      );
+
+      buildingTypes.data = newFiltered;
+      buildingTypes.loading = false;
     },
     buildingTypeEdited: (
       buildingTypes,
@@ -108,6 +113,7 @@ export const deleteBuildingType = (id: number) => (dispatch: Dispatch) => {
       onSuccess: [buildingTypeDeleted.type],
       url: "/building_type/" + id + "/",
       method: "DELETE",
+      deletedId: id,
       onError: [buildingTypeRequestFailed.type],
       onStart: buildingTypeRequested.type,
     })

@@ -13,7 +13,8 @@ const api: Middleware =
   async (action) => {
     if (action.type !== actions.apiCallBegun.type) return next(action);
 
-    const { url, method, onStart, onSuccess, onError, data } = action.payload;
+    const { url, method, onStart, onSuccess, onError, data, deletedId } =
+      action.payload;
     const { BASE_API_URL } = environments;
 
     if (onStart) dispatch({ type: onStart });
@@ -35,13 +36,10 @@ const api: Middleware =
     } = await api.any({ url, method, data });
 
     if (ok) {
-      if (isArray(onSuccess)) {
-        onSuccess.forEach((action) =>
-          dispatch({ type: action, payload: responseData })
-        );
-        return;
-      }
-      dispatch({ type: onSuccess, payload: responseData });
+      onSuccess.forEach((action: string) => {
+        if (deletedId) return dispatch({ type: action, payload: deletedId });
+        dispatch({ type: action, payload: responseData });
+      });
     }
     if (problem) {
       //@ts-ignore

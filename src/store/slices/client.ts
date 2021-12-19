@@ -31,6 +31,14 @@ const slice = createSlice({
     clientRequested: (client, action) => {
       client.loading = true;
     },
+    clientDeleted: (clients, action: PayloadAction<number>) => {
+      const newFiltered = clients.data.filter(
+        (client) => client.client_id !== action.payload
+      );
+
+      clients.data = newFiltered;
+      clients.loading = false;
+    },
     clientRequestFailed: (client, action) => {
       client.loading = false;
     },
@@ -53,6 +61,7 @@ export const {
   clientReceived,
   clientRequestFailed,
   clientRequested,
+  clientDeleted,
 } = slice.actions;
 
 export const loadClients = () => (dispatch: Dispatch) => {
@@ -74,6 +83,19 @@ export const addClient = (data: any) => (dispatch: Dispatch) => {
       url: "/client/",
       data,
       method: "POST",
+      onError: [clientRequestFailed.type],
+      onStart: clientRequested.type,
+    })
+  );
+};
+
+export const deleteClient = (id: number) => (dispatch: Dispatch) => {
+  dispatch(
+    apiCallBegun({
+      onSuccess: [clientDeleted.type],
+      url: "/client/" + id + "/",
+      method: "DELETE",
+      deletedId: id,
       onError: [clientRequestFailed.type],
       onStart: clientRequested.type,
     })
