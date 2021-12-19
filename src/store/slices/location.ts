@@ -28,6 +28,14 @@ const slice = createSlice({
       location.data = action.payload.results;
       location.loading = false;
     },
+    locationDeleted: (locations, action: PayloadAction<number>) => {
+      const newFiltered = locations.data.filter(
+        (location) => location.location_id !== action.payload
+      );
+
+      locations.data = newFiltered;
+      locations.loading = false;
+    },
     locationRequested: (location, action) => {
       location.loading = true;
     },
@@ -53,6 +61,7 @@ export const {
   locationReceived,
   locationRequestFailed,
   locationRequested,
+  locationDeleted,
 } = slice.actions;
 
 export const loadLocations = () => (dispatch: Dispatch) => {
@@ -87,6 +96,19 @@ export const editLocation = (data: any, id: number) => (dispatch: Dispatch) => {
       url: "/location/" + id + "/",
       data,
       method: "PUT",
+      onError: [locationRequestFailed.type],
+      onStart: locationRequested.type,
+    })
+  );
+};
+
+export const deleteLocation = (id: number) => (dispatch: Dispatch) => {
+  dispatch(
+    apiCallBegun({
+      onSuccess: [locationDeleted.type],
+      url: "/location/" + id + "/",
+      method: "DELETE",
+      deletedId: id,
       onError: [locationRequestFailed.type],
       onStart: locationRequested.type,
     })
